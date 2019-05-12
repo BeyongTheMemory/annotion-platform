@@ -22,12 +22,11 @@ const treeData = [{
   value: 'Milk',
   key: '0-1',
 }];
-let id = 0;
 class EntityError extends Component {
 
   state = {
     
-  }
+  };
 
   componentWillReceiveProps(newProps) {
     const { form } = this.props;
@@ -37,54 +36,41 @@ class EntityError extends Component {
         keys: newProps.errData,
       });
     }
-}
-
-  onChange = (value) => {
-    this.setState({ value });
-  }
-
-  add = () => {
-    const { form } = this.props;
-    const keys = form.getFieldValue('keys');
-    const nextKeys = keys.concat({ id: ++id });
-    form.setFieldsValue({
-      keys: nextKeys,
-    });
-  }
+  };
 
   handleReasonChange = (value, index) => {
     const { form } = this.props;
     const keys = form.getFieldValue('keys');
-    keys[index].type = value
+    keys[index].type = value;
     form.setFieldsValue({
       keys: keys,
     });
    
-  }
+  };
 
   handleInputChange = (value, index) => {
     const { form } = this.props;
     const keys = form.getFieldValue('keys');
-    keys[index].entity_name = value.target.value
-  }
+    // console.log(index);
+    // console.log(keys);
+    keys[index].entity_name = value.target.value;
+    // console.log(keys);
+    form.setFieldsValue({
+      keys: keys,
+    });
+  };
 
   handleTreeSelectChange = (value, index) => {
     const { form } = this.props;
     const keys = form.getFieldValue('keys');
-    keys[index].category_name = value
-  }
-
-  remove = (k) => {
-    const { form } = this.props;
-    const keys = form.getFieldValue('keys');
-
-    if (keys.length === 1) {
-      return;
-    }
+    // console.log(index);
+    // console.log(keys);
+    keys[index].category_name = value;
+    // console.log(keys);
     form.setFieldsValue({
-      keys: keys.filter(key => key !== k),
+      keys: keys,
     });
-  }
+  };
 
 
   render() {
@@ -93,7 +79,6 @@ class EntityError extends Component {
 
     getFieldDecorator('keys', { initialValue: errData});
     const keys = getFieldValue('keys');
-    
     const formItems = keys.map((k, index) => (
       <Form.Item
         required={true}
@@ -118,7 +103,7 @@ class EntityError extends Component {
             {k.type == 1 ? (
               <Row gutter={16}>
                 <Col span={12}>
-                  <Input placeholder="Please input the correct entity name" allowClear defaultValue={k.entity_name} onChange={(value) => {this.handleInputChange(value, index)}}/>
+                  <Input placeholder="Please input the correct entity name" allowClear value={k.entity_name} onChange={(value) => {this.handleInputChange(value, index)}}/>
                 </Col>
               </Row>
             ) : null}
@@ -131,7 +116,7 @@ class EntityError extends Component {
                 <Col span={12}>
                   <TreeSelect
                     showSearch
-                    defaultValue={k.category_name}
+                    value={k.category_name}
                     style={{ width: 300 }}
                     dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
                     treeData={treeData}

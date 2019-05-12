@@ -41,7 +41,6 @@ class AnnotionItem extends Component {
     dislike = (item) => {
         item.action = 1
         this.setState({
-            listData: listData,
             error_drawer_visible: true,
             current_item: item,
             current_err_data: item.err_data
@@ -57,8 +56,9 @@ class AnnotionItem extends Component {
     onErrSubmit = (data) => {
         // //todo:value check
         // console.log(this.state.current_item.err_data)
-        // this.state.current_item.err_data = data
+        this.state.current_item.err_data = data;
         // console.log(this.state.current_item.err_data)
+        //console.log(this.state.current_item);
         this.setState({
             error_drawer_visible: false,
         });
@@ -74,6 +74,7 @@ class AnnotionItem extends Component {
             return;
         }
         data = data.concat({ id: -1 })
+        //this.state.current_item.err_data = data
         this.setState({
             current_err_data: data,
         });
