@@ -17,7 +17,7 @@ for (let i = 0; i < 10; i++) {
         relation: 'is a',
         category: 'fruit',
         category_url: 'http://www.google.com',
-        action: null,
+        action: null, //0正确 1错误
         err_data: [{ "id": 0 }]
     });
 }
