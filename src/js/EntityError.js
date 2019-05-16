@@ -8,10 +8,12 @@ const treeData = [{
   title: 'wellness',
   value: 'wellness',
   key: '0',
+  disabled:true,
   children: [{
     title: 'Foods',
     value: 'Foods',
     key: '0-1',
+    disabled:true,
     children:[
       { title: 'Cereals',
         value: 'Cereals',
@@ -87,6 +89,7 @@ const treeData = [{
     title: 'Nutrients',
     value: 'Nutrients',
     key: '0-2',
+    disabled:true,
     children:[
     {title: 'Energy',
       value: 'Energy',
@@ -120,6 +123,7 @@ const treeData = [{
     title: 'Diseases',
     value: 'Diseases',
     key: '0-3',
+    disabled:true,
     children:[
         {title: 'Genetic disorders by system',
         value: 'Genetic disorders by system',
@@ -186,6 +190,7 @@ const treeData = [{
     title: 'Life style',
     value: 'Life style',
     key: '0-4',
+    disabled:true,
     children: [
       {title: 'Diets',
       value: 'Diets',
