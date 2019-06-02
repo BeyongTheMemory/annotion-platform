@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import { notification, List, Icon, Button, Modal, Typography } from 'antd';
 import EntityItem from './EntityItem';
 import EntityError from './EntityError';
@@ -8,13 +9,13 @@ const { Paragraph, Text } = Typography;
  * 列表条目组件
  */
 const listData = [];
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 1; i++) {
     listData.push({
         id: i,
-        entity: 'apple',
+        entity: 'Karpas',
         entity_url: 'http://www.google.com',
-        relation: 'is a',
-        category: 'fruit',
+        relation: 'is instance of',
+        category: 'Diets',
         category_url: 'http://www.google.com',
         action: null, //0正确 1错误
         err_data: [{ "id": 0 }]
@@ -27,8 +28,10 @@ class AnnotionItem extends Component {
         error_drawer_visible: false,
         current_item: null,
         current_err_data: [],
-        modalVisible: false
+        modalVisible: false,
+        iFrameHeight: '0px'
     }
+
 
     like = (item) => {
         item.action = 0
@@ -126,7 +129,26 @@ class AnnotionItem extends Component {
         return (
             <div style={{ background: '#fff', padding: 24, minHeight: 280, textAlign: 'center', width: '100%', minWidth: 680 }}>
                 <Typography> <Paragraph>
-                    <div dangerouslySetInnerHTML={{__html: "A <span style=\"color:blue;font-weight:bold\">apple</span> results from maturation of one or more flowers, and the gynoecium of the flower(s) forms all or part of the fruit.[10] Inside the ovary/ovaries are one or more ovules where the megagametophyte contains the egg cell.[11] After double fertilization, these ovules will become seeds.<br /> The ovules are fertilized in a process that starts with pollination, which involves the movement of pollen from the stamens to the stigma of flowers. After pollination, a tube grows from the pollen through the stigma into the ovary to the ovule and two sperm are transferred from the pollen to the megagametophyte. Within the megagametophyte one of the two sperm unites with the egg, forming a zygote, and the second sperm enters the central cell forming the endosperm mother cell, which completes the double fertilization process.[12][13] <br />Later the zygote will give rise to the embryo of the seed, and the endosperm mother cell will give rise to endosperm, a nutritive tissue used by the embryo.As the ovules develop into seeds, the ovary begins to ripen and the ovary wall, the pericarp, may become fleshy (as in berries or drupes), or form a hard outer covering (as in nuts). In some multiseeded fruits, the extent to which the flesh develops is proportional to the number of fertilized ovules.[14] The pericarp is often differentiated into two or three distinct layers called the exocarp (outer layer, also called epicarp), mesocarp (middle layer), and endocarp (inner layer). In some fruits, especially simple fruits derived from an inferior ovary, other parts of the flower (such as the floral tube, including the petals, sepals, and stamens), fuse with the ovary and ripen with it. In other cases, the sepals, petals and/or stamens and style of the flower fall off. When such other floral parts are a significant part of the fruit, it is called an accessory fruit. Since other parts of the flower may contribute to the structure of the fruit, it is important to study flower structure to understand how a particular fruit forms.[3]"}}/>
+                    <iframe src="https://en.wikipedia.org/wiki/Karpas"   width="100%"  height="800px"
+                        frameBorder="0"/>
+                    
+                    {/* <iframe
+                        crossorigin=”1“
+                        style={{ width: '100%', height: this.state.iFrameHeight, overflow: 'visible' }}
+                        onLoad={() => {
+                            const obj = ReactDOM.findDOMNode(this.refs.iframe);
+                            this.setState({
+                                "iFrameHeight": obj.contentWindow.document.body.scrollHeight + 'px'
+                            });
+                        }}
+                        ref="iframe"
+                        src="https://en.wikipedia.org/wiki/Karpas"
+                        width="100%"
+                        height={this.state.iFrameHeight}
+                        scrolling="no"
+                        frameBorder="0"
+                    /> */}
+
                 </Paragraph> </Typography>
 
                 <List
@@ -152,8 +174,8 @@ class AnnotionItem extends Component {
                 />
 
                 <EntityError onClose={this.onClose} visible={error_drawer_visible}
-                    errData={current_err_data} onSubmit={this.onErrSubmit} onErrAdd={this.onErrAdd} onErrRemove={this.onErrRemove} 
-                    />
+                    errData={current_err_data} onSubmit={this.onErrSubmit} onErrAdd={this.onErrAdd} onErrRemove={this.onErrRemove}
+                />
 
                 <Modal
                     title="Sure?"
