@@ -173,7 +173,7 @@ class AnnotionItem extends Component {
     }
 
     postFeedback = (feedback) => {
-        const url = "http://localhost:8080/ap/annotation/feedback";
+        const url = "http://localhost:8888/ap/annotation/feedback";
         const param = {
             userFeedbacks: feedback,
         };
@@ -214,7 +214,7 @@ class AnnotionItem extends Component {
     }
 
     getNext = (type) => {
-        const url = "http://localhost:8080/ap/annotation/next?type=" + type;
+        const url = "http://localhost:8888/ap/annotation/next?type=" + type;
         var doc = this;
         fetch(url, {
             method: 'GET',
@@ -267,7 +267,7 @@ class AnnotionItem extends Component {
     }
 
     loginRequest = (name, password) => {
-        const url = "http://localhost:8080/ap/user/login";
+        const url = "http://localhost:8888/ap/user/login";
         const param = {
             name: name,
             password: password
