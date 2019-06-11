@@ -320,7 +320,6 @@ class AnnotionItem extends Component {
         return (
             <div style={{ background: '#fff', padding: 24, minHeight: 280, textAlign: 'center', width: '100%', minWidth: 680 }}>
 
-                {frame}
 
                 <List
                     style={{ background: '#fff', padding: 24, minHeight: 280, textAlign: 'center', width: '100%', minWidth: 680 }}
@@ -343,6 +342,8 @@ class AnnotionItem extends Component {
                     )}
 
                 />
+
+                {frame}
 
                 <EntityError onClose={this.onClose} visible={error_drawer_visible}
                     errData={current_err_data} onSubmit={this.onErrSubmit} onErrAdd={this.onErrAdd} onErrRemove={this.onErrRemove} item={current_item}
