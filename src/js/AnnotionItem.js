@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { notification, List, Icon, Button, Modal, Typography, message } from 'antd';
+import { notification, List, Icon, Button, Modal, Typography, message,Divider } from 'antd';
 import EntityItem from './EntityItem';
 import EntityError from './EntityError';
 import LoginModel from './LoginModel'
@@ -102,17 +102,17 @@ class AnnotionItem extends Component {
                 return
             }
             sure_content += "<p>" + 'Result: ' + (item.action == 0) + "</p>"
-            
+
             if (item.action != 0 && item.err_data.length > 0) {
-                sure_content += "<p>" 
+                sure_content += "<p>"
                 for (let errorReason of item.err_data) {
                     if (errorReason.type == 1) {
-                        sure_content += "Entity is wrong,correct entity name:" + "<font color=‘red’>" +errorReason.entity_name + "</font>"
+                        sure_content += "Entity is wrong,correct entity name:" + "<font color=‘red’>" + errorReason.entity_name + "</font>"
                     } else if (errorReason.type == 2) {
-                        sure_content += "Category is wrong,correct category name:" + "<font color=‘red’>"+ errorReason.category_name + "</font>"
+                        sure_content += "Category is wrong,correct category name:" + "<font color=‘red’>" + errorReason.category_name + "</font>"
                     }
                 }
-                sure_content += "</p>" 
+                sure_content += "</p>"
             }
 
         }
@@ -132,7 +132,7 @@ class AnnotionItem extends Component {
             if (item.err_data.length > 0) {
                 for (let errorReason of item.err_data) {
                     if (errorReason.type == 1) {
-                        if (errorReason.entity_name == item.entity){
+                        if (errorReason.entity_name == item.entity) {
                             valid = false
                             notification.open({
                                 message: 'Error',
@@ -166,9 +166,9 @@ class AnnotionItem extends Component {
             modalVisible: false,
         });
 
-        if(valid){
-        console.log(feedback)
-        this.postFeedback(feedback)
+        if (valid) {
+            console.log(feedback)
+            this.postFeedback(feedback)
         }
     }
 
@@ -300,7 +300,7 @@ class AnnotionItem extends Component {
     }
 
     render() {
-        const { listData, error_drawer_visible, current_err_data, modalVisible, loginVisible, wiki_url, current_item,sure_content } = this.state;
+        const { listData, error_drawer_visible, current_err_data, modalVisible, loginVisible, wiki_url, current_item, sure_content } = this.state;
         const submitBtn = <div style={{
             textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px',
         }}
@@ -322,7 +322,6 @@ class AnnotionItem extends Component {
 
 
                 <List
-                    style={{ background: '#fff', padding: 24, minHeight: 280, textAlign: 'center', width: '100%', minWidth: 680 }}
                     size="large"
                     dataSource={listData}
                     itemLayout="horizontal"
@@ -343,6 +342,8 @@ class AnnotionItem extends Component {
 
                 />
 
+                <Divider>Wiki Page</Divider>
+
                 {frame}
 
                 <EntityError onClose={this.onClose} visible={error_drawer_visible}
@@ -355,7 +356,7 @@ class AnnotionItem extends Component {
                     onOk={this.modalHandleOk}
                     onCancel={this.modalHandleCancel}
                 >
-                      <div onClick={this.handleChange} dangerouslySetInnerHTML={{__html: sure_content}}></div>
+                    <div onClick={this.handleChange} dangerouslySetInnerHTML={{ __html: sure_content }}></div>
                 </Modal>
 
                 <LoginModel visible={loginVisible} onLogin={this.loginRequest.bind(this)} />
