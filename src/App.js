@@ -1,27 +1,21 @@
 import React, { Component } from 'react';
-import './App.css';
-import AnnotionList from './js/AnnotionList';
-import { Layout} from 'antd';
-
-const { Header, Content, Footer } = Layout;
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import EntityRecognition from './js/EntityRecognition'
+import RelationExtraction from './js/RelationExtraction'
 
 
 class App extends Component {
   render() {
-    return (
-      <Layout className="layout">
-      <Header>
-            <h2>Annotion Platform</h2>
-      </Header>
-      <Content style={{ padding: '0 50px' }}>
-        <div style={{ background: '#fff', padding: 24, minHeight: 280,textAlign: 'center', width: '100%'}}><AnnotionList style={{textAlign: 'center' }}/></div>
-      </Content>
-      <Footer style={{ textAlign: 'center' }}>
-        Annotion Platform ©2019 Created by Hong Ying
-      </Footer>
-    </Layout>
-    );
-  }
+      return (
+        <Router>
+        <div>
+          <Route path="/" exact component={EntityRecognition} />
+          <Route path="/er" exact component={EntityRecognition} />
+          <Route path="/re" exact component={RelationExtraction} />
+        </div>
+      </Router>
+      );
+    }
 }
 
 export default App;
