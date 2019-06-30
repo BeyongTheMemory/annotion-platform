@@ -101,7 +101,7 @@ class RelationExtractionItem extends Component {
 
     getNext = () => {
         if (this.state.name != "") {
-            const url = "http://172.26.187.188:15000/annotation/send-result";
+            const url = "http://172.26.187.188:15000/annotation/get-example";
             const param = {
                 user:this.state.user_name
             };
