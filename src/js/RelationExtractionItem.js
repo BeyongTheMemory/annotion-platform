@@ -21,7 +21,7 @@ class RelationExtractionItem extends Component {
     }
 
     componentDidMount() {
-        this.getNext(0)
+        this.getNext()
     }
 
 
@@ -34,31 +34,8 @@ class RelationExtractionItem extends Component {
 
     onSubmit = () => {
         //set content
-        var sure_content = ""
-        for (let item of this.state.listData) {
-            if (item.action == null) {
-                notification.open({
-                    message: 'Error',
-                    description: 'mis instance',
-                    duration: 2,
-                });
-                return
-            }
-            sure_content += "<p>" + 'Result: ' + (item.action == 0) + "</p>"
+        var sure_content = this.state.ent1 + " " + this.state.relation + " " + this.state.ent2
 
-            if (item.action != 0 && item.err_data.length > 0) {
-                sure_content += "<p>"
-                for (let errorReason of item.err_data) {
-                    if (errorReason.type == 1) {
-                        sure_content += "Entity is wrong,correct entity name:" + "<font color=‘red’>" + errorReason.entity_name + "</font>"
-                    } else if (errorReason.type == 2) {
-                        sure_content += "Category is wrong,correct category name:" + "<font color=‘red’>" + errorReason.category_name + "</font>"
-                    }
-                }
-                sure_content += "</p>"
-            }
-
-        }
         this.setState({
             modalVisible: true,
             sure_content: sure_content
@@ -66,59 +43,30 @@ class RelationExtractionItem extends Component {
     }
 
     modalHandleOk = () => {
-        console.log(this.state.listData)
-        var valid = true
-        var feedback = []
-        var valid = true
-        for (let item of this.state.listData) {
-            var errorReasons = []
-            if (item.err_data.length > 0) {
-                for (let errorReason of item.err_data) {
-                    if (errorReason.type == 1) {
-                        if (errorReason.entity_name == item.entity) {
-                            valid = false
-                            notification.open({
-                                message: 'Error',
-                                description: 'Please enter the right entity!',
-                                duration: 4,
-                            });
-                            break
-                        }
-                        errorReasons.push({
-                            "code": errorReason.type,
-                            "msg": errorReason.entity_name
-                        })
-                    } else if (errorReason.type == 2) {
-                        errorReasons.push({
-                            "code": errorReason.type,
-                            "msg": errorReason.category_name
-                        })
-                    }
-
-                }
-            }
-            feedback.push({
-                "entityCategoryId": item.id,
-                "entityCategoryType": 0,
-                "isCorrect": item.action == 0,
-                "errorReasons": errorReasons
-            })
+        if (this.state.relation == "" ){
+            notification.open({
+                message: 'Error',
+                description: 'Please choose the right relation!',
+                duration: 4,
+            });
+            return
         }
 
         this.setState({
             modalVisible: false,
         });
 
-        if (valid) {
-            console.log(feedback)
-            this.postFeedback(feedback)
-        }
+        this.postFeedback()
+
     }
 
-    postFeedback = (feedback) => {
-        const url = "http://127.0.0.1:8888/ap/annotation/feedback";
+    postFeedback = () => {
+        const url = "http://172.26.187.188:15000/annotation/send-result";
         const param = {
-            userFeedbacks: feedback,
+            ent1: this.state.ent1,
+            ent2: this.state.ent2,
+            lable: this.state.relation,
+            user:this.state.user_name
         };
         var doc = this;
         fetch(url, {
@@ -132,16 +80,11 @@ class RelationExtractionItem extends Component {
         }).then(function (response) {
             if (response.status === 200) {
                 response.json().then(function (data) {
-                    if (data.code === 200) {
+                    if (data.status === 0) {
                         message.success("submit success")
-                        doc.getNext(0)
-                    } else if (data.code === 10001) {
-                        message.error("login first")
-                        doc.setState({
-                            loginVisible: true,
-                        })
-                    } else {
-                        message.error(data.msg);
+                        doc.getNext()
+                    }  else {
+                        message.error(data.status);
                     }
                 })
             } else {
@@ -156,10 +99,34 @@ class RelationExtractionItem extends Component {
         });
     }
 
-    getNext = (type) => {
+    getNext = () => {
         if (this.state.name != "") {
-            //获取数据
-            this.updateListData()
+            const url = "http://172.26.187.188:15000/annotation/send-result";
+            const param = {
+                user:this.state.user_name
+            };
+            var doc = this;
+            fetch(url, {
+                method: 'POST',
+                body: JSON.stringify(param),
+                mode: 'cors',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                credentials: 'include',
+            }).then(function (response) {
+                if (response.status === 200) {
+                    response.json().then(function (data) {
+                        if (data.status === 0) {
+                            doc.updateListData(data)
+                        }  else {
+                            message.error(data.status);
+                        }
+                    })
+                } else {
+                    message.error("network error");
+                }
+            })
         } else {
             message.error("login first")
             this.setState({
@@ -171,19 +138,26 @@ class RelationExtractionItem extends Component {
 
     updateListData = (responseData) => {
         const listData = [];
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < responseData.contex.length; i++) {
             listData.push({
-                pos1: [1, 2],
-                pos2: [3, 4],
-                sentence: "xxxx"
+                pos1: responseData.contex[i].pos1,
+                pos2: responseData.contex[i].pos2,
+                sentence: responseData.contex[i].sentence
             });
         }
         this.setState({
             listData: listData,
-            ent1: "xxx",
-            ent2: "xxx"
+            ent1: responseData.ent1,
+            ent2: responseData.ent2,
+            relation: responseData.relation
         })
     }
+
+    handleRelationChange = (value) => {
+        this.setState({
+            relation: value
+        })
+    };
 
     showLogin = () => {
         this.setState({
@@ -214,7 +188,7 @@ class RelationExtractionItem extends Component {
                             loginVisible: false,
                             user_name: name
                         })
-                        doc.getNext(0)
+                        doc.getNext()
                     } else {
                         message.error(data.msg);
                     }
@@ -240,10 +214,10 @@ class RelationExtractionItem extends Component {
 
                 <div>
                     <Button type="primary">{ent1}</Button>
-                    <Select defaultValue="lucy" style={{ width: 120 }}>
-                        <Option value="lucy">1</Option>
-                        <Option value="lucy2">2</Option>
-                        <Option value="lucy3">3</Option>
+                    <Select value={this.state.relation} onChange={(value) => { this.handleRelationChange(value) }} style={{ width: 120 }}>
+                        <Option value="duan">1</Option>
+                        <Option value="hong">2</Option>
+                        <Option value="ying">3</Option>
                     </Select>
                     <Button type="primary">{ent2}</Button>
                 </div>
