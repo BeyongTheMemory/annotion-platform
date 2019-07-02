@@ -72,7 +72,7 @@ class RelationExtractionItem extends Component {
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(param),
-            mode: 'no-cors',
+            mode: 'cors',
             headers: {
                 'content-type': 'application/json'
             },
@@ -100,7 +100,7 @@ class RelationExtractionItem extends Component {
     }
 
     getNext = () => {
-        if (this.state.name != "") {
+        if (typeof(this.state.user_name) != undefined && this.state.user_name != "") {
             const url = "http://172.26.187.188:15000/annotation/get-example";
             const param = {
                 user:this.state.user_name
@@ -109,7 +109,7 @@ class RelationExtractionItem extends Component {
             fetch(url, {
                 method: 'POST',
                 body: JSON.stringify(param),
-                mode: 'no-cors',
+                mode: 'cors',
                 headers: {
                     'content-type': 'application/json'
                 },
@@ -166,7 +166,7 @@ class RelationExtractionItem extends Component {
     }
 
     loginRequest = (name, password) => {
-        const url = "http://127.0.0.1:8888/ap/user/login";
+        const url = "http://172.26.187.188:8888/ap/user/login";
         const param = {
             name: name,
             password: password
