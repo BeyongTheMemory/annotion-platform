@@ -72,7 +72,7 @@ class RelationExtractionItem extends Component {
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(param),
-            mode: 'no-cors',
+            mode: 'cors',
             headers: {
                 'content-type': 'application/json'
             },
@@ -109,7 +109,7 @@ class RelationExtractionItem extends Component {
             fetch(url, {
                 method: 'POST',
                 body: JSON.stringify(param),
-                mode: 'no-cors',
+                mode: 'cors',
                 headers: {
                     'content-type': 'application/json'
                 },
