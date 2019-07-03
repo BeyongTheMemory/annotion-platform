@@ -23,7 +23,7 @@ class RelationExtractionText extends Component {
             if(data.pos1[0] == i || data.pos2[0] == i){
                 result += "<font color=‘red’>"
             }
-            result += sentenceChar[i]
+            result += sentenceChar[i] + " "
             if(data.pos1[1] == i || data.pos2[1] == i){
                 result += "</font>"
             }
