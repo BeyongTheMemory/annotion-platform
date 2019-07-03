@@ -17,7 +17,7 @@ class RelationExtractionText extends Component {
     initText = () => {
         var data = this.props.data;
         console.log(data.sentence)
-        var sentenceChar = data.sentence.split("");
+        var sentenceChar = data.sentence.split(" ");
         var result = "";
         for ( var i = 0; i <sentenceChar.length; i++){
             if(data.pos1[0] == i || data.pos2[0] == i){
