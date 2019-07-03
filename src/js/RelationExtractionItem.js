@@ -34,7 +34,7 @@ class RelationExtractionItem extends Component {
 
     onSubmit = () => {
         //set content
-        if (typeof(this.state.relation) === undefined || this.state.relation == ""){
+        if (typeof(this.state.relation) === "undefined" || this.state.relation == "" ){
             notification.open({
                 message: 'Error',
                 description: 'Please choose the right relation!',
