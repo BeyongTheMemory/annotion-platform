@@ -100,7 +100,7 @@ class RelationExtractionItem extends Component {
     }
 
     getNext = () => {
-        if (typeof(this.state.user_name) != undefined && this.state.user_name != "") {
+        if (typeof(this.state.user_name) != "undefined" && this.state.user_name != "") {
             const url = "http://172.26.187.188:15000/annotation/get-example";
             const param = {
                 user:this.state.user_name
