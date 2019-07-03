@@ -65,7 +65,7 @@ class RelationExtractionItem extends Component {
         const param = {
             ent1: this.state.ent1,
             ent2: this.state.ent2,
-            lable: this.state.relation,
+            label: this.state.relation,
             user:this.state.user_name
         };
         var doc = this;
