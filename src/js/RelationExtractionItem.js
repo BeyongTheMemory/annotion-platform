@@ -117,8 +117,8 @@ class RelationExtractionItem extends Component {
             }).then(function (response) {
                 if (response.status === 200) {
                     response.json().then(function (data) {
-                        if (data.status === 0) {
-                            doc.updateListData(data)
+                        if (data.status === 0 || data.status === 1 || data.status === 2) {
+                            doc.updateListData(data.data)
                         }  else {
                             message.error(data.status);
                         }
