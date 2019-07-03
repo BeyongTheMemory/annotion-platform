@@ -34,7 +34,14 @@ class RelationExtractionItem extends Component {
 
     onSubmit = () => {
         //set content
-        if (this.state.relation )
+        if (typeof(this.state.relation) === undefined || this.state.relation == ""){
+            notification.open({
+                message: 'Error',
+                description: 'Please choose the right relation!',
+                duration: 4,
+            });
+            return
+        }
         var sure_content = this.state.ent1 + " " + this.state.relation + " " + this.state.ent2
 
         this.setState({
@@ -44,14 +51,6 @@ class RelationExtractionItem extends Component {
     }
 
     modalHandleOk = () => {
-        if (typeof(this.state.relation) == undefined || this.state.relation == ""){
-            notification.open({
-                message: 'Error',
-                description: 'Please choose the right relation!',
-                duration: 4,
-            });
-            return
-        }
 
         this.setState({
             modalVisible: false,
