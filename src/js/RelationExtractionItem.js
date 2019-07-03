@@ -215,9 +215,15 @@ class RelationExtractionItem extends Component {
                 <div>
                     <Button type="primary">{ent1}</Button>
                     <Select value={this.state.relation} onChange={(value) => { this.handleRelationChange(value) }} style={{ width: 120 }}>
-                        <Option value="duan">1</Option>
-                        <Option value="hong">2</Option>
-                        <Option value="ying">3</Option>
+                        <Option value="cause">cause</Option>
+                        <Option value="lack-cause">lack-cause</Option>
+                        <Option value="prevent">prevent</Option>
+                        <Option value="promote">promote</Option>
+                        <Option value="inhibit">inhibit</Option>
+                        <Option value="contain">contain</Option>
+                        <Option value="ingredient">ingredient</Option>
+                        <Option value="positive-effect">positive-effect</Option>
+                        <Option value="negative-effect">negative-effect</Option>
                     </Select>
                     <Button type="primary">{ent2}</Button>
                 </div>
