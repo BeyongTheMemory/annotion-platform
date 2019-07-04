@@ -235,15 +235,17 @@ class RelationExtractionItem extends Component {
                 <div>
                     <Button type="primary">{ent1}</Button>
                     <Select value={this.state.relation} onChange={(value) => { this.handleRelationChange(value) }} style={{ width: 120 }}>
-                        <Option value="cause">cause</Option>
-                        <Option value="lack-cause">lack-cause</Option>
-                        <Option value="prevent">prevent</Option>
-                        <Option value="promote">promote</Option>
-                        <Option value="inhibit">inhibit</Option>
-                        <Option value="contain">contain</Option>
-                        <Option value="ingredient">ingredient</Option>
-                        <Option value="positive-effect">positive-effect</Option>
-                        <Option value="negative-effect">negative-effect</Option>
+                        <Option value="nutrition/disease/cause">nutrition/disease/cause</Option>
+                        <Option value="nutrition/disease/lack-cause">nutrition/disease/lack-cause</Option>
+                        <Option value="nutrition/disease/prevent">nutrition/disease/prevent</Option>
+                        <Option value="nutrition/nutrition/promote">nutrition/nutrition/promote</Option>
+                        <Option value="nutrition/nutrition/inhibit">nutrition/nutrition/inhibit</Option>
+                        <Option value="food/nutrition/contain">food/nutrition/contain</Option>
+                        <Option value="food/food/ingredient">food/food/ingredient</Option>
+                        <Option value="food/disease/positive-effect">food/disease/positive-effect</Option>
+                        <Option value="food/disease/negative-effect">food/disease/negative-effect</Option>
+                        <Option value="diet/disease/positive-effect">diet/disease/positive-effect</Option>
+                        <Option value="diet/disease/negative-effect">diet/disease/negative-effect</Option>
                     </Select>
                     <Button type="primary">{ent2}</Button><Icon type="swap" onClick={this.swapClick} />
                 </div>
