@@ -69,7 +69,7 @@ class RelationExtractionItem extends Component {
         if (this.state.swap) {
             ent1Result = this.state.ent2
             ent2Result = this.state.ent1
-            relationResult += "(r)"
+            relationResult += "|r"
         }
         const param = {
             ent1: ent1Result,
