@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { notification, List, Select, Button, Modal, Typography, message, Divider } from 'antd';
+import { notification, List, Select, Button, Modal, Typography, message, Icon } from 'antd';
 import RelationExtractionText from './RelationExtractionText';
 import LoginModel from './LoginModel'
 const { Paragraph, Text } = Typography;
@@ -17,7 +17,8 @@ class RelationExtractionItem extends Component {
         modalVisible: false,
         loginVisible: false,
         sure_content: "",
-        user_name: ""
+        user_name: "",
+        swap: false
     }
 
     componentDidMount() {
@@ -34,7 +35,7 @@ class RelationExtractionItem extends Component {
 
     onSubmit = () => {
         //set content
-        if (typeof(this.state.relation) === "undefined" || this.state.relation == "" ){
+        if (typeof (this.state.relation) === "undefined" || this.state.relation == "") {
             notification.open({
                 message: 'Error',
                 description: 'Please choose the right relation!',
@@ -62,11 +63,19 @@ class RelationExtractionItem extends Component {
 
     postFeedback = () => {
         const url = "http://172.26.187.188:15000/annotation/send-result";
+        const ent1Result = this.state.ent1
+        const ent2Result = this.state.ent2
+        const relationResult = this.state.relation
+        if (this.state.swap) {
+            ent1Result = this.state.ent2
+            ent2Result = this.state.ent1
+            relationResult += "(r)"
+        }
         const param = {
-            ent1: this.state.ent1,
-            ent2: this.state.ent2,
-            label: this.state.relation,
-            user:this.state.user_name
+            ent1: ent1Result,
+            ent2: ent2Result,
+            label: relationResult,
+            user: this.state.user_name
         };
         var doc = this;
         fetch(url, {
@@ -83,7 +92,7 @@ class RelationExtractionItem extends Component {
                     if (data.status === 0) {
                         message.success("submit success")
                         doc.getNext()
-                    }  else {
+                    } else {
                         message.error(data.status);
                     }
                 })
@@ -100,10 +109,10 @@ class RelationExtractionItem extends Component {
     }
 
     getNext = () => {
-        if (typeof(this.state.user_name) != "undefined" && this.state.user_name != "") {
+        if (typeof (this.state.user_name) != "undefined" && this.state.user_name != "") {
             const url = "http://172.26.187.188:15000/annotation/get-example";
             const param = {
-                user:this.state.user_name
+                user: this.state.user_name
             };
             var doc = this;
             fetch(url, {
@@ -119,7 +128,7 @@ class RelationExtractionItem extends Component {
                     response.json().then(function (data) {
                         if (data.status === 0 || data.status === 1 || data.status === 2) {
                             doc.updateListData(data.data)
-                        }  else {
+                        } else {
                             message.error(data.status);
                         }
                     })
@@ -149,7 +158,8 @@ class RelationExtractionItem extends Component {
             listData: listData,
             ent1: responseData.ent1,
             ent2: responseData.ent2,
-            relation: responseData.relation
+            relation: responseData.relation,
+            swap:false
         })
     }
 
@@ -158,6 +168,16 @@ class RelationExtractionItem extends Component {
             relation: value
         })
     };
+
+    swapClick = () => {
+        const ent1 = this.state.ent1
+        const ent2 = this.state.ent2
+        this.setState({
+            ent1: ent2,
+            ent2: ent1,
+            swap: !this.state.swap
+        })
+    }
 
     showLogin = () => {
         this.setState({
@@ -225,7 +245,7 @@ class RelationExtractionItem extends Component {
                         <Option value="positive-effect">positive-effect</Option>
                         <Option value="negative-effect">negative-effect</Option>
                     </Select>
-                    <Button type="primary">{ent2}</Button>
+                    <Button type="primary">{ent2}</Button><Icon type="swap" onClick={this.swapClick} />
                 </div>
 
                 <List
