@@ -248,6 +248,7 @@ class RelationExtractionItem extends Component {
                         <Option value="food/disease/negative-effect">food/disease/negative-effect</Option>
                         <Option value="diet/disease/positive-effect">diet/disease/positive-effect</Option>
                         <Option value="diet/disease/negative-effect">diet/disease/negative-effect</Option>
+                        <Option value="others">others</Option>
                     </Select>
                     <Button type="primary">{ent2}</Button><Icon type="swap" onClick={this.swapClick} />
                 </div>

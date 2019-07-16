@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { notification, List, Icon, Button, Modal, Typography, message,Divider } from 'antd';
-import EntityItem from './EntityItem';
-import EntityError from './EntityError';
-import LoginModel from './LoginModel'
-const { Paragraph, Text } = Typography;
+import { notification, List, Icon, Button, Modal, Typography, message, Row } from 'antd';
+import NEREntityItem from './NEREntityItem';
+import NEREntityError from './NEREntityError';
+import LoginModel from './LoginModel';
+import AddNewMentionModel from './AddNewMentionModel';
+const { Text, Title } = Typography;
 
 /**
  * 列表条目组件
  */
-
-
-class AnnotionItem extends Component {
+class NERAnnotionItem extends Component {
     state = {
         listData: [],
         error_drawer_visible: false,
         current_item: null,
         current_err_data: [],
         modalVisible: false,
+        addNewMetationModel: false,
         iFrameHeight: '0px',
         loginVisible: false,
-        wiki_url: "",
-        sure_content: ""
+        sure_content: "",
+        text: ""
     }
 
     componentDidMount() {
@@ -59,10 +59,10 @@ class AnnotionItem extends Component {
     }
 
     onErrAdd = (data) => {
-        if (data.length > 0) {
+        if (data.length > 1) {
             notification.open({
                 message: 'Error',
-                description: 'The reason maximum size is 1',
+                description: 'The reason maximum size is 2',
                 duration: 2,
             });
             return;
@@ -93,7 +93,7 @@ class AnnotionItem extends Component {
         //set content
         var sure_content = ""
         for (let item of this.state.listData) {
-            if (item.action == null) {
+            if (item.action == null && !item.new_add) {
                 notification.open({
                     message: 'Error',
                     description: 'mis instance',
@@ -101,25 +101,34 @@ class AnnotionItem extends Component {
                 });
                 return
             }
-            sure_content += "<p>" + 'Result: ' + (item.action == 0) + "</p>"
 
-            if (item.action != 0 && item.err_data.length > 0) {
-                for (let errorReason of item.err_data) {
-                    sure_content += "<p>"
-                    if (errorReason.type == 1) {
-                        sure_content += "&nbsp&nbsp&nbsp&nbsp Entity is wrong,correct entity name:" + "<font color=orange>" + errorReason.entity_name + "</font>"
-                    } else if (errorReason.type == 2) {
-                        sure_content += "&nbsp&nbsp&nbsp&nbsp Category is wrong,correct category name:" + "<font color=orange>" + errorReason.category_name + "</font>"
+            if (item.new_add) {
+                sure_content += "<p>" + 'New Mention: ' + item.entity + "&nbsp&nbsp is an instance of &nbsp&nbsp" + item.category + "</p>"
+            } else {
+                sure_content += "<p>" + 'Result: ' + (item.action == 0) + "</p>"
+                if (item.action != 0 && item.err_data.length > 0) {
+                    for (let errorReason of item.err_data) {
+                        sure_content += "<p>"
+                        if (errorReason.type == 1) {
+                            sure_content += "&nbsp&nbsp&nbsp&nbsp Entity is wrong,correct entity name:" + "<font color=orange>" + errorReason.entity_name + "</font>"
+                        } else if (errorReason.type == 2) {
+                            sure_content += "&nbsp&nbsp&nbsp&nbsp Category is wrong,correct category name:" + "<font color=orange>" + errorReason.category_name + "</font>"
+                        }
+                        sure_content += "</p>"
                     }
-                    sure_content += "</p>"
                 }
             }
-
         }
         this.setState({
             modalVisible: true,
             sure_content: sure_content
         });
+    }
+
+    onAddNewMentation = () => {
+        this.setState({
+            addNewMetationModel: true,
+        })
     }
 
     modalHandleOk = () => {
@@ -214,31 +223,62 @@ class AnnotionItem extends Component {
     }
 
     getNext = (type) => {
-        const url = "http://172.26.187.188:8888/ap/annotation/next?type=" + type;
-        var doc = this;
-        fetch(url, {
-            method: 'GET',
-            credentials: 'include',
-            mode: 'cors',
-        }).then((response) => {
-            if (response.status === 200) {
-                response.json().then(function (data) {
-                    console.log(data);
-                    if (data.code === 200) {
-                        doc.updateListData(data.data)
-                    } else if (data.code === 10001) {
-                        message.error("login first")
-                        doc.setState({
-                            loginVisible: true,
-                        })
-                    } else {
-                        message.error(data.msg);
-                    }
+        // const url = "http://172.26.187.188:8888/ap/annotation/next?type=" + type;
+        // var doc = this;
+        // fetch(url, {
+        //     method: 'GET',
+        //     credentials: 'include',
+        //     mode: 'cors',
+        // }).then((response) => {
+        //     if (response.status === 200) {
+        //         response.json().then(function (data) {
+        //             console.log(data);
+        //             if (data.code === 200) {
+        //                 doc.updateListData(data.data)
+        //             } else if (data.code === 10001) {
+        //                 message.error("login first")
+        //                 doc.setState({
+        //                     loginVisible: true,
+        //                 })
+        //             } else {
+        //                 message.error(data.msg);
+        //             }
 
-                })
-            } else {
-                message.error("network error");
-            }
+        //         })
+        //     } else {
+        //         message.error("network error");
+        //     }
+        // })
+
+        const listData = [];
+        listData.push({
+            entity: "cocktail",
+            category: "foods/Beverages/Alcoholic_drinks",
+            action: null, //0正确 1错误
+            err_data: [{ "id": 0 }]
+        })
+        listData.push({
+            entity: "contain",
+            category: "foods/Beverages/Alcoholic_drinks",
+            action: null, //0正确 1错误
+            err_data: [{ "id": 0 }]
+        })
+        listData.push({
+            entity: "sugar",
+            category: "foods/Sweets/others",
+            action: null, //0正确 1错误
+            err_data: [{ "id": 0 }]
+        })
+        listData.push({
+            entity: "citrus",
+            category: "foods/Fruits/Citrus_fruits",
+            action: null, //0正确 1错误
+            err_data: [{ "id": 0 }]
+        })
+        const text = "A <font color=orange>cocktail</font> can contain <font color=orange>alcohol</font>  , a <font color=orange>sugar</font> , and a <font color=orange>citrus</font> .";
+        this.setState({
+            listData: listData,
+            text: text
         })
     }
 
@@ -256,7 +296,6 @@ class AnnotionItem extends Component {
         });
         this.setState({
             listData: listData,
-            wiki_url: responseData.wikiUrl
         })
     }
 
@@ -299,26 +338,45 @@ class AnnotionItem extends Component {
         })
     }
 
+    AddMentionRequest = (entity, category) => {
+
+        const listData = this.state.listData
+        listData.push({
+            entity: entity,
+            category: category,
+            action: null, //0正确 1错误
+            err_data: [{ "id": 0 }],
+            new_add: true
+        })
+        this.setState({
+            listData: listData,
+            addNewMetationModel: false,
+        })
+
+    }
+
     render() {
-        const { listData, error_drawer_visible, current_err_data, modalVisible, loginVisible, wiki_url, current_item, sure_content } = this.state;
+        const { listData, error_drawer_visible, current_err_data, modalVisible, loginVisible, current_item, sure_content, addNewMetationModel } = this.state;
         const submitBtn = <div style={{
-            textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px',
+            marginTop: 12, lineHeight: '32px',
         }}
         >
-            <Button onClick={this.onSubmit}>Submit</Button>
+            <Row gutter={16} style={{ textAlign: 'center' }}>
+                <Button type="dashed" onClick={this.onAddNewMentation} style={{ width: '60%' }}>
+                    <Icon type="plus" /> <strong><font size="4" >Add New Mention</font></strong>
+                </Button>
+            </Row>
+            <br />
+            <Button onClick={this.onSubmit} size='large'> Submit</Button>
         </div>
-        var frame = <Typography> <Paragraph>
-            {
-                wiki_url != "" ? (
-                    <iframe src={wiki_url} width="100%" height="800px"
-                        frameBorder="0" />
-                ) : null
-            }
-        </Paragraph> </Typography>
-
 
         return (
             <div style={{ background: '#fff', padding: 24, minHeight: 280, textAlign: 'center', width: '100%', minWidth: 680 }}>
+                <Typography>
+                    <strong><font size="6" >
+                        <div dangerouslySetInnerHTML={{ __html: this.state.text }}></div>
+                    </font></strong>
+                </Typography>
 
 
                 <List
@@ -329,24 +387,20 @@ class AnnotionItem extends Component {
                     loadMore={submitBtn}
                     renderItem={item => (
                         <List.Item
-                            actions={[
+                            actions={item.new_add ? [] : [
                                 <Icon type="like" theme={item.action === 0 ? 'filled' : 'outlined'}
                                     onClick={() => { this.like(item) }} />,
                                 <Icon type="dislike" theme={item.action === 1 ? 'filled' : 'outlined'}
                                     onClick={() => { this.dislike(item) }} />]}
                         >
                             <List.Item.Meta
-                                description={<EntityItem data={item} />} />
+                                description={<NEREntityItem data={item} />} />
                         </List.Item>
                     )}
 
                 />
 
-                <Divider>Wiki Page</Divider>
-
-                {frame}
-
-                <EntityError onClose={this.onClose} visible={error_drawer_visible}
+                <NEREntityError onClose={this.onClose} visible={error_drawer_visible}
                     errData={current_err_data} onSubmit={this.onErrSubmit} onErrAdd={this.onErrAdd} onErrRemove={this.onErrRemove} item={current_item}
                 />
 
@@ -361,10 +415,10 @@ class AnnotionItem extends Component {
 
                 <LoginModel visible={loginVisible} onLogin={this.loginRequest.bind(this)} />
 
-
+                <AddNewMentionModel visible={addNewMetationModel} onAdd={this.AddMentionRequest.bind(this)} />
             </div>
         );
     }
 }
 
-export default AnnotionItem;
+export default NERAnnotionItem;

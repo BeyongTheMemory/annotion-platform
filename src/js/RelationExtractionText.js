@@ -21,7 +21,7 @@ class RelationExtractionText extends Component {
         var result = "";
         for ( var i = 0; i <sentenceChar.length; i++){
             if(data.pos1[0] == i || data.pos2[0] == i){
-                result += "<font color=‘red’>"
+                result += "<font color=‘orange’>"
             }
             result += sentenceChar[i] + " "
             if(data.pos1[1] == i || data.pos2[1] == i){
