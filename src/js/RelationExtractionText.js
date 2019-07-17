@@ -7,7 +7,8 @@ const {Paragraph, Text} = Typography;
 class RelationExtractionText extends Component {
 
     state = {
-        text: ""
+        text: "",
+        bgColor:"rgba(255,255,225,1)"
     }
 
 
@@ -15,6 +16,19 @@ class RelationExtractionText extends Component {
         this.initText()
     }
 
+    onChange = e => {
+        if (e.target.checked) {
+            this.setState({
+                bgColor: "rgba(168,210,225,.25)"
+            });
+        }else {
+            this.setState({
+                bgColor:"rgba(255,255,225,1)"
+
+            });
+        }
+
+    };
     initText = () => {
         var data = this.props.data;
         console.log(data.sentence)
@@ -39,9 +53,9 @@ class RelationExtractionText extends Component {
         return (
 
             <div style={{marginBottom: 10}}>
-                <Checkbox/>
+                <Checkbox onChange={this.onChange}/>
                 <strong><font size="4">
-                    <div style={{backgroundColor:'rgba(168,210,225,.25)'}} dangerouslySetInnerHTML={{__html: this.state.text}}>
+                    <div style={{backgroundColor:{this.state.bgColor}}} dangerouslySetInnerHTML={{__html: this.state.text}}>
                     </div>
                 </font></strong>
             </div>
