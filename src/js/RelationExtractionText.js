@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../css/App.css';
-import {Typography, Checkbox,Row} from 'antd';
+import {Typography, Checkbox, Row} from 'antd';
 
 const {Paragraph, Text} = Typography;
 
@@ -37,7 +37,7 @@ class RelationExtractionText extends Component {
 
     render() {
         return (
-            <div style={{marginBottom: 10}}>
+            <div style={{marginBottom: 10,backgroundColor:"blue"}}>
                 <Row><strong><font size="4">
                     <Checkbox/>
                     <div dangerouslySetInnerHTML={{__html: this.state.text}}>
