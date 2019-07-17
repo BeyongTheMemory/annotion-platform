@@ -254,15 +254,6 @@ class RelationExtractionItem extends Component {
                     </Select>
                     <Button type="primary">{ent2}</Button><Icon type="swap" onClick={this.swapClick}/>
 
-                    <div style={{
-                        textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px',
-                    }}>
-                        <Input style={{width: 500}}
-                               prefix={<Icon type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                               placeholder="Input your comment here..."
-                        />
-                        <Button style={{marginLeft: 10}} onClick={this.onSubmit}>Submit</Button>
-                    </div>
 
                 </div>
 
@@ -283,7 +274,15 @@ class RelationExtractionItem extends Component {
 
                     />
                 </div>
-
+                <div style={{
+                    textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px',
+                }}>
+                    <Input style={{width: 500}}
+                           prefix={<Icon type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
+                           placeholder="Input your comment here..."
+                    />
+                    <Button style={{marginLeft: 10}} onClick={this.onSubmit}>Submit</Button>
+                </div>
 
                 <Modal
                     title="Sure?"
