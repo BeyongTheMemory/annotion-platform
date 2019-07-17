@@ -277,7 +277,7 @@ class RelationExtractionItem extends Component {
                 <div style={{
                     textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px',
                 }}>
-                    <Input style={{width: 500}}
+                    <Input style={{width: 700}}
                            prefix={<Icon type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
                            placeholder="Input your comment here..."
                     />
