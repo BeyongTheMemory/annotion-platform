@@ -243,7 +243,7 @@ class RelationExtractionItem extends Component {
                         <Option value="other">other</Option>
                     </Select>
                     <Button type="primary">{ent2}</Button><Icon type="swap" onClick={this.swapClick} />
-                    <Input style={{width: 100}}
+                    <Input style={{width: 500}}
                         prefix={<Icon type="fire" style={{ color: 'rgba(0,0,0,.25)'}} />}
                         placeholder="Input your comment here..."
                     />
