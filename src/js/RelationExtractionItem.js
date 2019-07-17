@@ -223,12 +223,12 @@ class RelationExtractionItem extends Component {
 
     render() {
         const { listData, modalVisible, loginVisible, sure_content, ent1, ent2 } = this.state;
-        const submitBtn = <div style={{
-            textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px',
-        }}
-        >
-            <Button onClick={this.onSubmit}>Submit</Button>
-        </div>
+        // const submitBtn = <div style={{
+        //     textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px',
+        // }}
+        // >
+        //     <Button onClick={this.onSubmit}>Submit</Button>
+        // </div>
 
 
         return (
@@ -243,7 +243,7 @@ class RelationExtractionItem extends Component {
                         <Option value="other">other</Option>
                     </Select>
                     <Button type="primary">{ent2}</Button><Icon type="swap" onClick={this.swapClick} />
-                    {submitBtn}
+                    <Button onClick={this.onSubmit}>Submit</Button>
                 </div>
 
 
