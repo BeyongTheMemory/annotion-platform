@@ -39,7 +39,8 @@ class RelationExtractionText extends Component {
         return (
             <div style={{marginBottom: 10}}>
                 <strong><font size="4">
-                    <div dangerouslySetInnerHTML={{__html: this.state.text}}>                <Checkbox/>
+                    <Checkbox/>
+                    <div dangerouslySetInnerHTML={{__html: this.state.text}}>
                     </div>
                 </font></strong>
             </div>
