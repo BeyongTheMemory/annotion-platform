@@ -8,7 +8,8 @@ class RelationExtractionText extends Component {
 
     state = {
         text: "",
-        bgColor:"white"
+        bgColor:"white",
+        choose:false
     }
 
 
@@ -17,13 +18,14 @@ class RelationExtractionText extends Component {
     }
 
     onChange = e => {
-        console.log(e)
-        if (e.target.checked) {
+        if (!this.state.choose) {
             this.setState({
+                choose:true,
                 bgColor: "rgba(168,210,225,.25)"
             });
         }else {
             this.setState({
+                choose:false,
                 bgColor:"white"
 
             });
