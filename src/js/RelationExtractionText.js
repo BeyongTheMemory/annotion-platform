@@ -8,7 +8,7 @@ class RelationExtractionText extends Component {
 
     state = {
         text: "",
-        bgColor:"rgba(255,255,225,1)"
+        bgColor:"white"
     }
 
 
@@ -23,7 +23,7 @@ class RelationExtractionText extends Component {
             });
         }else {
             this.setState({
-                bgColor:"rgba(255,255,225,1)"
+                bgColor:"white"
 
             });
         }
