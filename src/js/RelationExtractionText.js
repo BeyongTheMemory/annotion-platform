@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import '../css/App.css';
-import { Typography } from 'antd';
-const { Paragraph, Text,Checkbox } = Typography;
+import {Typography} from 'antd';
+
+const {Paragraph, Text, Checkbox} = Typography;
 
 class RelationExtractionText extends Component {
 
@@ -36,13 +37,15 @@ class RelationExtractionText extends Component {
 
     render() {
         return (
-
-            <Text mark>
+            <div>
                 <Checkbox/>
-                <strong><font size="4">
-                    <div dangerouslySetInnerHTML={{ __html: this.state.text }}></div>
-                </font></strong>
-            </Text>
+
+                <Text mark>
+                    <strong><font size="4">
+                        <div dangerouslySetInnerHTML={{__html: this.state.text}}></div>
+                    </font></strong>
+                </Text>
+            </div>
 
         );
     }
