@@ -243,7 +243,7 @@ class RelationExtractionItem extends Component {
             }}>
                 <div>
                     <strong style={{marginRight: 20}}><font size="5" color="black"> ID: 1 </font></strong>
-                    <Button type="primary">{ent1}</Button>
+                    <Button type="primary"><strong>{ent1}</strong></Button>
                     <Select value={this.state.relation} onChange={(value) => {
                         this.handleRelationChange(value)
                     }} style={{width: 400}}>
@@ -252,7 +252,7 @@ class RelationExtractionItem extends Component {
                         <Option value="prevent">prevent</Option>
                         <Option value="other">other</Option>
                     </Select>
-                    <Button type="primary">{ent2}</Button><Icon  style={{marginLeft: 20,fontSize: '20px'}}  type="swap" onClick={this.swapClick}/>
+                    <Button type="primary"><strong>{ent2}</strong></Button><Icon  style={{marginLeft: 20,fontSize: '20px'}}  type="swap" onClick={this.swapClick}/>
 
 
                 </div>
