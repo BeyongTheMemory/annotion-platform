@@ -10,7 +10,7 @@ class App extends Component {
         <Router>
         <div>
           <Route path="/ner" exact component={NewEntityRecognition} />
-          <Route path="/er" exact component={EntityRecognition} />
+          <Route path="/typing" exact component={EntityRecognition} />
           <Route path="/re" exact component={RelationExtraction} />
           <Route path="/" exact component={EntityRecognition} />
         </div>
