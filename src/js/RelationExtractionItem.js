@@ -246,6 +246,8 @@ class RelationExtractionItem extends Component {
                     {submitBtn}
                 </div>
 
+                <strong><font size="4" color="blue"> 1</font></strong>
+
                 <div style={{ textAlign: 'left' }}>
                 <List
                     size="large"
