@@ -17,7 +17,7 @@ class EntityItem extends Component {
         return (
             <div >
                 <Button type="primary" size="large" onClick={this.onEntityBtnClick}>{this.props.data.entity}</Button>
-                <Button type="danger" className="argin-left-10" size="large" disabled>{this.props.data.relation === 0 ? 'is instance of' : 'unknown'}</Button>
+                <Button type="danger" className="argin-left-10" size="large" disabled>{this.props.data.relation === 0 ? 'an instance of' : 'unknown'}</Button>
                 <Button type="primary" className="argin-left-10" size="large" onClick={this.onCategoryBtnClick}>{this.props.data.category}</Button>
             </div>
         );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../css/App.css';
-import { Typography} from 'antd';
+import { Typography } from 'antd';
 const { Paragraph, Text } = Typography;
 
 class RelationExtractionText extends Component {
@@ -11,7 +11,7 @@ class RelationExtractionText extends Component {
 
 
     componentDidMount() {
-       this.initText()
+        this.initText()
     }
 
     initText = () => {
@@ -19,12 +19,12 @@ class RelationExtractionText extends Component {
         console.log(data.sentence)
         var sentenceChar = data.sentence.split(" ");
         var result = "";
-        for ( var i = 0; i <sentenceChar.length; i++){
-            if(data.pos1[0] == i || data.pos2[0] == i){
+        for (var i = 0; i < sentenceChar.length; i++) {
+            if (data.pos1[0] == i || data.pos2[0] == i) {
                 result += "<font color=‘orange’>"
             }
             result += sentenceChar[i] + " "
-            if(data.pos1[1] == i || data.pos2[1] == i){
+            if (data.pos1[1] == i || data.pos2[1] == i) {
                 result += "</font>"
             }
         }
@@ -36,13 +36,15 @@ class RelationExtractionText extends Component {
 
     render() {
         return (
-            
+
             <Text mark>
-            <div dangerouslySetInnerHTML={{ __html: this.state.text }}></div>
+                <strong><font size="4">
+                    <div dangerouslySetInnerHTML={{ __html: this.state.text }}></div>
+                </font></strong>
             </Text>
-            
+
         );
-      }
+    }
 }
 
 export default RelationExtractionText;
