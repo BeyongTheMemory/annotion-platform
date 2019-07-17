@@ -235,6 +235,7 @@ class RelationExtractionItem extends Component {
             <div style={{ background: '#fff', padding: 24, minHeight: 280, textAlign: 'center', width: '100%', minWidth: 680 }}>
                 <div>
                     <strong><font size="5" color="black">     ID: 1     </font></strong>
+                    <div>    </div>
                     <Button type="primary">{ent1}</Button>
                     <Select value={this.state.relation} onChange={(value) => { this.handleRelationChange(value) }} style={{ width: 400 }}>
                         <Option value="cause">cause</Option>
