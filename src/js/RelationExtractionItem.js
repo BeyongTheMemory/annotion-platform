@@ -281,7 +281,7 @@ class RelationExtractionItem extends Component {
                            prefix={<Icon type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
                            placeholder="Input your comment here..."
                     />
-                    <Button style={{marginLeft: 10}} onClick={this.onSubmit}>Submit</Button>
+                    <Button style={{marginLeft: 10}} onClick={this.onSubmit}  type="primary">Submit</Button>
                 </div>
 
                 <Modal
