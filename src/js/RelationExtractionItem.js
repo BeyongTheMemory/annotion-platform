@@ -252,7 +252,7 @@ class RelationExtractionItem extends Component {
                         <Option value="prevent">prevent</Option>
                         <Option value="other">other</Option>
                     </Select>
-                    <Button type="primary">{ent2}</Button><Icon type="swap" onClick={this.swapClick}/>
+                    <Button type="primary">{ent2}</Button><Icon  style={{marginLeft: 20}}  type="swap" onClick={this.swapClick}/>
 
 
                 </div>
@@ -281,7 +281,7 @@ class RelationExtractionItem extends Component {
                            prefix={<Icon type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
                            placeholder="Input your comment here..."
                     />
-                    <Button style={{marginLeft: 10}} onClick={this.onSubmit}  type="primary">Submit</Button>
+                    <Button style={{marginLeft: 50}} onClick={this.onSubmit}  type="primary">Submit</Button>
                 </div>
 
                 <Modal
