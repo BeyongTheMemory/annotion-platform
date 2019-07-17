@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { notification, List, Select, Button, Modal, Typography, message, Icon } from 'antd';
+import {notification, List, Select, Button, Modal, Typography, message, Icon, Input} from 'antd';
 import RelationExtractionText from './RelationExtractionText';
 import LoginModel from './LoginModel'
 const { Paragraph, Text } = Typography;
@@ -243,6 +243,10 @@ class RelationExtractionItem extends Component {
                         <Option value="other">other</Option>
                     </Select>
                     <Button type="primary">{ent2}</Button><Icon type="swap" onClick={this.swapClick} />
+                    <Input
+                        prefix={<Icon type="fire" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                        placeholder="Input your comment here..."
+                    />
                     <Button style={{ marginLeft: 100}} onClick={this.onSubmit}>Submit</Button>
                 </div>
 
