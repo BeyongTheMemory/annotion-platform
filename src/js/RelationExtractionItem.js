@@ -251,6 +251,7 @@ class RelationExtractionItem extends Component {
                         <Option value="others">others</Option>
                     </Select>
                     <Button type="primary">{ent2}</Button><Icon type="swap" onClick={this.swapClick} />
+                    {submitBtn}
                 </div>
 
                 <List
@@ -258,7 +259,6 @@ class RelationExtractionItem extends Component {
                     dataSource={listData}
                     itemLayout="horizontal"
                     split="false"
-                    loadMore={submitBtn}
                     renderItem={item => (
                         <List.Item
                         >
