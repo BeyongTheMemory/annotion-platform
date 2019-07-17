@@ -17,6 +17,7 @@ class RelationExtractionText extends Component {
     }
 
     onChange = e => {
+        console.log(e)
         if (e.target.checked) {
             this.setState({
                 bgColor: "rgba(168,210,225,.25)"
@@ -52,7 +53,7 @@ class RelationExtractionText extends Component {
     render() {
         return (
 
-            <div style={{marginBottom: 10}}>
+            <div style={{marginBottom: 10}} onClick={this.onChange}>
                 <Checkbox onChange={this.onChange}/>
                 <strong><font size="4">
                     <div style={{backgroundColor:this.state.bgColor}} dangerouslySetInnerHTML={{__html: this.state.text}}>
