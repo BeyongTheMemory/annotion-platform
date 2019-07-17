@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {notification, List, Select, Button, Modal, Typography, message, Icon, Input} from 'antd';
 import RelationExtractionText from './RelationExtractionText';
 import LoginModel from './LoginModel'
-const { Paragraph, Text } = Typography;
-const { Option } = Select;
+
+const {Paragraph, Text} = Typography;
+const {Option} = Select;
 
 /**
  * RE条目组件
@@ -70,7 +71,7 @@ class RelationExtractionItem extends Component {
             ent1Result = this.state.ent2;
             ent2Result = this.state.ent1;
             relationResult += "|r";
-        }else {
+        } else {
             relationResult += "|o";
         }
         const param = {
@@ -161,7 +162,7 @@ class RelationExtractionItem extends Component {
             ent1: responseData.ent1,
             ent2: responseData.ent2,
             relation: responseData.relation,
-            swap:false
+            swap: false
         })
     }
 
@@ -222,7 +223,7 @@ class RelationExtractionItem extends Component {
     }
 
     render() {
-        const { listData, modalVisible, loginVisible, sure_content, ent1, ent2 } = this.state;
+        const {listData, modalVisible, loginVisible, sure_content, ent1, ent2} = this.state;
         // const submitBtn = <div style={{
         //     textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px',
         // }}
@@ -232,42 +233,56 @@ class RelationExtractionItem extends Component {
 
 
         return (
-            <div style={{ background: '#fff', padding: 24, minHeight: 280, textAlign: 'center', width: '100%', minWidth: 680 }}>
+            <div style={{
+                background: '#fff',
+                padding: 24,
+                minHeight: 280,
+                textAlign: 'center',
+                width: '100%',
+                minWidth: 680
+            }}>
                 <div>
-                    <strong style={{ marginRight: 20}}><font size="5" color="black">     ID: 1       </font></strong>
+                    <strong style={{marginRight: 20}}><font size="5" color="black"> ID: 1 </font></strong>
                     <Button type="primary">{ent1}</Button>
-                    <Select value={this.state.relation} onChange={(value) => { this.handleRelationChange(value) }} style={{ width: 400 }}>
+                    <Select value={this.state.relation} onChange={(value) => {
+                        this.handleRelationChange(value)
+                    }} style={{width: 400}}>
                         <Option value="cause">cause</Option>
                         <Option value="lack-cause">lack-cause</Option>
                         <Option value="prevent">prevent</Option>
                         <Option value="other">other</Option>
                     </Select>
-                    <Button type="primary">{ent2}</Button><Icon type="swap" onClick={this.swapClick} />
-                    <Input style={{width: 500}}
-                        prefix={<Icon type="fire" style={{ color: 'rgba(0,0,0,.25)'}} />}
-                        placeholder="Input your comment here..."
+                    <Button type="primary">{ent2}</Button><Icon type="swap" onClick={this.swapClick}/>
+
+                    <div style={{
+                        textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px',
+                    }}>
+                        <Input style={{width: 500}}
+                               prefix={<Icon type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
+                               placeholder="Input your comment here..."
+                        />
+                        <Button style={{marginLeft: 10}} onClick={this.onSubmit}>Submit</Button>
+                    </div>
+
+                </div>
+
+
+                <div style={{textAlign: 'left'}}>
+                    <List
+                        size="large"
+                        dataSource={listData}
+                        itemLayout="horizontal"
+                        split="false"
+                        renderItem={item => (
+                            <List.Item
+                            >
+                                <List.Item.Meta
+                                    description={<RelationExtractionText data={item}/>}/>
+                            </List.Item>
+                        )}
+
                     />
-                    <Button style={{ marginLeft: 10}} onClick={this.onSubmit}>Submit</Button>
                 </div>
-
-
-                <div style={{ textAlign: 'left' }}>
-                <List
-                    size="large"
-                    dataSource={listData}
-                    itemLayout="horizontal"
-                    split="false"
-                    renderItem={item => (
-                        <List.Item
-                        >
-                            <List.Item.Meta
-                                description={<RelationExtractionText data={item} />} />
-                        </List.Item>
-                    )}
-
-                />
-                </div>
-
 
 
                 <Modal
@@ -276,10 +291,10 @@ class RelationExtractionItem extends Component {
                     onOk={this.modalHandleOk}
                     onCancel={this.modalHandleCancel}
                 >
-                    <div onClick={this.handleChange} dangerouslySetInnerHTML={{ __html: sure_content }}></div>
+                    <div onClick={this.handleChange} dangerouslySetInnerHTML={{__html: sure_content}}></div>
                 </Modal>
 
-                <LoginModel visible={loginVisible} onLogin={this.loginRequest.bind(this)} />
+                <LoginModel visible={loginVisible} onLogin={this.loginRequest.bind(this)}/>
 
 
             </div>
