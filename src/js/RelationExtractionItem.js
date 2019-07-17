@@ -252,7 +252,7 @@ class RelationExtractionItem extends Component {
                         <Option value="prevent">prevent</Option>
                         <Option value="other">other</Option>
                     </Select>
-                    <Button type="primary">{ent2}</Button><Icon width="500" style={{marginLeft: 20,width:500}}  type="swap" onClick={this.swapClick}/>
+                    <Button type="primary">{ent2}</Button><Icon width="500" style={{marginLeft: 20}}  type="swap" onClick={this.swapClick}/>
 
 
                 </div>
