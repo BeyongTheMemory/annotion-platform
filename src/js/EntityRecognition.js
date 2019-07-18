@@ -16,7 +16,7 @@ class EntityRecognition extends Component {
         <div style={{ background: '#fff', padding: 24, minHeight: 280,textAlign: 'center', width: '100%'}}><AnnotionList style={{textAlign: 'center' }}/></div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>
-        Annotion Platform ©2019 Created by Hong Ying
+        Annotation Platform ©2019 Created by Hong Ying
       </Footer>
     </Layout>
     );
