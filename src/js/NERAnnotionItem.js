@@ -13,6 +13,8 @@ const { Text, Title } = Typography;
 class NERAnnotionItem extends Component {
     state = {
         listData: [],
+        entityData: [],
+        tokenData: [],
         error_drawer_visible: false,
         current_item: null,
         current_err_data: [],
@@ -21,7 +23,10 @@ class NERAnnotionItem extends Component {
         iFrameHeight: '0px',
         loginVisible: false,
         sure_content: "",
-        text: ""
+        text: "",
+        chooseEntity: true,
+        addNewTitle: "",
+        optionItems: [],
     }
 
     componentDidMount() {
@@ -42,6 +47,14 @@ class NERAnnotionItem extends Component {
             error_drawer_visible: true,
             current_item: item,
             current_err_data: item.err_data
+        });
+    }
+
+    deleteRecord = (item, index) => {
+        const listData = this.state.listData
+        listData.splice(index, 1)
+        this.setState({
+            listData: this.state.listData
         });
     }
 
@@ -125,8 +138,20 @@ class NERAnnotionItem extends Component {
         });
     }
 
-    onAddNewMentation = () => {
+    onAddNewEntity = () => {
         this.setState({
+            chooseEntity: false,
+            addNewTitle: "Add new entity",
+            optionItems: this.state.tokenData,
+            addNewMetationModel: true
+        })
+    }
+
+    onAddNewCategory = () => {
+        this.setState({
+            chooseEntity: true,
+            addNewTitle: "Add new category",
+            optionItems: this.state.entityData,
             addNewMetationModel: true,
         })
     }
@@ -275,9 +300,37 @@ class NERAnnotionItem extends Component {
             action: null, //0正确 1错误
             err_data: [{ "id": 0 }]
         })
+        const entityData = [];
+        entityData.push({
+            name: "cocktail"
+        })
+        entityData.push({
+            name: "contain"
+        })
+        entityData.push({
+            name: "sugar"
+        })
+        entityData.push({
+            name: "citrus"
+        })
+        const tokenData = [];
+        tokenData.push({
+            name: "A"
+        })
+        tokenData.push({
+            name: "can"
+        })
+        tokenData.push({
+            name: "and"
+        })
+        tokenData.push({
+            name: "a"
+        })
         const text = "A <font color=orange>cocktail</font> can contain <font color=orange>alcohol</font>  , a <font color=orange>sugar</font> , and a <font color=orange>citrus</font> .";
         this.setState({
             listData: listData,
+            entityData: entityData,
+            tokenData: tokenData,
             text: text
         })
     }
@@ -355,46 +408,57 @@ class NERAnnotionItem extends Component {
 
     }
 
+    MentionCancel = () => {
+        this.setState({
+            addNewMetationModel: false,
+        })
+    }
+
     render() {
         const { listData, error_drawer_visible, current_err_data, modalVisible, loginVisible, current_item, sure_content, addNewMetationModel } = this.state;
-        const submitBtn = <div style={{
+        const addBtn = <div style={{
             marginTop: 12, lineHeight: '32px',
         }}
         >
-            <Row gutter={16} style={{ textAlign: 'center' }}>
-                <Button type="dashed" onClick={this.onAddNewMentation} style={{ width: '60%' }}>
-                    <Icon type="plus" /> <strong><font size="4" >Add New Mention</font></strong>
+            <Row gutter={16} style={{ textAlign: 'center', padding: 20 }}>
+                <Button type="dashed" onClick={this.onAddNewEntity} style={{ width: '30%' }}>
+                    <Icon type="plus" /> <strong><font size="4" >Add New Entity</font></strong>
+                </Button>
+                <Button type="dashed" onClick={this.onAddNewCategory} style={{ width: '30%' }}>
+                    <Icon type="plus" /> <strong><font size="4" >Add New Category</font></strong>
                 </Button>
             </Row>
             <br />
-            <Button onClick={this.onSubmit} size='large'> Submit</Button>
         </div>
 
         return (
             <div style={{ background: '#fff', padding: 24, minHeight: 280, textAlign: 'center', width: '100%', minWidth: 680 }}>
                 <Typography>
                     <strong><font size="6" >
-                        <div dangerouslySetInnerHTML={{ __html: this.state.text }}></div>
+                        <div style={{ display: "inline" ,float: 'left'}} dangerouslySetInnerHTML={{ __html: this.state.text }}></div>
+                        <div style={{ display: "inline" ,float:"right"}}>
+                            <Button onClick={this.onSubmit} size='large'> Submit</Button>
+                        </div>
                     </font></strong>
                 </Typography>
 
-
                 <List
+                style={{marginTop:100}}
                     size="large"
                     dataSource={listData}
                     itemLayout="horizontal"
                     split="false"
-                    loadMore={submitBtn}
-                    renderItem={item => (
+                    loadMore={addBtn}
+                    renderItem={(item, index) => (
                         <List.Item
-                            actions={item.new_add ? [] : [
+                            actions={item.new_add ? [<Icon type="delete" onClick={() => { this.deleteRecord(item, index) }} />] : [
                                 <Icon type="like" theme={item.action === 0 ? 'filled' : 'outlined'}
                                     onClick={() => { this.like(item) }} />,
                                 <Icon type="dislike" theme={item.action === 1 ? 'filled' : 'outlined'}
                                     onClick={() => { this.dislike(item) }} />]}
                         >
                             <List.Item.Meta
-                                description={<NEREntityItem data={item} />} />
+                                description={<NEREntityItem data={item} index={index} />} />
                         </List.Item>
                     )}
 
@@ -415,7 +479,7 @@ class NERAnnotionItem extends Component {
 
                 <LoginModel visible={loginVisible} onLogin={this.loginRequest.bind(this)} />
 
-                <AddNewMentionModel visible={addNewMetationModel} onAdd={this.AddMentionRequest.bind(this)} />
+                <AddNewMentionModel title={this.state.addNewTitle} choose={this.state.chooseEntity} visible={addNewMetationModel} options={this.state.optionItems} onAdd={this.AddMentionRequest.bind(this)} onCancel={this.MentionCancel.bind(this)} />
             </div>
         );
     }
