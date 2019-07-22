@@ -305,7 +305,7 @@ class NERAnnotionItem extends Component {
             name: "cocktail"
         })
         entityData.push({
-            name: "contain"
+            name: "alcohol"
         })
         entityData.push({
             name: "sugar"
@@ -321,10 +321,10 @@ class NERAnnotionItem extends Component {
             name: "can"
         })
         tokenData.push({
-            name: "and"
+            name: "contain"
         })
         tokenData.push({
-            name: "a"
+            name: "and"
         })
         const text = "A <font color=orange>cocktail</font> can contain <font color=orange>alcohol</font>  , a <font color=orange>sugar</font> , and a <font color=orange>citrus</font> .";
         this.setState({
