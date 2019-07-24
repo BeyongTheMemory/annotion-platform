@@ -162,6 +162,7 @@ class RelationExtractionItem extends Component {
                 clueStatus:false
             });
         }
+        console.log(listData)
         this.setState({
             listData: listData,
             ent1: responseData.ent1,
