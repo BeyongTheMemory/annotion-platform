@@ -154,6 +154,9 @@ class RelationExtractionItem extends Component {
 
     updateListData = (responseData) => {
         let listData = [];
+        this.setState({
+            listData: listData
+        })
         for (var i = 0; i < responseData.context.length; i++) {
             listData.push({
                 pos1: responseData.context[i].pos1,
@@ -190,11 +193,6 @@ class RelationExtractionItem extends Component {
         })
     }
 
-    showLogin = () => {
-        this.setState({
-            loginVisible: true,
-        });
-    }
 
     handleCommentChange = (value) => {
         this.setState({
