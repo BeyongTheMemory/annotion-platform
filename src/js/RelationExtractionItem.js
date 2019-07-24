@@ -156,11 +156,11 @@ class RelationExtractionItem extends Component {
 
     updateListData = (responseData) => {
         const listData = [];
-        for (var i = 0; i < responseData.contex.length; i++) {
+        for (var i = 0; i < responseData.context.length; i++) {
             listData.push({
-                pos1: responseData.contex[i].pos1,
-                pos2: responseData.contex[i].pos2,
-                sentence: responseData.contex[i].sentence
+                pos1: responseData.context[i].pos1,
+                pos2: responseData.context[i].pos2,
+                sentence: responseData.context[i].sentence
             });
         }
         this.setState({
