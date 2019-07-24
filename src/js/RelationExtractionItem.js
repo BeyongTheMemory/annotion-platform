@@ -70,7 +70,7 @@ class RelationExtractionItem extends Component {
         }
         let clue = []
         for (let i = 0; i < this.state.listData.length; i++) {
-            if(this.state.listData.listData[i].clueStatus){
+            if(this.state.listData[i].clueStatus){
                 clue.push(i)
             }
         }
