@@ -237,7 +237,7 @@ class RelationExtractionItem extends Component {
     }
 
     render() {
-        const {listData, modalVisible, loginVisible, sure_content, ent1, ent2} = this.state;
+        const { modalVisible, loginVisible, sure_content, ent1, ent2} = this.state;
         // const submitBtn = <div style={{
         //     textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px',
         // }}
@@ -275,7 +275,7 @@ class RelationExtractionItem extends Component {
                 <div style={{textAlign: 'left'}}>
                     <List
                         size="large"
-                        dataSource={listData}
+                        dataSource={this.state.listData}
                         itemLayout="horizontal"
                         split="false"
                         renderItem={(item,index) => (
