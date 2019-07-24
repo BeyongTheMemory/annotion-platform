@@ -47,7 +47,7 @@ class RelationExtractionItem extends Component {
     }
 
     onClueChange = (index,status) =>{
-        this.state.listData[index].cureStatus = status
+        this.state.listData[index].clueStatus = status
     }
 
     modalHandleOk = () => {
@@ -168,7 +168,8 @@ class RelationExtractionItem extends Component {
             ent2: responseData.ent2,
             relation: responseData.relation,
             ep_num:responseData.ep_num,
-            swap: false
+            swap: false,
+            comment:""
         })
     }
 
@@ -278,7 +279,7 @@ class RelationExtractionItem extends Component {
                             <List.Item
                             >
                                 <List.Item.Meta
-                                    description={<RelationExtractionText data={item} index={index} onCureChange={this.onClueChange}/>}/>
+                                    description={<RelationExtractionText data={item} index={index} onClueChange={this.onClueChange}/>}/>
                             </List.Item>
                         )}
 
@@ -291,6 +292,7 @@ class RelationExtractionItem extends Component {
                            prefix={<Icon type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
                            placeholder="Input your comment here..."
                            onChange={(value) => { this.handleCommentChange(value) }}
+                           value={this.state.comment}
                     />
                     <Button type="primary" style={{marginLeft: 50}} onClick={this.onSubmit}><strong>Submit</strong></Button>
                 </div>

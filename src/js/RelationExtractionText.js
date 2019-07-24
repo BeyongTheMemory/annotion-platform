@@ -18,7 +18,7 @@ class RelationExtractionText extends Component {
     }
 
     onChange = () => {
-        var status;
+        let status;
         if (!this.state.choose) {
             status = true
             this.setState({
@@ -32,7 +32,7 @@ class RelationExtractionText extends Component {
                 bgColor: "white"
             });
         }
-        this.props.onCureChange(this.props.index,status)
+        this.props.onClueChange(this.props.index,status)
 
     };
     initText = () => {
