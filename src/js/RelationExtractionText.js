@@ -8,8 +8,8 @@ class RelationExtractionText extends Component {
 
     state = {
         text: "",
-        bgColor:"white",
-        choose:false
+        bgColor: "white",
+        choose: false
     }
 
 
@@ -20,13 +20,13 @@ class RelationExtractionText extends Component {
     onChange = () => {
         if (!this.state.choose) {
             this.setState({
-                choose:true,
+                choose: true,
                 bgColor: "rgba(168,210,225,.25)"
             });
-        }else {
+        } else {
             this.setState({
-                choose:false,
-                bgColor:"white"
+                choose: false,
+                bgColor: "white"
             });
         }
 
@@ -55,9 +55,12 @@ class RelationExtractionText extends Component {
         return (
 
             <div style={{marginBottom: 10}} onClick={this.onChange}>
-                <Checkbox checked={this.state.choose}/>
+                <div style={{display: "inline"}}>
+                    <Checkbox checked={this.state.choose}/>
+                </div>
                 <strong><font size="4">
-                    <div  style={{ display: "inline"}} style={{backgroundColor:this.state.bgColor}} dangerouslySetInnerHTML={{__html: this.state.text}}>
+                    <div style={{display: "inline"}} style={{backgroundColor: this.state.bgColor}}
+                         dangerouslySetInnerHTML={{__html: this.state.text}}>
                     </div>
                 </font></strong>
             </div>
