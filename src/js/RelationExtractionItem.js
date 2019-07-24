@@ -196,7 +196,9 @@ class RelationExtractionItem extends Component {
     }
 
     handleCommentChange = (value) => {
-        this.state.comment = value.target.value;
+        this.setState({
+            comment:value.target.value
+        })
     }
 
     loginRequest = (name, password) => {
