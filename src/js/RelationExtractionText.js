@@ -57,7 +57,7 @@ class RelationExtractionText extends Component {
             <div style={{marginBottom: 10}} onClick={this.onChange}>
                 <Checkbox checked={this.state.choose}/>
                 <strong><font size="4">
-                    <div style={{backgroundColor:this.state.bgColor}} dangerouslySetInnerHTML={{__html: this.state.text}}>
+                    <div  style={{ display: "inline"}} style={{backgroundColor:this.state.bgColor}} dangerouslySetInnerHTML={{__html: this.state.text}}>
                     </div>
                 </font></strong>
             </div>

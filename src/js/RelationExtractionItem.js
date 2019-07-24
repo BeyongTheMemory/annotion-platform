@@ -65,19 +65,13 @@ class RelationExtractionItem extends Component {
 
     postFeedback = () => {
         const url = "http://172.26.187.188:15000/annotation/send-result";
-        let ent1Result = this.state.ent1;
-        let ent2Result = this.state.ent2;
         let relationResult = this.state.relation;
         if (this.state.swap) {
-            ent1Result = this.state.ent2;
-            ent2Result = this.state.ent1;
             relationResult += "|r";
         } else {
             relationResult += "|o";
         }
         const result = {
-            ent1: ent1Result,
-            ent2: ent2Result,
             label: relationResult,
             user: this.state.user_name,
             comment:this.state.comment
