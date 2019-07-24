@@ -70,7 +70,7 @@ class RelationExtractionItem extends Component {
         }
         let clue = []
         for (let i = 0; i < this.state.listData.length; i++) {
-            if(this.state.listData.listData[i].cureStatus){
+            if(this.state.listData.listData[i].clueStatus){
                 clue.push(i)
             }
         }
@@ -159,7 +159,7 @@ class RelationExtractionItem extends Component {
                 pos1: responseData.context[i].pos1,
                 pos2: responseData.context[i].pos2,
                 sentence: responseData.context[i].sentence,
-                cureStatus:false
+                clueStatus:false
             });
         }
         this.setState({
