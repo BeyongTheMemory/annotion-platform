@@ -164,13 +164,13 @@ class RelationExtractionItem extends Component {
         }
         console.log(listData)
         this.setState({
-            listData: listData,
             ent1: responseData.ent1,
             ent2: responseData.ent2,
             relation: responseData.relation,
             ep_num:responseData.ep_num,
             swap: false,
-            comment:""
+            comment:"",
+            listData: listData
         })
     }
 
