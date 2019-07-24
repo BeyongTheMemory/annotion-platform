@@ -84,7 +84,7 @@ class RelationExtractionItem extends Component {
         };
         const param = {
             result:result,
-            ep_num:his.state.ep_num
+            ep_num:this.state.ep_num
         }
         var doc = this;
         fetch(url, {
