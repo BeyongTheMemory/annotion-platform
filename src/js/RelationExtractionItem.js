@@ -19,7 +19,8 @@ class RelationExtractionItem extends Component {
         loginVisible: false,
         sure_content: "",
         user_name: "",
-        swap: false
+        swap: false,
+        comment:""
     }
 
     componentDidMount() {
@@ -74,12 +75,17 @@ class RelationExtractionItem extends Component {
         } else {
             relationResult += "|o";
         }
-        const param = {
+        const result = {
             ent1: ent1Result,
             ent2: ent2Result,
             label: relationResult,
-            user: this.state.user_name
+            user: this.state.user_name,
+            comment:this.state.comment
         };
+        const param = {
+            result:result,
+            ep_num:his.state.ep_num
+        }
         var doc = this;
         fetch(url, {
             method: 'POST',
@@ -162,6 +168,7 @@ class RelationExtractionItem extends Component {
             ent1: responseData.ent1,
             ent2: responseData.ent2,
             relation: responseData.relation,
+            ep_num:responseData.ep_num,
             swap: false
         })
     }
@@ -186,6 +193,10 @@ class RelationExtractionItem extends Component {
         this.setState({
             loginVisible: true,
         });
+    }
+
+    handleCommentChange = (value) => {
+        this.state.comment = value
     }
 
     loginRequest = (name, password) => {
@@ -242,7 +253,7 @@ class RelationExtractionItem extends Component {
                 minWidth: 680
             }}>
                 <div>
-                    <strong style={{marginRight: 20}}><font size="5" color="black"> ID: 1 </font></strong>
+                    <strong style={{marginRight: 20}}><font size="5" color="black"> ID: {this.state.ep_num} </font></strong>
                     <Button type="primary"><strong>{ent1}</strong></Button>
                     <Select value={this.state.relation} onChange={(value) => {
                         this.handleRelationChange(value)
@@ -280,6 +291,7 @@ class RelationExtractionItem extends Component {
                     <Input style={{width: 700}}
                            prefix={<Icon type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
                            placeholder="Input your comment here..."
+                           onChange={(value) => { this.handleCommentChange(value) }}
                     />
                     <Button type="primary" style={{marginLeft: 50}} onClick={this.onSubmit}><strong>Submit</strong></Button>
                 </div>
