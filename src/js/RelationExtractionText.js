@@ -18,17 +18,21 @@ class RelationExtractionText extends Component {
     }
 
     onChange = () => {
+        var status;
         if (!this.state.choose) {
+            status = true
             this.setState({
-                choose: true,
+                choose: status,
                 bgColor: "rgba(168,210,225,.25)"
             });
         } else {
+            status = false
             this.setState({
-                choose: false,
+                choose: status,
                 bgColor: "white"
             });
         }
+        this.props.onCureChange(this.props.index,status)
 
     };
     initText = () => {

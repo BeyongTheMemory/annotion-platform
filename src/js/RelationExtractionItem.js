@@ -28,13 +28,6 @@ class RelationExtractionItem extends Component {
     }
 
 
-    like = (item) => {
-        item.action = 0
-        this.setState({
-            listData: this.state.listData
-        });
-    }
-
     onSubmit = () => {
         //set content
         if (typeof (this.state.relation) === "undefined" || this.state.relation == "") {
@@ -51,6 +44,10 @@ class RelationExtractionItem extends Component {
             modalVisible: true,
             sure_content: sure_content
         });
+    }
+
+    onClueChange = (index,status) =>{
+        this.state.listData[index].cureStatus = status
     }
 
     modalHandleOk = () => {
@@ -71,16 +68,23 @@ class RelationExtractionItem extends Component {
         } else {
             relationResult += "|o";
         }
+        let clue = []
+        for (let i = 0; i < this.state.listData.length; i++) {
+            if(this.state.listData.listData[i].cureStatus){
+                clue.push(i)
+            }
+        }
         const result = {
             label: relationResult,
             user: this.state.user_name,
-            comment:this.state.comment
+            comment:this.state.comment,
+            clue:clue
         };
         const param = {
             result:result,
             ep_num:this.state.ep_num
         }
-        var doc = this;
+        let doc = this;
         fetch(url, {
             method: 'POST',
             body: JSON.stringify(param),
@@ -154,7 +158,8 @@ class RelationExtractionItem extends Component {
             listData.push({
                 pos1: responseData.context[i].pos1,
                 pos2: responseData.context[i].pos2,
-                sentence: responseData.context[i].sentence
+                sentence: responseData.context[i].sentence,
+                cureStatus:false
             });
         }
         this.setState({
@@ -269,11 +274,11 @@ class RelationExtractionItem extends Component {
                         dataSource={listData}
                         itemLayout="horizontal"
                         split="false"
-                        renderItem={item => (
+                        renderItem={(item,index) => (
                             <List.Item
                             >
                                 <List.Item.Meta
-                                    description={<RelationExtractionText data={item}/>}/>
+                                    description={<RelationExtractionText data={item} index={index} onCureChange={this.onClueChange}/>}/>
                             </List.Item>
                         )}
 
