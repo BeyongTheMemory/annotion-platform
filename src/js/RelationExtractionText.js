@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import '../css/App.css';
-import {Typography, Checkbox} from 'antd';
+import {Typography, Checkbox,Row} from 'antd';
 
 const {Paragraph, Text} = Typography;
 
@@ -55,7 +55,7 @@ class RelationExtractionText extends Component {
         return (
 
             <div style={{marginBottom: 10}} onClick={this.onChange}>
-                <Typography>
+                <Row>
                     <strong><font size="4">
                         <div style={{display: "inline"}}>
                             <Checkbox checked={this.state.choose}/>
@@ -64,7 +64,7 @@ class RelationExtractionText extends Component {
                              dangerouslySetInnerHTML={{__html: this.state.text}}>
                         </div>
                     </font></strong>
-                </Typography>
+                </Row>
             </div>
 
         );
