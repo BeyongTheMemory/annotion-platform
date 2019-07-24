@@ -156,7 +156,7 @@ class RelationExtractionItem extends Component {
         let listData = [];
         this.setState({
             listData: listData
-        })
+        });
         for (var i = 0; i < responseData.context.length; i++) {
             listData.push({
                 pos1: responseData.context[i].pos1,
