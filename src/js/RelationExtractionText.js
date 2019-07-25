@@ -27,7 +27,7 @@ class RelationExtractionText extends Component {
             this.setState({
                 choose: status,
                 bgColor: "rgba(168,210,225,.25)",
-                heartColor: "rgb(128,25,64)",
+                heartColor: "rgb(192,52,96)",
                 heartFillColor:"rgb(128,25,64)",
                 theme:"twoTone"
             });
