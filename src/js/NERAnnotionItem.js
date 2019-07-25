@@ -442,7 +442,7 @@ class NERAnnotionItem extends Component {
                     </font></strong>
                 </Typography>
 
-                <Divider/>
+                <Divider style={{ marginTop:10}}/>
 
                 <List
                 style={{marginTop:100}}
