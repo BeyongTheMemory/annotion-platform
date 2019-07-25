@@ -285,6 +285,7 @@ class RelationExtractionItem extends Component {
                         dataSource={this.state.listData}
                         itemLayout="horizontal"
                         split="false"
+                        bordered
                         renderItem={(item, index) => (
                             <List.Item
                             >
