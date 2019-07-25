@@ -271,7 +271,7 @@ class RelationExtractionItem extends Component {
                 </div>
 
 
-                <div style={{textAlign: 'left',width: '60%'}}>
+                <div style={{marginTop:200,width: '60%'}}>
                     <List
                         size="large"
                         dataSource={this.state.listData}
@@ -288,7 +288,7 @@ class RelationExtractionItem extends Component {
                     />
                 </div>
                 <div style={{
-                    textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px',
+                     marginTop: 12, height: 32, lineHeight: '32px',
                 }}>
                     <Input style={{width: 700}}
                            prefix={<Icon type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
