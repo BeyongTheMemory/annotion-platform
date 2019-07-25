@@ -253,9 +253,9 @@ class RelationExtractionItem extends Component {
                 textAlign: 'center',
                 width: '100%',
                 minWidth: 500,
-                lineHeight: '32px'
+                lineHeight: '32px',
             }}>
-                <div style={{width: '100%'}}>
+                <div style={{width: '100%', display: "inline-block"}}>
                     <Row>
                         <font size="6"> ID: {this.state.ep_num} </font>
                         <Button size='large' style={{backgroundColor: '#faf5d5', fontSize: 30}}>
@@ -270,7 +270,7 @@ class RelationExtractionItem extends Component {
                             <Option value="other"><font size="6">other</font></Option>
                         </Select>
                         <Button size='large' style={{backgroundColor: '#faf5d5', fontSize: 30}}>
-                            {ent2}
+                            <font color='#ecac41'> {ent2}</font>
                         </Button>
                         <Button style={{marginLeft: 50, backgroundColor: '#faf5d5', fontSize: 30}}
                                 onClick={this.onSubmit}
