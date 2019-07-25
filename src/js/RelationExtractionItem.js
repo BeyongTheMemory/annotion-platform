@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import {notification, List, Select, Button, Modal, Typography, message, Icon, Input} from 'antd';
+import {notification, List, Select, Button, Modal, Typography, message, Row, Input} from 'antd';
 import RelationExtractionText from './RelationExtractionText';
 import LoginModel from './LoginModel'
 import '../css/REItem.css'
@@ -255,7 +255,8 @@ class RelationExtractionItem extends Component {
                 minWidth: 500,
                 lineHeight:'32px'
             }}>
-                <div style={{width: '100%'}}>
+                <div style={{width: '100%' }}>
+                    <Row>
                     <font size="6"> ID: {this.state.ep_num} </font>
                     <Button size='large' style={{backgroundColor: '#faf5d5'}}>
                             <font size="6" color='#4c9bc3'> {ent1}</font>
@@ -275,7 +276,7 @@ class RelationExtractionItem extends Component {
                             size='large'><font size="6"> Submit</font></Button>
                     {/*<Icon  style={{marginLeft: 20,fontSize: '20px'}}  type="swap" onClick={this.swapClick}/>*/}
 
-
+                    </Row>
                 </div>
 
 
