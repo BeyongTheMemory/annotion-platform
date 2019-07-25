@@ -63,7 +63,7 @@ class RelationExtractionText extends Component {
 
             <div style={{marginBottom: 10}} onClick={this.onChange}>
                 <Row>
-                    <strong><font size="5">
+                    <strong><font size="6">
                         <div style={{display: "inline",float: 'left'}}>
                             <Checkbox checked={this.state.choose}/>
                         </div>

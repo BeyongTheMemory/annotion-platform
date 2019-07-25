@@ -253,11 +253,11 @@ class RelationExtractionItem extends Component {
                 width: '100%',
                 minWidth: 500
             }}>
-                <div style={{width: '50%'}}>
-                    <font size="5"> ID: {this.state.ep_num} </font>
+                <div style={{width: '80%'}}>
+                    <font size="6"> ID: {this.state.ep_num} </font>
                     <Button size='large' style={{backgroundColor: '#faf5d5'}}>
                         <strong>
-                            <font size="5" color='#4c9bc3'> {ent1}</font>
+                            <font size="6" color='#4c9bc3'> {ent1}</font>
                         </strong>
                     </Button>
                     <Select size='large' value={this.state.relation} onChange={(value) => {
@@ -270,7 +270,7 @@ class RelationExtractionItem extends Component {
                     </Select>
                     <Button size='large' style={{backgroundColor: '#faf5d5'}}>
                         <strong>
-                            <font size="5" color='#ecac41'> {ent2}</font>
+                            <font size="6" color='#ecac41'> {ent2}</font>
                         </strong>
                     </Button>
                     {/*<Icon  style={{marginLeft: 20,fontSize: '20px'}}  type="swap" onClick={this.swapClick}/>*/}
@@ -279,7 +279,7 @@ class RelationExtractionItem extends Component {
                 </div>
 
 
-                <div style={{textAlign: 'left', width: '50%'}}>
+                <div style={{textAlign: 'left', width: '80%'}}>
                     <List
                         size="large"
                         dataSource={this.state.listData}
@@ -297,18 +297,20 @@ class RelationExtractionItem extends Component {
                     />
                 </div>
                 <div style={{
-                    textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px', width: '50%'
+                    textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px', width: '80%'
                 }}>
-                    <Input style={{width: 700}}
-                           prefix={<Icon type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
-                           placeholder="Input your comment here..."
-                           onChange={(value) => {
-                               this.handleCommentChange(value)
-                           }}
-                           value={this.state.comment}
+                    <Input
+                        size='large' 
+                        style={{width: 700}}
+                        prefix={<Icon type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
+                        placeholder="Input your comment here..."
+                        onChange={(value) => {
+                            this.handleCommentChange(value)
+                        }}
+                        value={this.state.comment}
                     />
                     <Button style={{marginLeft: 50, backgroundColor: '#faf5d5'}} onClick={this.onSubmit}
-                            size='large'><strong><font size="5"> Submit</font></strong></Button>
+                            size='large'><strong><font size="6"> Submit</font></strong></Button>
                 </div>
 
                 <Modal
