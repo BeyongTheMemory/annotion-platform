@@ -70,7 +70,7 @@ class RelationExtractionText extends Component {
             <div style={{marginBottom: 10,lineHeight:'50px'}} onClick={this.onChange}>
                 <Row>
                     <font size="6">
-                        <Icon size="large" type="heart" style={{ color: this.state.heartColor }} fill={this.state.heartFillColor} />
+                        <Icon size="large" type="heart" theme="twoTone" twoToneColor={ this.state.heartColor}  />
                         <div style={{backgroundColor: this.state.bgColor}}
                              dangerouslySetInnerHTML={{__html: this.state.text}}>
                         </div>
