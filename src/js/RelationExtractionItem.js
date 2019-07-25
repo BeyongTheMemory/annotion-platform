@@ -257,9 +257,7 @@ class RelationExtractionItem extends Component {
                 <div style={{width: '100%'}}>
                     <font size="6"> ID: {this.state.ep_num} </font>
                     <Button size='large' style={{backgroundColor: '#faf5d5'}}>
-                        <strong>
                             <font size="6" color='#4c9bc3'> {ent1}</font>
-                        </strong>
                     </Button>
                     <Select size='large' value={this.state.relation} onChange={(value) => {
                         this.handleRelationChange(value)
@@ -270,9 +268,7 @@ class RelationExtractionItem extends Component {
                         <Option value="other">other</Option>
                     </Select>
                     <Button size='large' style={{backgroundColor: '#faf5d5'}}>
-                        <strong>
                             <font size="6" color='#ecac41'> {ent2}</font>
-                        </strong>
                     </Button>
                     {/*<Icon  style={{marginLeft: 20,fontSize: '20px'}}  type="swap" onClick={this.swapClick}/>*/}
 
@@ -311,7 +307,7 @@ class RelationExtractionItem extends Component {
                         value={this.state.comment}
                     />
                     <Button style={{marginLeft: 50, backgroundColor: '#faf5d5'}} onClick={this.onSubmit}
-                            size='large'><strong><font size="6"> Submit</font></strong></Button>
+                            size='large'><font size="6"> Submit</font></Button>
                 </div>
 
                 <Modal
