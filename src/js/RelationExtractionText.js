@@ -42,10 +42,10 @@ class RelationExtractionText extends Component {
         var result = "";
         for (var i = 0; i < sentence.length; i++) {
             if (data.pos1[0] == i) {
-                result += "<font color='rgba(168,210,225,0)'>"
+                result += "<font color='rgb(168,210,225)'>"
             }
             if (data.pos2[0] == i){
-                result += "<font color='rgba(224,104,48,0)'>"
+                result += "<font color='rgb(224,104,48)'>"
             }
             result += sentence[i] + " "
             if (data.pos1[1] == i || data.pos2[1] == i) {
