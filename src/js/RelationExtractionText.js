@@ -11,7 +11,8 @@ class RelationExtractionText extends Component {
         bgColor: "white",
         choose: false,
         heartColor:"black",
-        heartFillColor:"white"
+        heartFillColor:"white",
+        theme:"outlined"
     }
 
 
@@ -26,8 +27,9 @@ class RelationExtractionText extends Component {
             this.setState({
                 choose: status,
                 bgColor: "rgba(168,210,225,.25)",
-                heartColor: "rgba(183,53,92,.1)",
-                heartFillColor:"rgba(183,53,92,.1)"
+                heartColor: "rgb(192,52,96)",
+                heartFillColor:"rgb(128,25,64)",
+                theme:"twoTone"
             });
         } else {
             status = false
@@ -35,7 +37,8 @@ class RelationExtractionText extends Component {
                 choose: status,
                 bgColor: "white",
                 heartColor:"black",
-                heartFillColor:"white"
+                heartFillColor:"white",
+                theme:"outlined"
             });
         }
         this.props.onClueChange(this.props.index,status)
@@ -70,7 +73,7 @@ class RelationExtractionText extends Component {
             <div style={{marginBottom: 10,lineHeight:'50px'}} onClick={this.onChange}>
                 <Row>
                     <font size="6">
-                        <Icon size="large" type="heart" theme="twoTone" twoToneColor={ this.state.heartColor}  />
+                        <Icon size="large" type="heart" theme={this.state.theme} twoToneColor={ this.state.heartColor}  />
                         <div style={{backgroundColor: this.state.bgColor}}
                              dangerouslySetInnerHTML={{__html: this.state.text}}>
                         </div>
