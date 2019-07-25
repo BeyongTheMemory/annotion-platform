@@ -300,8 +300,8 @@ class RelationExtractionItem extends Component {
                 }}>
                     <Input
                         size='large' 
-                        style={{width:  '100%'}}
-                        prefix={<Icon type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
+                        style={{width:'100%',height:50}}
+                        prefix={<Icon size="large" type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
                         placeholder="Input your comment here..."
                         onChange={(value) => {
                             this.handleCommentChange(value)
