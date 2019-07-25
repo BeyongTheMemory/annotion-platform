@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {notification, List, Select, Button, Modal, Typography, message, Icon, Input} from 'antd';
 import RelationExtractionText from './RelationExtractionText';
 import LoginModel from './LoginModel'
+import '../css/REItem.css'
 
 const {Paragraph, Text} = Typography;
 const {Option} = Select;
@@ -300,7 +301,7 @@ class RelationExtractionItem extends Component {
                 }}>
                     <Input
                         size='large' 
-                        style={{width:'100%',height:50, fontSize:30,inlineSize:30}}
+                        style={{width:'100%',height:50, fontSize:30}}
                         prefix={<Icon size="large" type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
                         placeholder="Input your comment here..."
                         onChange={(value) => {
