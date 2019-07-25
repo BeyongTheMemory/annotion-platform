@@ -49,9 +49,7 @@ class LoginModel extends Component {
                     </Form.Item>
                     <Form.Item>
 
-                        <Button type="primary" htmlType="submit" className="login-form-button">
-                            Log in
-                        </Button>
+                        <Button htmlType="submit" className="login-form-button"   size='large'><strong><font size="4" >   Log in</font></strong></Button>
 
                     </Form.Item>
                 </Form>
