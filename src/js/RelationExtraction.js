@@ -1,7 +1,7 @@
-import React, {Component, List} from 'react';
+import React, {Component} from 'react';
 import '../css/App.css';
 import RelationExtractionItem from './RelationExtractionItem';
-import { Layout} from 'antd';
+import { Layout,List} from 'antd';
 import imgURL from '../img/bg.jpeg';
 
 const { Header, Content, Footer } = Layout;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { notification, List, Icon, Button, Modal, Typography, message, Row } from 'antd';
+import {notification, List, Icon, Button, Modal, Typography, message, Row, Divider} from 'antd';
 import NEREntityItem from './NEREntityItem';
 import NEREntityError from './NEREntityError';
 import LoginModel from './LoginModel';
@@ -441,6 +441,8 @@ class NERAnnotionItem extends Component {
                         </div>
                     </font></strong>
                 </Typography>
+
+                <Divider/>
 
                 <List
                 style={{marginTop:100}}
