@@ -270,6 +270,8 @@ class RelationExtractionItem extends Component {
                     <Button size='large' style={{backgroundColor: '#faf5d5'}}>
                             <font size="6" color='#ecac41'> {ent2}</font>
                     </Button>
+                    <Button style={{marginLeft: 50, backgroundColor: '#faf5d5'}} onClick={this.onSubmit}
+                            size='large'><font size="6"> Submit</font></Button>
                     {/*<Icon  style={{marginLeft: 20,fontSize: '20px'}}  type="swap" onClick={this.swapClick}/>*/}
 
 
@@ -298,7 +300,7 @@ class RelationExtractionItem extends Component {
                 }}>
                     <Input
                         size='large' 
-                        style={{width: 700}}
+                        style={{width:  '100%'}}
                         prefix={<Icon type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
                         placeholder="Input your comment here..."
                         onChange={(value) => {
@@ -306,8 +308,7 @@ class RelationExtractionItem extends Component {
                         }}
                         value={this.state.comment}
                     />
-                    <Button style={{marginLeft: 50, backgroundColor: '#faf5d5'}} onClick={this.onSubmit}
-                            size='large'><font size="6"> Submit</font></Button>
+
                 </div>
 
                 <Modal
