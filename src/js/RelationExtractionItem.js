@@ -271,7 +271,7 @@ class RelationExtractionItem extends Component {
                 </div>
 
 
-                <div style={{marginTop:50,width: '60%'}}>
+                <div style={{marginTop:25,width: '60%'}}>
                     <List
                         size="large"
                         dataSource={this.state.listData}
