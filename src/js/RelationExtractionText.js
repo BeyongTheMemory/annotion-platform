@@ -10,7 +10,8 @@ class RelationExtractionText extends Component {
         text: "",
         bgColor: "white",
         choose: false,
-        heartColor:"white"
+        heartColor:"black",
+        heartFillColor:"white"
     }
 
 
@@ -25,14 +26,16 @@ class RelationExtractionText extends Component {
             this.setState({
                 choose: status,
                 bgColor: "rgba(168,210,225,.25)",
-                heartColor: "rgba(183,53,92,.1)"
+                heartColor: "rgba(183,53,92,.1)",
+                heartFillColor:"rgba(183,53,92,.1)"
             });
         } else {
             status = false
             this.setState({
                 choose: status,
                 bgColor: "white",
-                heartColor:"white"
+                heartColor:"black",
+                heartFillColor:"white"
             });
         }
         this.props.onClueChange(this.props.index,status)
@@ -67,7 +70,7 @@ class RelationExtractionText extends Component {
             <div style={{marginBottom: 10,lineHeight:'50px'}} onClick={this.onChange}>
                 <Row>
                     <font size="6">
-                        <Icon size="large" type="heart" style={{ color: this.state.heartColor }} />
+                        <Icon size="large" type="heart" style={{ color: this.state.heartColor }} fill={this.state.heartFillColor} />
                         <div style={{backgroundColor: this.state.bgColor}}
                              dangerouslySetInnerHTML={{__html: this.state.text}}>
                         </div>
