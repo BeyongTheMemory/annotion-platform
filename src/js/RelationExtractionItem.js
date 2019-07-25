@@ -253,28 +253,29 @@ class RelationExtractionItem extends Component {
                 textAlign: 'center',
                 width: '100%',
                 minWidth: 500,
-                lineHeight:'32px'
+                lineHeight: '32px'
             }}>
-                <div style={{width: '100%' }}>
+                <div style={{width: '100%'}}>
                     <Row>
-                    <font size="6"> ID: {this.state.ep_num} </font>
-                    <Button size='large' style={{backgroundColor: '#faf5d5',fontSize:30,textEmphasisColor:'#4c9bc3',textDecorationColor:'#4c9bc3'}}>
-                           {ent1}
-                    </Button>
-                    <Select size='large' value={this.state.relation} onChange={(value) => {
-                        this.handleRelationChange(value)
-                    }} style={{width: 400}}>
-                        <Option value="cause"> <font size="6">cause </font></Option>
-                        <Option value="lack-cause"><font size="6">lack-cause</font></Option>
-                        <Option value="prevent"><font size="6">prevent</font></Option>
-                        <Option value="other"><font size="6">other</font></Option>
-                    </Select>
-                    <Button size='large' style={{backgroundColor: '#faf5d5'}}>
-                            <font size="6" color='#ecac41'> {ent2}</font>
-                    </Button>
-                    <Button style={{marginLeft: 50, backgroundColor: '#faf5d5'}} onClick={this.onSubmit}
-                            size='large'><font size="6"> Submit</font></Button>
-                    {/*<Icon  style={{marginLeft: 20,fontSize: '20px'}}  type="swap" onClick={this.swapClick}/>*/}
+                        <font size="6"> ID: {this.state.ep_num} </font>
+                        <Button size='large' style={{backgroundColor: '#faf5d5', fontSize: 30}}>
+                            <font color='#4c9bc3'> {ent1}</font>
+                        </Button>
+                        <Select size='large' value={this.state.relation} onChange={(value) => {
+                            this.handleRelationChange(value)
+                        }} style={{width: 400,marginTop:-100}}>
+                            <Option value="cause"> <font size="6">cause </font></Option>
+                            <Option value="lack-cause"><font size="6">lack-cause</font></Option>
+                            <Option value="prevent"><font size="6">prevent</font></Option>
+                            <Option value="other"><font size="6">other</font></Option>
+                        </Select>
+                        <Button size='large' style={{backgroundColor: '#faf5d5', fontSize: 30}}>
+                            {ent2}
+                        </Button>
+                        <Button style={{marginLeft: 50, backgroundColor: '#faf5d5', fontSize: 30}}
+                                onClick={this.onSubmit}
+                                size='large'> Submit</Button>
+                        {/*<Icon  style={{marginLeft: 20,fontSize: '20px'}}  type="swap" onClick={this.swapClick}/>*/}
 
                     </Row>
                 </div>
@@ -302,8 +303,8 @@ class RelationExtractionItem extends Component {
                 }}>
                     <Input
                         className="comment-input"
-                        size='large' 
-                        style={{width:'100%',height:50, fontSize:30}}
+                        size='large'
+                        style={{width: '100%', height: 50, fontSize: 30}}
                         placeholder="Input your comment here..."
                         onChange={(value) => {
                             this.handleCommentChange(value)
