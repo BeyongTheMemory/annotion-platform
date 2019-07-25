@@ -63,24 +63,32 @@ class RelationExtractionItem extends Component {
 
     postFeedback = () => {
         const url = "http://172.26.187.188:15000/annotation/send-result";
-        let relationResult = this.state.relation;
-        if (this.state.swap) {
-            relationResult += "|r";
-        } else {
-            relationResult += "|o";
-        }
+
         let clue = []
         for (let i = 0; i < this.state.listData.length; i++) {
             if (this.state.listData[i].clueStatus) {
                 clue.push(i)
             }
         }
+
+        if (this.state.relation != 'other' && clue.length < 1) {
+            notification.open({
+                message: 'Error',
+                description: 'Please choose the right relation!',
+                duration: 4,
+            });
+            return
+        }
+
         const result = {
-            label: relationResult,
+            label: this.state.relation,
             user: this.state.user_name,
             comment: this.state.comment,
             clue: clue
         };
+
+
+
         const param = {
             result: result,
             ep_num: this.state.ep_num
@@ -271,7 +279,7 @@ class RelationExtractionItem extends Component {
                     <Button size='large' style={{backgroundColor: '#faf5d5', fontSize: 30}}>
                         <font color='#ecac41'> {ent2}</font>
                     </Button>
-                    <Button style={{marginLeft: 50, backgroundColor: '#faf5d5', fontSize: 30,float: 'right'}}
+                    <Button style={{marginLeft: 50, backgroundColor: '#faf5d5', fontSize: 30, float: 'right'}}
                             onClick={this.onSubmit}
                             size='large'> Submit</Button>
                     {/*<Icon  style={{marginLeft: 20,fontSize: '20px'}}  type="swap" onClick={this.swapClick}/>*/}
@@ -279,7 +287,7 @@ class RelationExtractionItem extends Component {
                 </div>
 
 
-                <div style={{textAlign: 'left', width: '100%',marginTop:70}}>
+                <div style={{textAlign: 'left', width: '100%', marginTop: 70}}>
                     <List
                         size="large"
                         dataSource={this.state.listData}
