@@ -19,11 +19,12 @@ class RelationExtraction extends Component{
           <Content style={{ padding: '0 50px' }}>
             <div style={{ background: '#fff', padding: 24, minHeight: 280,textAlign: 'center', width: '100%'}}>
                 <List
+                    style={{textAlign: 'center' }}
                     size="large"
                     bordered
                     dataSource={data}
                     renderItem={item => (<List.Item>
-                        <RelationExtractionItem style={{textAlign: 'center' }}/>
+                        <RelationExtractionItem />
                     </List.Item>)}
                 />
                 </div>
