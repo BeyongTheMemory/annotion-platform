@@ -61,7 +61,7 @@ class RelationExtractionText extends Component {
     render() {
         return (
 
-            <div style={{marginBottom: 10}} onClick={this.onChange}>
+            <div style={{marginBottom: 10,lineHeight:'50px'}} onClick={this.onChange}>
                 <Row>
                     <font size="6">
                         <div style={{display: "inline",float: 'left'}}>
