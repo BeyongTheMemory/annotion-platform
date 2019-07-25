@@ -437,7 +437,7 @@ class NERAnnotionItem extends Component {
                     <strong><font size="6" >
                         <div style={{ display: "inline" ,float: 'left'}} dangerouslySetInnerHTML={{ __html: this.state.text }}></div>
                         <div style={{ display: "inline" ,float:"right"}}>
-                            <Button onClick={this.onSubmit} size='large'> Submit</Button>
+                            <Button onClick={this.onSubmit} size='large'><strong><font size="4" > Submit</font></strong></Button>
                         </div>
                     </font></strong>
                 </Typography>
