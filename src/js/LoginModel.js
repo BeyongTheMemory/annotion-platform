@@ -48,12 +48,11 @@ class LoginModel extends Component {
                         )}
                     </Form.Item>
                     <Form.Item>
-
-                        <Button style={{backgroundColor: 'rgba(250,425,413,1)'}} htmlType="submit" className="login-form-button"   size='large'><strong><font size="4" >   Log in</font></strong></Button>
-
+                        <Button style={{backgroundColor: '#faf5d5'}} htmlType="submit" className="login-form-button"   size='large'><strong><font size="4" >   Log in</font></strong></Button>
                     </Form.Item>
                 </Form>
             </Modal>
+
         );
     }
 }
