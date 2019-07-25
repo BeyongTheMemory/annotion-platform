@@ -279,7 +279,7 @@ class RelationExtractionItem extends Component {
                 </div>
 
 
-                <div style={{textAlign: 'left', width: '100%'}}>
+                <div style={{textAlign: 'left', width: '100%',marginTop:100}}>
                     <List
                         size="large"
                         dataSource={this.state.listData}
@@ -298,7 +298,7 @@ class RelationExtractionItem extends Component {
                     />
                 </div>
                 <div style={{
-                    textAlign: 'left', marginTop: 12, height: 50, lineHeight: '32px', width: '100%'
+                    textAlign: 'left', marginTop: 100, height: 50, lineHeight: '32px', width: '100%'
                 }}>
                     <Input
                         className="comment-input"
