@@ -258,10 +258,17 @@ class RelationExtractionItem extends Component {
                 <div style={{width: '100%' }}>
                     <Row>
                     <font size="6"> ID: {this.state.ep_num} </font>
-                    <Button size='large' style={{backgroundColor: '#faf5d5'}}>
-                            <font size="6" color='#4c9bc3'> {ent1}</font>
+                    <Button size='large' style={{backgroundColor: '#faf5d5',fontSize:30}}>
+                            <font color='#4c9bc3'> {ent1}</font>
                     </Button>
-
+                    <Select size='large' value={this.state.relation} onChange={(value) => {
+                        this.handleRelationChange(value)
+                    }} style={{width: 400}}>
+                        <Option value="cause"> <font size="6">cause </font></Option>
+                        <Option value="lack-cause"><font size="6">lack-cause</font></Option>
+                        <Option value="prevent"><font size="6">prevent</font></Option>
+                        <Option value="other"><font size="6">other</font></Option>
+                    </Select>
                     <Button size='large' style={{backgroundColor: '#faf5d5'}}>
                             <font size="6" color='#ecac41'> {ent2}</font>
                     </Button>
