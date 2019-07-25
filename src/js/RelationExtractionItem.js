@@ -74,7 +74,7 @@ class RelationExtractionItem extends Component {
         if (this.state.relation != 'other' && clue.length < 1) {
             notification.open({
                 message: 'Error',
-                description: 'Please choose the right relation!',
+                description: 'Flipped at least once. 💛',
                 duration: 4,
             });
             return
