@@ -249,9 +249,9 @@ class RelationExtractionItem extends Component {
                 background: '#fff',
                 padding: 24,
                 minHeight: 280,
-                textAlign: 'left',
-                width: '100%',
-                minWidth: 680
+                textAlign: 'center',
+                width: '60%',
+                minWidth: 500
             }}>
                 <div>
                     <strong style={{marginRight: 20}}><font size="5" color="black"> ID: {this.state.ep_num} </font></strong>
@@ -271,7 +271,7 @@ class RelationExtractionItem extends Component {
                 </div>
 
 
-                <div style={{marginTop:25,width: '60%'}}>
+                <div style={{marginTop:25}}>
                     <List
                         size="large"
                         dataSource={this.state.listData}
