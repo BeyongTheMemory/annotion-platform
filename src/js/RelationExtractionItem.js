@@ -255,7 +255,7 @@ class RelationExtractionItem extends Component {
             }}>
                 <div style={{width: '50%'}}>
                     <strong style={{marginRight: 20}}><font size="5" color="black"> ID: {this.state.ep_num} </font></strong>
-                    <Button size='large'><strong><font size="4" > {ent1}</font></strong></Button>
+                    <Button size='large'><strong><font size="4" color='#5e2779' > {ent1}</font></strong></Button>
 
                     <Select value={this.state.relation} onChange={(value) => {
                         this.handleRelationChange(value)
@@ -265,7 +265,7 @@ class RelationExtractionItem extends Component {
                         <Option value="prevent">prevent</Option>
                         <Option value="other">other</Option>
                     </Select>
-                    <Button size='large'><strong><font size="4" > {ent2}</font></strong></Button>
+                    <Button size='large'><strong><font size="4" color='#e06830'> {ent2}</font></strong></Button>
                     {/*<Icon  style={{marginLeft: 20,fontSize: '20px'}}  type="swap" onClick={this.swapClick}/>*/}
 
 
