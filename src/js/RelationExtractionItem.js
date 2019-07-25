@@ -253,7 +253,7 @@ class RelationExtractionItem extends Component {
                 width: '100%',
                 minWidth: 500
             }}>
-                <div style={{width: '50%'}}>
+                <div style={{width: '50%',textAlign: 'center',}}>
                     <strong><font size="5" color="black"> ID: {this.state.ep_num} </font></strong>
                     <Button type="primary"><strong>{ent1}</strong></Button>
                     <Select value={this.state.relation} onChange={(value) => {
@@ -271,7 +271,7 @@ class RelationExtractionItem extends Component {
                 </div>
 
 
-                <div style={{marginTop:25,width: '50%'}}>
+                <div style={{marginTop:25,width: '50%',textAlign: 'center',}}>
                     <List
                         size="large"
                         dataSource={this.state.listData}
@@ -288,7 +288,7 @@ class RelationExtractionItem extends Component {
                     />
                 </div>
                 <div style={{
-                     marginTop: 12, height: 32, lineHeight: '32px',width: '50%'
+                     marginTop: 12, height: 32, lineHeight: '32px',width: '50%',textAlign: 'center',
                 }}>
                     <Input style={{width: 700}}
                            prefix={<Icon type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}

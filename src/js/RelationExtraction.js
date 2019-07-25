@@ -15,7 +15,7 @@ class RelationExtraction extends Component{
             <div style={{ background: '#fff', padding: 24, minHeight: 280,textAlign: 'center', width: '100%'}}><RelationExtractionItem style={{textAlign: 'center' }}/></div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>
-            Annotation Platform ©2019 Created by Hong Ying
+            Annotation Platform ©2019 Created by NExT++
           </Footer>
         </Layout>
         );
