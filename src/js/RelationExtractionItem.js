@@ -21,7 +21,8 @@ class RelationExtractionItem extends Component {
         sure_content: "",
         user_name: "",
         swap: false,
-        comment: ""
+        comment: "",
+        clue:[]
     }
 
     componentDidMount() {
@@ -39,6 +40,26 @@ class RelationExtractionItem extends Component {
             });
             return
         }
+
+        let clue = []
+        for (let i = 0; i < this.state.listData.length; i++) {
+            if (this.state.listData[i].clueStatus) {
+                clue.push(i)
+            }
+        }
+
+        if (this.state.relation != 'other' && clue.length < 1) {
+            notification.open({
+                message: 'Error',
+                description: 'Flipped at least once. 💛',
+                duration: 4,
+            });
+            return
+        }
+
+        this.state.clue = clue
+
+
         var sure_content = this.state.ent1 + " " + this.state.relation + " " + this.state.ent2
 
         this.setState({
@@ -64,27 +85,13 @@ class RelationExtractionItem extends Component {
     postFeedback = () => {
         const url = "http://172.26.187.188:15000/annotation/send-result";
 
-        let clue = []
-        for (let i = 0; i < this.state.listData.length; i++) {
-            if (this.state.listData[i].clueStatus) {
-                clue.push(i)
-            }
-        }
 
-        if (this.state.relation != 'other' && clue.length < 1) {
-            notification.open({
-                message: 'Error',
-                description: 'Flipped at least once. 💛',
-                duration: 4,
-            });
-            return
-        }
 
         const result = {
             label: this.state.relation,
             user: this.state.user_name,
             comment: this.state.comment,
-            clue: clue
+            clue: this.state.clue
         };
 
 
