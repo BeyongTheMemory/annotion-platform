@@ -264,13 +264,14 @@ class RelationExtractionItem extends Component {
                         <Option value="prevent">prevent</Option>
                         <Option value="other">other</Option>
                     </Select>
-                    <Button type="primary"><strong>{ent2}</strong></Button><Icon  style={{marginLeft: 20,fontSize: '20px'}}  type="swap" onClick={this.swapClick}/>
+                    <Button type="primary"><strong>{ent2}</strong></Button>
+                    {/* <Icon  style={{marginLeft: 20,fontSize: '20px'}}  type="swap" onClick={this.swapClick}/> */}
 
 
                 </div>
 
 
-                <div style={{textAlign: 'left'}}>
+                <div style={{textAlign: 'left',width: '60%'}}>
                     <List
                         size="large"
                         dataSource={this.state.listData}

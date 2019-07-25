@@ -18,7 +18,7 @@ class RelationExtractionText extends Component {
     }
 
     onChange = () => {
-        let status;
+        var status;
         if (!this.state.choose) {
             status = true
             this.setState({
