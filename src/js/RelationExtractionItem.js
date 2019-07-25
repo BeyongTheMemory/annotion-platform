@@ -247,7 +247,7 @@ class RelationExtractionItem extends Component {
         return (
             <div style={{
                 background: '#fff',
-                padding: 24,
+                padding: 35,
                 minHeight: 500,
                 textAlign: 'center',
                 width: '100%',
