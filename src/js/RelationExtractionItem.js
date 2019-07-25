@@ -253,8 +253,8 @@ class RelationExtractionItem extends Component {
                 width: '100%',
                 minWidth: 500
             }}>
-                <div style={{width: '50%',textAlign: 'center',}}>
-                    <strong><font size="5" color="black"> ID: {this.state.ep_num} </font></strong>
+                <div style={{width: '50%'}}>
+                    <strong style={{marginRight: 20}}><font size="5" color="black"> ID: {this.state.ep_num} </font></strong>
                     <Button type="primary"><strong>{ent1}</strong></Button>
                     <Select value={this.state.relation} onChange={(value) => {
                         this.handleRelationChange(value)
@@ -265,13 +265,13 @@ class RelationExtractionItem extends Component {
                         <Option value="other">other</Option>
                     </Select>
                     <Button type="primary"><strong>{ent2}</strong></Button>
-                    {/* <Icon  style={{marginLeft: 20,fontSize: '20px'}}  type="swap" onClick={this.swapClick}/> */}
+                    {/*<Icon  style={{marginLeft: 20,fontSize: '20px'}}  type="swap" onClick={this.swapClick}/>*/}
 
 
                 </div>
 
 
-                <div style={{marginTop:25,width: '50%',textAlign: 'center',}}>
+                <div style={{textAlign: 'left',width: '50%'}}>
                     <List
                         size="large"
                         dataSource={this.state.listData}
@@ -288,7 +288,7 @@ class RelationExtractionItem extends Component {
                     />
                 </div>
                 <div style={{
-                     marginTop: 12, height: 32, lineHeight: '32px',width: '50%',textAlign: 'center',
+                    textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px',width: '50%'
                 }}>
                     <Input style={{width: 700}}
                            prefix={<Icon type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
