@@ -251,7 +251,8 @@ class RelationExtractionItem extends Component {
                 minHeight: 500,
                 textAlign: 'center',
                 width: '100%',
-                minWidth: 500
+                minWidth: 500,
+                lineHeight:'32px'
             }}>
                 <div style={{width: '100%'}}>
                     <font size="6"> ID: {this.state.ep_num} </font>
