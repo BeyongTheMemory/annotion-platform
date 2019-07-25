@@ -1,3 +1,7 @@
 .comment-input::-webkit-input-placeholder {
     font-size:32px;
 }
+
+#comment-input::-webkit-input-placeholder {
+    font-size:32px;
+}
