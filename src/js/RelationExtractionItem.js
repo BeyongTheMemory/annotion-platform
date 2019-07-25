@@ -253,7 +253,7 @@ class RelationExtractionItem extends Component {
                 width: '100%',
                 minWidth: 500
             }}>
-                <div style={{width: '80%'}}>
+                <div style={{width: '100%'}}>
                     <font size="6"> ID: {this.state.ep_num} </font>
                     <Button size='large' style={{backgroundColor: '#faf5d5'}}>
                         <strong>
@@ -279,7 +279,7 @@ class RelationExtractionItem extends Component {
                 </div>
 
 
-                <div style={{textAlign: 'left', width: '80%'}}>
+                <div style={{textAlign: 'left', width: '100%'}}>
                     <List
                         size="large"
                         dataSource={this.state.listData}
@@ -297,7 +297,7 @@ class RelationExtractionItem extends Component {
                     />
                 </div>
                 <div style={{
-                    textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px', width: '80%'
+                    textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px', width: '100%'
                 }}>
                     <Input
                         size='large' 
