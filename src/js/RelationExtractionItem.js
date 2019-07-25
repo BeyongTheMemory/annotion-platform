@@ -20,7 +20,7 @@ class RelationExtractionItem extends Component {
         sure_content: "",
         user_name: "",
         swap: false,
-        comment:""
+        comment: ""
     }
 
     componentDidMount() {
@@ -46,7 +46,7 @@ class RelationExtractionItem extends Component {
         });
     }
 
-    onClueChange = (index,status) =>{
+    onClueChange = (index, status) => {
         this.state.listData[index].clueStatus = status
     }
 
@@ -70,19 +70,19 @@ class RelationExtractionItem extends Component {
         }
         let clue = []
         for (let i = 0; i < this.state.listData.length; i++) {
-            if(this.state.listData[i].clueStatus){
+            if (this.state.listData[i].clueStatus) {
                 clue.push(i)
             }
         }
         const result = {
             label: relationResult,
             user: this.state.user_name,
-            comment:this.state.comment,
-            clue:clue
+            comment: this.state.comment,
+            clue: clue
         };
         const param = {
-            result:result,
-            ep_num:this.state.ep_num
+            result: result,
+            ep_num: this.state.ep_num
         }
         let doc = this;
         fetch(url, {
@@ -162,7 +162,7 @@ class RelationExtractionItem extends Component {
                 pos1: responseData.context[i].pos1,
                 pos2: responseData.context[i].pos2,
                 sentence: responseData.context[i].sentence,
-                clueStatus:false
+                clueStatus: false
             });
         }
         console.log(listData)
@@ -170,9 +170,9 @@ class RelationExtractionItem extends Component {
             ent1: responseData.ent1,
             ent2: responseData.ent2,
             relation: responseData.relation,
-            ep_num:responseData.ep_num,
+            ep_num: responseData.ep_num,
             swap: false,
-            comment:"",
+            comment: "",
             listData: listData
         })
     }
@@ -196,7 +196,7 @@ class RelationExtractionItem extends Component {
 
     handleCommentChange = (value) => {
         this.setState({
-            comment:value.target.value
+            comment: value.target.value
         })
     }
 
@@ -235,7 +235,7 @@ class RelationExtractionItem extends Component {
     }
 
     render() {
-        const { modalVisible, loginVisible, sure_content, ent1, ent2} = this.state;
+        const {modalVisible, loginVisible, sure_content, ent1, ent2} = this.state;
         // const submitBtn = <div style={{
         //     textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px',
         // }}
@@ -254,10 +254,13 @@ class RelationExtractionItem extends Component {
                 minWidth: 500
             }}>
                 <div style={{width: '50%'}}>
-                    <strong style={{marginRight: 20}}><font size="5" color="black"> ID: {this.state.ep_num} </font></strong>
-                    <Button size='large' style={{backgroundColor: '#faf5d5'}}><strong><font size="4" color='#4c9bc3' > {ent1}</font></strong></Button>
-
-                    <Select value={this.state.relation} onChange={(value) => {
+                    <font size="5"> ID: {this.state.ep_num} </font>
+                    <Button size='large' style={{backgroundColor: '#faf5d5'}}>
+                        <strong>
+                            <font size="4" color='#4c9bc3'> {ent1}</font>
+                        </strong>
+                    </Button>
+                    <Select size='large' value={this.state.relation} onChange={(value) => {
                         this.handleRelationChange(value)
                     }} style={{width: 400}}>
                         <Option value="cause">cause</Option>
@@ -265,39 +268,47 @@ class RelationExtractionItem extends Component {
                         <Option value="prevent">prevent</Option>
                         <Option value="other">other</Option>
                     </Select>
-                    <Button size='large' style={{backgroundColor: '#faf5d5'}}><strong><font size="4" color='#ecac41'> {ent2}</font></strong></Button>
+                    <Button size='large' style={{backgroundColor: '#faf5d5'}}>
+                        <strong>
+                            <font size="4" color='#ecac41'> {ent2}</font>
+                        </strong>
+                    </Button>
                     {/*<Icon  style={{marginLeft: 20,fontSize: '20px'}}  type="swap" onClick={this.swapClick}/>*/}
 
 
                 </div>
 
 
-                <div style={{textAlign: 'left',width: '50%'}}>
+                <div style={{textAlign: 'left', width: '50%'}}>
                     <List
                         size="large"
                         dataSource={this.state.listData}
                         itemLayout="horizontal"
                         split="false"
-                        renderItem={(item,index) => (
+                        renderItem={(item, index) => (
                             <List.Item
                             >
                                 <List.Item.Meta
-                                    description={<RelationExtractionText data={item} index={index} onClueChange={this.onClueChange}/>}/>
+                                    description={<RelationExtractionText data={item} index={index}
+                                                                         onClueChange={this.onClueChange}/>}/>
                             </List.Item>
                         )}
 
                     />
                 </div>
                 <div style={{
-                    textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px',width: '50%'
+                    textAlign: 'center', marginTop: 12, height: 32, lineHeight: '32px', width: '50%'
                 }}>
                     <Input style={{width: 700}}
                            prefix={<Icon type="fire" style={{color: 'rgba(0,0,0,.25)'}}/>}
                            placeholder="Input your comment here..."
-                           onChange={(value) => { this.handleCommentChange(value) }}
+                           onChange={(value) => {
+                               this.handleCommentChange(value)
+                           }}
                            value={this.state.comment}
                     />
-                    <Button style={{marginLeft: 50,backgroundColor: '#faf5d5'}} onClick={this.onSubmit} size='large'><strong><font size="4" > Submit</font></strong></Button>
+                    <Button style={{marginLeft: 50, backgroundColor: '#faf5d5'}} onClick={this.onSubmit}
+                            size='large'><strong><font size="4"> Submit</font></strong></Button>
                 </div>
 
                 <Modal
