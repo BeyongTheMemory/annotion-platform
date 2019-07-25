@@ -249,7 +249,7 @@ class RelationExtractionItem extends Component {
                 background: '#fff',
                 padding: 24,
                 minHeight: 280,
-                textAlign: 'center',
+                textAlign: 'left',
                 width: '100%',
                 minWidth: 680
             }}>
