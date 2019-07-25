@@ -70,7 +70,7 @@ class RelationExtractionText extends Component {
     render() {
         return (
 
-            <div style={{marginBottom: 10,lineHeight:'50px'}} onClick={this.onChange}>
+            <div style={{marginBottom: 10,lineHeight:'50px',textAlign:'justify'}} onClick={this.onChange}>
                 <Row>
                     <font size="6">
                         <Icon size="large" type="heart" theme={this.state.theme} twoToneColor={ this.state.heartColor}  />
