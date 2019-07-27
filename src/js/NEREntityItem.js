@@ -12,7 +12,7 @@ class NEREntityItem extends Component {
         return (
             <div style={{textAlign: 'left'}}>
                 <strong>
-                    <font size="3" >   {this.props.index}   </font>
+                    <font size="3" >   {this.props.data.id}   </font>
                     <font color="pink" size="4" >{this.props.data.entity}</font>
                     <font size="4" >   is an instance of   </font>
                     <font color="pink" size="4">{this.props.data.category}</font>

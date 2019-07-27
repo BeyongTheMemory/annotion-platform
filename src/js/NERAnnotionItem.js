@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {notification, List, Icon, Button, Modal, Typography, message, Row, Divider} from 'antd';
 import NEREntityItem from './NEREntityItem';
 import NEREntityError from './NEREntityError';
 import LoginModel from './LoginModel';
 import AddNewMentionModel from './AddNewMentionModel';
-const { Text, Title } = Typography;
+
+const {Text, Title} = Typography;
 
 /**
  * 列表条目组件
@@ -27,10 +28,12 @@ class NERAnnotionItem extends Component {
         chooseEntity: true,
         addNewTitle: "",
         optionItems: [],
+        textOrg:[],
+        id:-1
     }
 
     componentDidMount() {
-        this.getNext(0)
+        this.getNext()
     }
 
 
@@ -80,7 +83,7 @@ class NERAnnotionItem extends Component {
             });
             return;
         }
-        data = data.concat({ id: -1 })
+        data = data.concat({id: -1})
         //this.state.current_item.err_data = data
         this.setState({
             current_err_data: data,
@@ -158,12 +161,12 @@ class NERAnnotionItem extends Component {
 
     modalHandleOk = () => {
         console.log(this.state.listData)
-        var valid = true
-        var feedback = []
-        var valid = true
+        let valid = true
+        let feedback = []
         for (let item of this.state.listData) {
-            var errorReasons = []
+            let errorReasons = []
             if (item.err_data.length > 0) {
+                console.log(item)
                 for (let errorReason of item.err_data) {
                     if (errorReason.type == 1) {
                         if (errorReason.entity_name == item.entity) {
@@ -190,26 +193,30 @@ class NERAnnotionItem extends Component {
             }
             feedback.push({
                 "entityCategoryId": item.id,
-                "entityCategoryType": 0,
+                "origCategory":item.category,
+                "origEntity":item.entity,
                 "isCorrect": item.action == 0,
-                "errorReasons": errorReasons
+                "errorReasons": errorReasons,
+                "isNew":item.new_add
             })
         }
+
 
         this.setState({
             modalVisible: false,
         });
 
         if (valid) {
-            console.log(feedback)
             this.postFeedback(feedback)
         }
     }
 
     postFeedback = (feedback) => {
-        const url = "http://172.26.187.188:8888/ap/annotation/feedback";
+        const url = "http://172.26.187.88:8888/ap/sentence/feedback";
+        console.log(this.state)
         const param = {
-            userFeedbacks: feedback,
+            sentenceId:this.state.id,
+            reason: JSON.stringify(feedback)
         };
         var doc = this;
         fetch(url, {
@@ -225,7 +232,7 @@ class NERAnnotionItem extends Component {
                 response.json().then(function (data) {
                     if (data.code === 200) {
                         message.success("submit success")
-                        doc.getNext(0)
+                        doc.getNext()
                     } else if (data.code === 10001) {
                         message.error("login first")
                         doc.setState({
@@ -247,108 +254,104 @@ class NERAnnotionItem extends Component {
         });
     }
 
-    getNext = (type) => {
-        // const url = "http://172.26.187.188:8888/ap/annotation/next?type=" + type;
-        // var doc = this;
-        // fetch(url, {
-        //     method: 'GET',
-        //     credentials: 'include',
-        //     mode: 'cors',
-        // }).then((response) => {
-        //     if (response.status === 200) {
-        //         response.json().then(function (data) {
-        //             console.log(data);
-        //             if (data.code === 200) {
-        //                 doc.updateListData(data.data)
-        //             } else if (data.code === 10001) {
-        //                 message.error("login first")
-        //                 doc.setState({
-        //                     loginVisible: true,
-        //                 })
-        //             } else {
-        //                 message.error(data.msg);
-        //             }
+    getNext = () => {
+        const url = "http://172.26.187.88:8888/ap/sentence/next";
+        var doc = this;
+        fetch(url, {
+            method: 'GET',
+            credentials: 'include',
+            mode: 'cors',
+        }).then((response) => {
+            if (response.status === 200) {
+                response.json().then(function (data) {
+                    console.log(data);
+                    if (data.code === 200) {
+                        doc.updateListData(JSON.parse(data.data.content))
+                    } else if (data.code === 10001) {
+                        message.error("login first")
+                        doc.setState({
+                            loginVisible: true,
+                        })
+                    } else {
+                        message.error(data.msg);
+                    }
 
-        //         })
-        //     } else {
-        //         message.error("network error");
-        //     }
-        // })
+                })
+            } else {
+                message.error("network error");
+            }
+        })
 
-        const listData = [];
-        listData.push({
-            entity: "cocktail",
-            category: "foods/Beverages/Alcoholic_drinks",
-            action: null, //0正确 1错误
-            err_data: [{ "id": 0 }]
-        })
-        listData.push({
-            entity: "contain",
-            category: "foods/Beverages/Alcoholic_drinks",
-            action: null, //0正确 1错误
-            err_data: [{ "id": 0 }]
-        })
-        listData.push({
-            entity: "sugar",
-            category: "foods/Sweets/others",
-            action: null, //0正确 1错误
-            err_data: [{ "id": 0 }]
-        })
-        listData.push({
-            entity: "citrus",
-            category: "foods/Fruits/Citrus_fruits",
-            action: null, //0正确 1错误
-            err_data: [{ "id": 0 }]
-        })
-        const entityData = [];
-        entityData.push({
-            name: "cocktail"
-        })
-        entityData.push({
-            name: "alcohol"
-        })
-        entityData.push({
-            name: "sugar"
-        })
-        entityData.push({
-            name: "citrus"
-        })
-        const tokenData = [];
-        tokenData.push({
-            name: "A"
-        })
-        tokenData.push({
-            name: "can"
-        })
-        tokenData.push({
-            name: "contain"
-        })
-        tokenData.push({
-            name: "and"
-        })
-        const text = "A <font color=orange>cocktail</font> can contain <font color=orange>alcohol</font>  , a <font color=orange>sugar</font> , and a <font color=orange>citrus</font> .";
+
+    }
+
+    updateListData = (responseData) => {
+        console.log(responseData)
+        let mentionMap = new Map();
+        let listData = [];
+        let entityData = [];
+        for (let i = 0; i < responseData.mentions.length; i++) {
+            let newMention = responseData.mentions[i];
+            let oldMention = mentionMap.get(newMention.start);
+            if (oldMention == null) {
+                mentionMap.set(newMention.start, newMention);
+            } else if (oldMention.end < newMention.end) {
+                mentionMap.set(newMention.start, newMention);
+            }
+            let entity = responseData.tokens.slice(newMention.start, newMention.end);
+            let entityName = "";
+            for(let nameItem of entity){
+                entityName += nameItem + " "
+            }
+            if (entityName != ", " && entityName != ". " && entityName != "," && entityName != "."){
+                entityData.push({
+                    name: entityName
+                });
+            }
+
+            let types = newMention.types;
+            for (let j = 0; j < types.length; j++) {
+                listData.push({
+                    id: newMention.mention_id,
+                    entity: entityName,
+                    category: types[j],
+                    action: null, //0正确 1错误
+                    err_data: [{"id": 0}]
+                })
+            }
+        }
+
+        let entitySet = new Set(entityData);
+        let tokenDataList = Array.from(new Set(responseData.tokens.concat(entityData).filter(v => !entitySet.has(v))));
+        let tokenData = [];
+        for(let tokenWord of tokenDataList){
+            if (tokenWord != ", " && tokenWord != ". " && tokenWord != "," && tokenWord != "."){
+                tokenData.push({
+                    name: tokenWord
+                });
+            }
+        }
+
+
+        let mention = null;
+        let text = "";
+        for (let i = 0; i < responseData.tokens.length; i++) {
+            if (mention == null && mentionMap.get(i) != null) {
+                mention = mentionMap.get(i)
+                text += "<font color=#4c9bc3>"
+            }
+            text += responseData.tokens[i] + " ";
+            if (mention != null && mention.end === i+1) {
+                text += "</font>"
+            }
+        }
         this.setState({
             listData: listData,
             entityData: entityData,
             tokenData: tokenData,
-            text: text
-        })
-    }
-
-    updateListData = (responseData) => {
-        const listData = [];
-        listData.push({
-            id: responseData.id,
-            entity: responseData.entity,
-            entity_url: responseData.wikiUrl,
-            relation: responseData.relation,
-            category: responseData.category,
-            category_url: responseData.wikiUrl,
-            action: null, //0正确 1错误
-            err_data: [{ "id": 0 }],
-        });
-        this.setState({
-            listData: listData,
+            text: text,
+            id: responseData.sentence_id,
+            textOrg:responseData.tokens
         })
     }
 
@@ -359,7 +362,7 @@ class NERAnnotionItem extends Component {
     }
 
     loginRequest = (name, password) => {
-        const url = "http://172.26.187.188:8888/ap/user/login";
+        const url = "http://172.26.187.88:8888/ap/user/login";
         const param = {
             name: name,
             password: password
@@ -380,7 +383,7 @@ class NERAnnotionItem extends Component {
                         doc.setState({
                             loginVisible: false,
                         })
-                        doc.getNext(0)
+                        doc.getNext()
                     } else {
                         message.error(data.msg);
                     }
@@ -398,7 +401,7 @@ class NERAnnotionItem extends Component {
             entity: entity,
             category: category,
             action: null, //0正确 1错误
-            err_data: [{ "id": 0 }],
+            err_data: [{"id": 0}],
             new_add: true
         })
         this.setState({
@@ -415,37 +418,45 @@ class NERAnnotionItem extends Component {
     }
 
     render() {
-        const { listData, error_drawer_visible, current_err_data, modalVisible, loginVisible, current_item, sure_content, addNewMetationModel } = this.state;
+        const {listData, error_drawer_visible, current_err_data, modalVisible, loginVisible, current_item, sure_content, addNewMetationModel} = this.state;
         const addBtn = <div style={{
             marginTop: 12, lineHeight: '32px',
         }}
         >
-            <Row gutter={16} style={{ textAlign: 'center', padding: 20 }}>
-                <Button type="dashed" onClick={this.onAddNewEntity} style={{ width: '30%' }}>
-                    <Icon type="plus" /> <strong><font size="4" >Add New Entity</font></strong>
+            <Row gutter={16} style={{textAlign: 'center', padding: 20}}>
+                <Button type="dashed" onClick={this.onAddNewEntity} style={{width: '30%'}}>
+                    <Icon type="plus"/> <strong><font size="4">Add New Entity</font></strong>
                 </Button>
-                <Button type="dashed" onClick={this.onAddNewCategory} style={{ width: '30%' }}>
-                    <Icon type="plus" /> <strong><font size="4" >Add New Category</font></strong>
+                <Button type="dashed" onClick={this.onAddNewCategory} style={{width: '30%'}}>
+                    <Icon type="plus"/> <strong><font size="4">Add New Category</font></strong>
                 </Button>
             </Row>
-            <br />
+            <br/>
         </div>
 
         return (
-            <div style={{ background: '#fff', padding: 24, minHeight: 280, textAlign: 'center', width: '100%', minWidth: 680 }}>
+            <div style={{
+                background: '#fff',
+                padding: 24,
+                minHeight: 280,
+                textAlign: 'center',
+                width: '100%',
+                minWidth: 680
+            }}>
                 <Typography>
-                    <strong><font size="6" >
-                        <div style={{ display: "inline" ,float: 'left'}} dangerouslySetInnerHTML={{ __html: this.state.text }}></div>
-                        <div style={{ display: "inline" ,float:"right"}}>
-                            <Button onClick={this.onSubmit} size='large'><strong><font size="4" > Submit</font></strong></Button>
+                    <strong><font size="4">
+                        <div style={{display: "inline", float: 'left'}}
+                             dangerouslySetInnerHTML={{__html: this.state.text}}></div>
+                        <div style={{display: "inline", float: "right"}}>
+                            <Button onClick={this.onSubmit} size='large'><strong><font size="4"> Submit</font></strong></Button>
                         </div>
                     </font></strong>
                 </Typography>
 
 
                 <List
-                style={{marginTop:100}}
-                bordered
+                    style={{marginTop: 100}}
+                    bordered
                     size="large"
                     dataSource={listData}
                     itemLayout="horizontal"
@@ -453,21 +464,28 @@ class NERAnnotionItem extends Component {
                     loadMore={addBtn}
                     renderItem={(item, index) => (
                         <List.Item
-                            actions={item.new_add ? [<Icon type="delete" onClick={() => { this.deleteRecord(item, index) }} />] : [
+                            actions={item.new_add ? [<Icon type="delete" onClick={() => {
+                                this.deleteRecord(item, index)
+                            }}/>] : [
                                 <Icon type="like" theme={item.action === 0 ? 'filled' : 'outlined'}
-                                    onClick={() => { this.like(item) }} />,
+                                      onClick={() => {
+                                          this.like(item)
+                                      }}/>,
                                 <Icon type="dislike" theme={item.action === 1 ? 'filled' : 'outlined'}
-                                    onClick={() => { this.dislike(item) }} />]}
+                                      onClick={() => {
+                                          this.dislike(item)
+                                      }}/>]}
                         >
                             <List.Item.Meta
-                                description={<NEREntityItem data={item} index={index} />} />
+                                description={<NEREntityItem data={item} index={index}/>}/>
                         </List.Item>
                     )}
 
                 />
 
                 <NEREntityError onClose={this.onClose} visible={error_drawer_visible}
-                    errData={current_err_data} onSubmit={this.onErrSubmit} onErrAdd={this.onErrAdd} onErrRemove={this.onErrRemove} item={current_item}
+                                errData={current_err_data} onSubmit={this.onErrSubmit} onErrAdd={this.onErrAdd}
+                                onErrRemove={this.onErrRemove} item={current_item} text={this.state.textOrg}
                 />
 
                 <Modal
@@ -476,12 +494,14 @@ class NERAnnotionItem extends Component {
                     onOk={this.modalHandleOk}
                     onCancel={this.modalHandleCancel}
                 >
-                    <div onClick={this.handleChange} dangerouslySetInnerHTML={{ __html: sure_content }}></div>
+                    <div onClick={this.handleChange} dangerouslySetInnerHTML={{__html: sure_content}}></div>
                 </Modal>
 
-                <LoginModel visible={loginVisible} onLogin={this.loginRequest.bind(this)} />
+                <LoginModel visible={loginVisible} onLogin={this.loginRequest.bind(this)}/>
 
-                <AddNewMentionModel title={this.state.addNewTitle} choose={this.state.chooseEntity} visible={addNewMetationModel} options={this.state.optionItems} onAdd={this.AddMentionRequest.bind(this)} onCancel={this.MentionCancel.bind(this)} />
+                <AddNewMentionModel title={this.state.addNewTitle} choose={this.state.chooseEntity}
+                                    visible={addNewMetationModel} options={this.state.optionItems}
+                                    onAdd={this.AddMentionRequest.bind(this)} onCancel={this.MentionCancel.bind(this)}/>
             </div>
         );
     }
