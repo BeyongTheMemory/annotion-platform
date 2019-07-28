@@ -342,6 +342,7 @@ class NERAnnotionItem extends Component {
             }
             text += responseData.tokens[i] + " ";
             if (mention != null && mention.end === i+1) {
+                mention = null;
                 text += "</font>"
             }
         }
@@ -355,11 +356,6 @@ class NERAnnotionItem extends Component {
         })
     }
 
-    showLogin = () => {
-        this.setState({
-            loginVisible: true,
-        });
-    }
 
     loginRequest = (name, password) => {
         const url = "http://172.26.187.188:8888/ap/user/login";
