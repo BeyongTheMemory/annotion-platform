@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
-import { Form, Icon, Input, Button, Select, Modal, TreeSelect } from 'antd';
-const { Option } = Select;
+import React, {Component} from 'react';
+import {Form, Icon, Input, Button, Select, Modal, TreeSelect, AutoComplete, Col} from 'antd';
+
+const {Option} = Select;
+
 /**
  * 新增屬性
  */
@@ -8,30 +10,112 @@ class AddNewMentionModel extends Component {
     state = {
         closable: true,
         entity: "",
-        category: ""
+        category: [],
+        categoryResult: [],
+        searchData: []
+    };
+
+    valueMap = {};
+
+
+    componentDidMount() {
+        this.loops(global.constants.treeData);
+    }
+
+    loops = (list, parent) => {
+        return (list || []).map(({children, value}) => {
+            const node = (this.valueMap[value] = {
+                parent,
+                value
+            });
+            node.children = this.loops(children, node);
+            return node;
+        });
+    };
+
+    getPath = (value) => {
+        const path = [];
+        let current = this.valueMap[value];
+        while (current) {
+            path.unshift(current.value);
+            current = current.parent;
+        }
+        return path;
+    };
+
+    handleTreeSelectChange = (value) => {
+        let treeValue = this.getPath(value);
+        let data = "";
+        for (let i = 0; i < treeValue.length; i++) {
+            if (i !== 0) {
+                data += "/" + treeValue[i]
+            } else {
+                data += treeValue[i]
+            }
+        }
+        this.state.categoryResult.push(data)
+        let categorySet = new Set(this.state.category);
+        categorySet.add(value);
+        this.setState({
+            category: Array.from(categorySet)
+        });
+
+    };
+
+    handleEntityChange = (value) => {
+        this.setState({
+            entity: value
+        })
+    };
+
+    handleSearch = value => {
+        let splitValue = value.split(" ");
+        let org = splitValue.splice(0, splitValue.length - 1);
+        let searchValue = splitValue[splitValue.length - 1].toLowerCase();
+        let searchData = [];
+        for (let textItem of this.props.text) {
+            if (textItem.toLowerCase().includes(searchValue)) {
+                searchData.push(org + " " + textItem)
+            }
+        }
+        this.setState({
+            searchData: searchData,
+        });
+    };
+
+
+    handleOnSearch = (value) => {
+        if (value.length <= this.state.categoryResult.length) {
+            for (let i = 0; i < this.state.category.length; i++) {
+                if (i > value.length || value[i] !== this.state.category[i]) {
+                    console.log(i);
+                    this.state.categoryResult.splice(i, 1);
+                }
+            }
+            this.setState({
+                category: value
+            });
+        }
     };
 
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.onAdd(values.entity, values.category)
+                this.props.onAdd(this.state.entity, this.state.categoryResult);
                 this.props.form.resetFields();
+                this.setState({
+                    entity: "",
+                    category: [],
+                    categoryResult: []
+                })
             }
         });
     };
 
-    handleEntityChange = (value, index) => {
-        this.state.entity = value
-    }
-
-    handleCategoryChange = (value, index) => {
-        this.state.category = value
-    }
 
     render() {
-        const { getFieldDecorator } = this.props.form;
-        const optionItems = this.props.options.map((item, index) => (
+        const optionItems = this.props.options.map((item) => (
             <Option value={item.name}>{item.name}</Option>
         ));
         return (
@@ -43,26 +127,41 @@ class AddNewMentionModel extends Component {
                 footer={null}>
                 <Form onSubmit={this.handleSubmit} className="login-form">
                     <Form.Item>
-                        {getFieldDecorator('entity', {
-                            rules: [{ required: true, message: 'Please choose entity!' }],
-                        })(
-                            <Select placeholder="Please choose a entity" value={this.state.type}>
+                        {this.props.choose ? (
+                            <Select placeholder="Please choose a entity" value={this.state.entity}
+                                    onChange={(value) => {
+                                        this.handleEntityChange(value)
+                                    }}>
                                 {optionItems}
                             </Select>
-                        )}
+                        ) : (<AutoComplete
+                            dataSource={this.state.searchData}
+                            value={this.state.entity}
+                            onChange={(value) => {
+                                this.handleEntityChange(value)
+                            }}
+                            onSearch={this.handleSearch}
+                            placeholder="Please input the correct entity name"
+                        />)
+                        }
+
                     </Form.Item>
-                    <Form.Item>
-                        {getFieldDecorator('category', {
-                            rules: [{ required: true, message: 'Please choose category!' }],
-                        })(
-                            <TreeSelect
-                                showSearch
-                                style={{ width: 300 }}
-                                dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                                treeData={global.constants.treeData}
-                                placeholder="Please select the correct category"
-                            />
-                        )}
+                    < Form.Item>
+                        < TreeSelect
+                            showSearch
+                            treeCheckable="true"
+                            style={{width: 300}}
+                            dropdownStyle={{maxHeight: 400, overflow: 'auto'}}
+                            treeData={global.constants.treeData}
+                            placeholder="Please select the correct category"
+                            value={this.state.category}
+                            onSelect={(value) => {
+                                this.handleTreeSelectChange(value)
+                            }}
+                            onChange={(value) => {
+                                this.handleOnSearch(value)
+                            }}
+                        />
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" htmlType="submit" className="login-form-button">
@@ -75,5 +174,6 @@ class AddNewMentionModel extends Component {
         );
     }
 }
+
 AddNewMentionModel = Form.create({})(AddNewMentionModel);
 export default AddNewMentionModel;

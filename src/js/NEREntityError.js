@@ -4,12 +4,42 @@ import {
 } from 'antd';
 import './config'
 
+const {SHOW_ALL} = TreeSelect;
 const {Option} = Select;
+
 
 class NEREntityError extends Component {
 
     state = {
         searchData: []
+    };
+
+    valueMap = {};
+
+
+    componentDidMount() {
+        this.loops(global.constants.treeData);
+    }
+
+    loops = (list, parent) => {
+        return (list || []).map(({children, value}) => {
+            const node = (this.valueMap[value] = {
+                parent,
+                value
+            });
+            node.children = this.loops(children, node);
+            return node;
+        });
+    };
+
+    getPath = (value) => {
+        const path = [];
+        let current = this.valueMap[value];
+        while (current) {
+            path.unshift(current.value);
+            current = current.parent;
+        }
+        return path;
     };
 
     componentWillReceiveProps(newProps) {
@@ -56,10 +86,9 @@ class NEREntityError extends Component {
     };
 
 
-
     handleSearch = value => {
         let splitValue = value.split(" ");
-        let org = splitValue.splice(0,splitValue.length - 1);
+        let org = splitValue.splice(0, splitValue.length - 1);
         let searchValue = splitValue[splitValue.length - 1].toLowerCase();
         let searchData = [];
         for (let textItem of this.props.text) {
@@ -73,11 +102,20 @@ class NEREntityError extends Component {
     };
 
     handleTreeSelectChange = (value, index) => {
+        let treeValue = this.getPath(value);
+        let data = "";
+        for (let i = 0; i < treeValue.length; i++) {
+            if (i !== 0){
+                data +=  "/" + treeValue[i]
+            }else {
+                data +=  treeValue[i]
+            }
+        }
         const {form} = this.props;
         const keys = form.getFieldValue('keys');
         // console.log(index);
         // console.log(keys);
-        keys[index].category_name = value;
+        keys[index].category_name = data;
         // console.log(keys);
         form.setFieldsValue({
             keys: keys,
@@ -168,7 +206,8 @@ class NEREntityError extends Component {
                                         dropdownStyle={{maxHeight: 400, overflow: 'auto'}}
                                         treeData={global.constants.treeData}
                                         placeholder="Please select the correct category"
-                                        onChange={(value) => {
+                                        showCheckedStrategy={TreeSelect.SHOW_ALL}
+                                        onSelect={(value) => {
                                             this.handleTreeSelectChange(value, index)
                                         }}
                                     />

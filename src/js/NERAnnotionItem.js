@@ -121,7 +121,7 @@ class NERAnnotionItem extends Component {
             if (item.new_add) {
                 sure_content += "<p>" + 'New Mention: ' + item.entity + "&nbsp&nbsp is an instance of &nbsp&nbsp" + item.category + "</p>"
             } else {
-                sure_content += "<p>" + 'Result: ' + (item.action == 0) + "</p>"
+                sure_content += "<p>" + "<font color='pink' size='4'>" + item.entity + "</font>" + "&nbsp&nbsp is an instance of &nbsp&nbsp" + "<font color='pink' size='4'>" + item.category + "</font>" + ":" + "<font color='red' size='4'>" + (item.action == 0) + "</font>" + "</p>"
                 if (item.action != 0 && item.err_data.length > 0) {
                     for (let errorReason of item.err_data) {
                         sure_content += "<p>"
@@ -394,28 +394,31 @@ class NERAnnotionItem extends Component {
         })
     }
 
-    AddMentionRequest = (entity, category) => {
+    AddMentionRequest = (entity, categorys) => {
 
         const listData = this.state.listData
-        listData.push({
-            entity: entity,
-            category: category,
-            action: null, //0正确 1错误
-            err_data: [{"id": 0}],
-            new_add: true
-        })
+        for (let category of categorys){
+            listData.push({
+                entity: entity,
+                category: category,
+                action: null, //0正确 1错误
+                err_data: [{"id": 0}],
+                new_add: true
+            });
+        }
+
         this.setState({
             listData: listData,
             addNewMetationModel: false,
         })
 
-    }
+    };
 
     MentionCancel = () => {
         this.setState({
             addNewMetationModel: false,
         })
-    }
+    };
 
     render() {
         const {listData, error_drawer_visible, current_err_data, modalVisible, loginVisible, current_item, sure_content, addNewMetationModel} = this.state;
@@ -501,7 +504,8 @@ class NERAnnotionItem extends Component {
 
                 <AddNewMentionModel title={this.state.addNewTitle} choose={this.state.chooseEntity}
                                     visible={addNewMetationModel} options={this.state.optionItems}
-                                    onAdd={this.AddMentionRequest.bind(this)} onCancel={this.MentionCancel.bind(this)}/>
+                                    onAdd={this.AddMentionRequest.bind(this)} onCancel={this.MentionCancel.bind(this)}
+                                    text={this.state.textOrg}/>
             </div>
         );
     }
