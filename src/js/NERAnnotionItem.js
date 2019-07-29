@@ -212,7 +212,7 @@ class NERAnnotionItem extends Component {
     }
 
     postFeedback = (feedback) => {
-        const url = "http://172.26.187.188:8888/ap/sentence/feedback";
+        const url = "http://54.169.250.197:8888/ap/sentence/feedback";
         console.log(this.state)
         const param = {
             sentenceId:this.state.id,
@@ -255,7 +255,7 @@ class NERAnnotionItem extends Component {
     }
 
     getNext = () => {
-        const url = "http://172.26.187.188:8888/ap/sentence/next";
+        const url = "http://54.169.250.197:8888/ap/sentence/next";
         var doc = this;
         fetch(url, {
             method: 'GET',
@@ -358,7 +358,7 @@ class NERAnnotionItem extends Component {
 
 
     loginRequest = (name, password) => {
-        const url = "http://172.26.187.188:8888/ap/user/login";
+        const url = "http://54.169.250.197:8888/ap/user/login";
         const param = {
             name: name,
             password: password

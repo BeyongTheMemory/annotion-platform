@@ -217,7 +217,7 @@ class RelationExtractionItem extends Component {
     }
 
     loginRequest = (name, password) => {
-        const url = "http://172.26.187.188:8888/ap/user/login";
+        const url = "http://54.169.250.197:8888/ap/user/login";
         const param = {
             name: name,
             password: password
