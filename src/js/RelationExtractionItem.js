@@ -83,7 +83,7 @@ class RelationExtractionItem extends Component {
     }
 
     postFeedback = () => {
-        const url = "http://172.26.187.188:15000/annotation/send-result";
+        const url = "http://54.169.250.197:15000/annotation/send-result";
 
 
 
@@ -133,7 +133,7 @@ class RelationExtractionItem extends Component {
 
     getNext = () => {
         if (typeof (this.state.user_name) != "undefined" && this.state.user_name != "") {
-            const url = "http://172.26.187.188:15000/annotation/get-example";
+            const url = "http://54.169.250.197:15000/annotation/get-example";
             const param = {
                 user: this.state.user_name
             };
