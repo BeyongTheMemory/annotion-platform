@@ -303,7 +303,7 @@ class NERAnnotionItem extends Component {
             for(let nameItem of entity){
                 entityName += nameItem + " "
             }
-            if (entityName != ", " && entityName != ". " && entityName != "," && entityName != "."){
+            if (entityName !== "," && entityName !== "." && entityName !== "(" && entityName !== ")"){
                 entityData.push({
                     name: entityName
                 });
@@ -325,7 +325,7 @@ class NERAnnotionItem extends Component {
         let tokenDataList = Array.from(new Set(responseData.tokens.concat(entityData).filter(v => !entitySet.has(v))));
         let tokenData = [];
         for(let tokenWord of tokenDataList){
-            if (tokenWord != ", " && tokenWord != ". " && tokenWord != "," && tokenWord != "."){
+            if (tokenWord !== "," && tokenWord !== "." ){
                 tokenData.push({
                     name: tokenWord
                 });
@@ -346,13 +346,16 @@ class NERAnnotionItem extends Component {
                 text += "</font>"
             }
         }
+        let textOrg = [];
+        textOrg.push(entityData);
+        textOrg.push(tokenData);
         this.setState({
             listData: listData,
             entityData: entityData,
             tokenData: tokenData,
             text: text,
             id: responseData.sentence_id,
-            textOrg:responseData.tokens
+            textOrg:textOrg
         })
     }
 
