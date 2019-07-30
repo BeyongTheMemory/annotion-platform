@@ -351,8 +351,6 @@ class NERAnnotionItem extends Component {
             }
         }
 
-        textOrg.push(entityData);
-        textOrg.push(tokenData);
         this.setState({
             listData: listData,
             entityData: entityData,
