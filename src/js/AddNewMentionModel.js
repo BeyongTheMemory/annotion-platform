@@ -81,8 +81,8 @@ class AddNewMentionModel extends Component {
         let searchData = [];
         for (let textItem of this.props.text) {
             if (textItem.toLowerCase().includes(searchValue)) {
-                searchData.push(org)
-                searchData.push(" " + textItem)
+                searchData.push(org);
+                searchData.push(" " + textItem);
             }
         }
         this.setState({
