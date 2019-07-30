@@ -335,7 +335,7 @@ class NERAnnotionItem extends Component {
 
         let mention = null;
         let text = "";
-        let textOrg = [];
+        let textOrg = new Set();
         for (let i = 0; i < responseData.tokens.length; i++) {
             if (mention == null && mentionMap.get(i) != null) {
                 mention = mentionMap.get(i)
@@ -347,7 +347,7 @@ class NERAnnotionItem extends Component {
                 text += "</font>"
             }
             if (responseData.tokens[i] !== "," && responseData.tokens[i] !== "." && responseData.tokens[i] !== "(" && responseData.tokens[i] !== ")"){
-                textOrg.push(responseData.tokens[i])
+                textOrg.add(responseData.tokens[i])
             }
         }
 
@@ -357,7 +357,7 @@ class NERAnnotionItem extends Component {
             tokenData: tokenData,
             text: text,
             id: responseData.sentence_id,
-            textOrg:textOrg
+            textOrg:Array.from(textOrg)
         })
     }
 

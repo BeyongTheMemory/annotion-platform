@@ -76,6 +76,7 @@ class AddNewMentionModel extends Component {
                 splitValue.push(valueItem)
             }
         }
+        console.log(splitValue);
         let org = splitValue.splice(0, splitValue.length - 1);
 
         let searchValue = "";
