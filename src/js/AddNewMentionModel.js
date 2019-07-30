@@ -80,7 +80,7 @@ class AddNewMentionModel extends Component {
         let org = splitValue[0];
 
         if (splitValue.length > 0){
-             org = splitValue.splice(0, splitValue.length - 1);
+             org = splitValue.splice(0, splitValue.length - 1).concat(" ");
         }
 
         let searchValue = "";
@@ -92,7 +92,7 @@ class AddNewMentionModel extends Component {
         for (let textItem of this.props.text) {
             if (textItem.toLowerCase().includes(searchValue)) {
                 if (org.length > 0) {
-                    searchData.push(...org);
+                    searchData.push(org);
                 }
                 searchData.push(" " + textItem);
             }
