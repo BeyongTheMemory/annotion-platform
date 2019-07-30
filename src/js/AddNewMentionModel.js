@@ -79,8 +79,8 @@ class AddNewMentionModel extends Component {
         console.log(splitValue);
         let org = splitValue[0];
 
-        if (splitValue.length > 0){
-             org = splitValue.splice(0, splitValue.length - 1).join(" ");
+        if (splitValue.length > 0) {
+            org = splitValue.splice(0, splitValue.length - 1).join(" ");
         }
 
         let searchValue = "";
@@ -91,10 +91,11 @@ class AddNewMentionModel extends Component {
         console.log(org);
         for (let textItem of this.props.text) {
             if (textItem.toLowerCase().includes(searchValue)) {
-                if (typeof(org) !== "undefined" && org.length > 0) {
-                    searchData.push(org);
+                if (typeof (org) !== "undefined" && org.length > 0) {
+                    searchData.push(org + " " + textItem);
+                }else {
+                    searchData.push(textItem);
                 }
-                searchData.push(" " + textItem);
             }
         }
         console.log(searchData);
