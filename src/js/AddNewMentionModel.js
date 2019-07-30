@@ -69,7 +69,13 @@ class AddNewMentionModel extends Component {
     };
 
     handleSearch = value => {
-        let splitValue = value.split(" ");
+        let sourceValue = value.split(" ");
+        let splitValue = [];
+        for (let valueItem of sourceValue) {
+            if (valueItem.trim().length > 0){
+                splitValue.push(valueItem)
+            }
+        }
         console.log(splitValue)
         let org = splitValue.splice(0, splitValue.length - 1);
         console.log(org)
