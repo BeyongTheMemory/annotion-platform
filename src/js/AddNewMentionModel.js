@@ -70,7 +70,12 @@ class AddNewMentionModel extends Component {
 
     handleSearch = value => {
         let splitValue = value.split(" ");
-        let org = splitValue.splice(0, splitValue.length - 1);
+        let org;
+        if (splitValue.length > 1) {
+            org = splitValue.splice(0, splitValue.length - 1);
+        }else {
+            org = splitValue[0]
+        }
         let searchValue = splitValue[splitValue.length - 1].toLowerCase();
         let searchData = [];
         for (let textItem of this.props.text) {
