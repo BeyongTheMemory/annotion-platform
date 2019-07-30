@@ -94,7 +94,6 @@ class NEREntityError extends Component {
                 splitValue.push(valueItem)
             }
         }
-        console.log(splitValue);
         let org = splitValue[0];
 
         if (splitValue.length > 0) {
@@ -106,7 +105,6 @@ class NEREntityError extends Component {
             searchValue = splitValue[splitValue.length - 1].toLowerCase();
         }
         let searchData = [];
-        console.log(org);
         for (let textItem of this.props.text) {
             if (textItem.toLowerCase().includes(searchValue)) {
                 if (typeof (org) !== "undefined" && org.length > 0) {
@@ -116,7 +114,6 @@ class NEREntityError extends Component {
                 }
             }
         }
-        console.log(searchData);
         this.setState({
             searchData: searchData,
         });
