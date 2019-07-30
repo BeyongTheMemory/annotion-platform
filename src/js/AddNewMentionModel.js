@@ -83,6 +83,7 @@ class AddNewMentionModel extends Component {
             searchValue = splitValue[splitValue.length - 1].toLowerCase();
         }
         let searchData = [];
+        console.log(org);
         for (let textItem of this.props.text) {
             if (textItem.toLowerCase().includes(searchValue)) {
                 if (org.length > 0) {
@@ -91,6 +92,7 @@ class AddNewMentionModel extends Component {
                 searchData.push(" " + textItem);
             }
         }
+        console.log(searchData);
         this.setState({
             searchData: searchData,
         });
