@@ -335,6 +335,7 @@ class NERAnnotionItem extends Component {
 
         let mention = null;
         let text = "";
+        let textOrg = [];
         for (let i = 0; i < responseData.tokens.length; i++) {
             if (mention == null && mentionMap.get(i) != null) {
                 mention = mentionMap.get(i)
@@ -345,8 +346,11 @@ class NERAnnotionItem extends Component {
                 mention = null;
                 text += "</font>"
             }
+            if (responseData.tokens[i] !== "," && responseData.tokens[i] !== "." && responseData.tokens[i] !== "(" && responseData.tokens[i] !== ")"){
+                textOrg.push(responseData.tokens[i])
+            }
         }
-        let textOrg = [];
+
         textOrg.push(entityData);
         textOrg.push(tokenData);
         this.setState({
