@@ -87,15 +87,31 @@ class NEREntityError extends Component {
 
 
     handleSearch = value => {
-        let splitValue = value.split(" ");
-        let org = splitValue.splice(0, splitValue.length - 1);
-        let searchValue = splitValue[splitValue.length - 1].toLowerCase();
-        let searchData = [];
-        for (let textItem of this.props.text) {
-            if (textItem.toLowerCase().includes(searchValue)) {
-                searchData.push(org + " " + textItem)
+        let sourceValue = value.split(" ");
+        let splitValue = [];
+        for (let valueItem of sourceValue) {
+            if (valueItem.trim().length > 0) {
+                splitValue.push(valueItem)
             }
         }
+        console.log(splitValue);
+        let org = splitValue.splice(0, splitValue.length - 1);
+
+        let searchValue = "";
+        if (splitValue.length > 0) {
+            searchValue = splitValue[splitValue.length - 1].toLowerCase();
+        }
+        let searchData = [];
+        console.log(org);
+        for (let textItem of this.props.text) {
+            if (textItem.toLowerCase().includes(searchValue)) {
+                if (org.length > 0) {
+                    searchData.push(...org);
+                }
+                searchData.push(" " + textItem);
+            }
+        }
+        console.log(searchData);
         this.setState({
             searchData: searchData,
         });
