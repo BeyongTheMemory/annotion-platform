@@ -80,7 +80,7 @@ class AddNewMentionModel extends Component {
         let org = splitValue[0];
 
         if (splitValue.length > 0){
-             org = splitValue.splice(0, splitValue.length - 1).concat(" ");
+             org = splitValue.splice(0, splitValue.length - 1).join(" ");
         }
 
         let searchValue = "";
