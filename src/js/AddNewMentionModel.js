@@ -76,20 +76,18 @@ class AddNewMentionModel extends Component {
                 splitValue.push(valueItem)
             }
         }
-        console.log(splitValue)
         let org = splitValue.splice(0, splitValue.length - 1);
-        console.log(org)
         let searchValue = splitValue[splitValue.length - 1].toLowerCase();
         let searchData = [];
         for (let textItem of this.props.text) {
             if (textItem.toLowerCase().includes(searchValue)) {
-                searchData.push(org + " " + textItem)
+                searchData.push(org)
+                searchData.push(" " + textItem)
             }
         }
         this.setState({
             searchData: searchData,
         });
-        console.log(searchData)
     };
 
 
