@@ -77,7 +77,11 @@ class AddNewMentionModel extends Component {
             }
         }
         console.log(splitValue);
-        let org = splitValue.splice(0, splitValue.length - 1);
+        let org = splitValue[0];
+
+        if (splitValue.length > 0){
+             org = splitValue.splice(0, splitValue.length - 1);
+        }
 
         let searchValue = "";
         if (splitValue.length > 0) {
