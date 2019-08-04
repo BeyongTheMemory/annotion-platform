@@ -403,14 +403,35 @@ class NERAnnotionItem extends Component {
         })
     }
 
-    AddMentionRequest = (entity, categorys) => {
+    AddMentionRequest = (entity, categorys,addNewEntity) => {
 
         const listData = this.state.listData;
         let entityDataSet = new Set(this.state.entityData);
         entityDataSet.add({
             name:entity
         });
+        let nameCategorySet = new Set();
+        for (let item of this.state.listData) {
+            if (item.entity === entity && addNewEntity){
+                notification.open({
+                    message: 'Error',
+                    description: 'Can not add an existing entity',
+                    duration: 4,
+                });
+                return
+            }
+            nameCategorySet.add(item.entity + item.category)
+        }
+
         for (let category of categorys) {
+            if (nameCategorySet.has(entity + category)){
+                notification.open({
+                    message: 'Error',
+                    description: 'Can not add an existing triple',
+                    duration: 4,
+                });
+                return
+            }
             listData.push({
                 entity: entity,
                 category: category,

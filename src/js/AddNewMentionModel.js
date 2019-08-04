@@ -93,7 +93,7 @@ class AddNewMentionModel extends Component {
             if (textItem.toLowerCase().includes(searchValue)) {
                 if (typeof (org) !== "undefined" && org.length > 0) {
                     searchData.push(org + " " + textItem);
-                }else {
+                } else {
                     searchData.push(textItem);
                 }
             }
@@ -123,7 +123,7 @@ class AddNewMentionModel extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.onAdd(this.state.entity, this.state.categoryResult);
+                this.props.onAdd(this.state.entity, this.state.categoryResult, !this.props.choose);
                 this.props.form.resetFields();
                 this.setState({
                     entity: "",
