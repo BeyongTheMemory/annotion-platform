@@ -405,7 +405,9 @@ class NERAnnotionItem extends Component {
 
     AddMentionRequest = (entity, categorys) => {
 
-        const listData = this.state.listData
+        const listData = this.state.listData;
+        let entityDataSet = new Set(this.state.entityData);
+        entityDataSet.add(entity)
         for (let category of categorys) {
             listData.push({
                 entity: entity,
@@ -419,6 +421,7 @@ class NERAnnotionItem extends Component {
         this.setState({
             listData: listData,
             addNewMetationModel: false,
+            entityData:Array.from(entityDataSet)
         })
 
     };
