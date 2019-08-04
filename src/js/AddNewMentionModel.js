@@ -123,7 +123,7 @@ class AddNewMentionModel extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                this.props.onAdd(this.state.entity, this.state.categoryResult, !this.props.choose);
+                this.props.onAdd(this.state.entity.trim(), this.state.categoryResult.trim(), !this.props.choose);
                 this.props.form.resetFields();
                 this.setState({
                     entity: "",

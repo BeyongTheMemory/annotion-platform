@@ -412,7 +412,7 @@ class NERAnnotionItem extends Component {
         });
         let nameCategorySet = new Set();
         for (let item of this.state.listData) {
-            if (item.entity == entity && addNewEntity){
+            if (item.entity.trim() === entity && addNewEntity){
                 notification.open({
                     message: 'Error',
                     description: 'Can not add an existing entity',
@@ -420,7 +420,7 @@ class NERAnnotionItem extends Component {
                 });
                 return
             }
-            nameCategorySet.add(item.entity + item.category)
+            nameCategorySet.add(item.entity.trim() + item.category.trim())
         }
 
         for (let category of categorys) {
