@@ -119,7 +119,7 @@ class NERAnnotionItem extends Component {
                 return
             }
             console.log(item.action)
-            if (item.action !== 0 && item.err_data.length <= 0 && !item.new_add) {
+            if (item.action != 0 && item.err_data.length <= 0 && !item.new_add) {
                 notification.open({
                     message: 'Error',
                     description: 'The error reason is empty in triple ' + lineNumber + '.',
