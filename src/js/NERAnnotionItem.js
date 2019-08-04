@@ -108,6 +108,7 @@ class NERAnnotionItem extends Component {
     onSubmit = () => {
         //set content
         var sure_content = ""
+        let lineNumber = 1;
         for (let item of this.state.listData) {
             if (item.action == null && !item.new_add) {
                 notification.open({
@@ -117,7 +118,16 @@ class NERAnnotionItem extends Component {
                 });
                 return
             }
-
+            console.log(item.action)
+            if (item.action !== 0 && item.err_data.length <= 0 && !item.new_add) {
+                notification.open({
+                    message: 'Error',
+                    description: 'The error reason is empty in triple ' + lineNumber + '.',
+                    duration: 4,
+                });
+                break
+            }
+            lineNumber++;
             if (item.new_add) {
                 sure_content += "<p>" + 'New Mention: ' + item.entity + "&nbsp&nbsp is an instance of &nbsp&nbsp" + item.category + "</p>"
             } else {
@@ -167,15 +177,7 @@ class NERAnnotionItem extends Component {
         for (let item of this.state.listData) {
             console.log(item.action);
             console.log(item.item.err_data.length);
-            if (item.action !== 0 && item.err_data.length <= 0) {
-                valid = false;
-                notification.open({
-                    message: 'Error',
-                    description: 'The error reason is empty in triple ' + lineNumber + '.',
-                    duration: 4,
-                });
-                break
-            }
+
             lineNumber++;
             let errorReasons = [];
 
