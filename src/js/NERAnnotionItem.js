@@ -176,7 +176,7 @@ class NERAnnotionItem extends Component {
                                 description: 'Please enter the right entity!',
                                 duration: 4,
                             });
-                            break
+                            return;
                         }
                         errorReasons.push({
                             "code": errorReason.type,
@@ -194,7 +194,7 @@ class NERAnnotionItem extends Component {
                             description: 'The erro reason is empty in triple ' + lineNumber + '!',
                             duration: 4,
                         });
-                        break
+                        return;
                     }
                     lineNumber++;
                 }
