@@ -173,12 +173,7 @@ class NERAnnotionItem extends Component {
         console.log(this.state.listData);
         let valid = true;
         let feedback = [];
-        let lineNumber = 1;
         for (let item of this.state.listData) {
-            console.log(item.action);
-            console.log(item.item.err_data.length);
-
-            lineNumber++;
             let errorReasons = [];
 
             if (item.err_data.length > 0) {
