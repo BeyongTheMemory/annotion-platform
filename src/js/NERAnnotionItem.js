@@ -108,7 +108,6 @@ class NERAnnotionItem extends Component {
     onSubmit = () => {
         //set content
         var sure_content = ""
-        let lineNumber = 1;
         for (let item of this.state.listData) {
             if (item.action == null && !item.new_add) {
                 notification.open({
@@ -118,16 +117,7 @@ class NERAnnotionItem extends Component {
                 });
                 return
             }
-            console.log(item.action)
-            if (item.action == 1 && item.err_data.length <= 0 && !item.new_add) {
-                notification.open({
-                    message: 'Error',
-                    description: 'The error reason is empty in triple ' + lineNumber + '.',
-                    duration: 4,
-                });
-                break
-            }
-            lineNumber++;
+
             if (item.new_add) {
                 sure_content += "<p>" + 'New Mention: ' + item.entity + "&nbsp&nbsp is an instance of &nbsp&nbsp" + item.category + "</p>"
             } else {
@@ -173,9 +163,9 @@ class NERAnnotionItem extends Component {
         console.log(this.state.listData);
         let valid = true;
         let feedback = [];
+        let lineNumber = 1;
         for (let item of this.state.listData) {
             let errorReasons = [];
-
             if (item.err_data.length > 0) {
                 for (let errorReason of item.err_data) {
                     if (errorReason.type === 1) {
@@ -197,8 +187,16 @@ class NERAnnotionItem extends Component {
                             "code": errorReason.type,
                             "msg": errorReason.category_name
                         })
+                    }else {
+                        valid = false;
+                        notification.open({
+                            message: 'Error',
+                            description: 'The erro reason is empty in triple ' + lineNumber + '!',
+                            duration: 4,
+                        });
+                        break
                     }
-
+                    lineNumber++;
                 }
             }
             feedback.push({
