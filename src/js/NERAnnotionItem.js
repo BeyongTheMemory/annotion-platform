@@ -407,7 +407,7 @@ class NERAnnotionItem extends Component {
 
         const listData = this.state.listData;
         let entityDataSet = new Set(this.state.entityData);
-        entityDataSet.add(entity)
+        entityDataSet = entityDataSet.add(entity);
         for (let category of categorys) {
             listData.push({
                 entity: entity,
@@ -417,7 +417,6 @@ class NERAnnotionItem extends Component {
                 new_add: true
             });
         }
-
         this.setState({
             listData: listData,
             addNewMetationModel: false,
