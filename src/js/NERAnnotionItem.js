@@ -28,8 +28,8 @@ class NERAnnotionItem extends Component {
         chooseEntity: true,
         addNewTitle: "",
         optionItems: [],
-        textOrg:[],
-        id:-1
+        textOrg: [],
+        id: -1
     }
 
     componentDidMount() {
@@ -160,17 +160,28 @@ class NERAnnotionItem extends Component {
     }
 
     modalHandleOk = () => {
-        console.log(this.state.listData)
-        let valid = true
-        let feedback = []
+        console.log(this.state.listData);
+        let valid = true;
+        let feedback = [];
+        let lineNumber = 1;
         for (let item of this.state.listData) {
-            let errorReasons = []
+            if (item.action !== 0 && item.err_data.length <= 0) {
+                valid = false;
+                notification.open({
+                    message: 'Error',
+                    description: 'The error reason is empty in triple ' + lineNumber + '.',
+                    duration: 4,
+                });
+                break
+            }
+            lineNumber++;
+            let errorReasons = [];
+
             if (item.err_data.length > 0) {
-                console.log(item)
                 for (let errorReason of item.err_data) {
-                    if (errorReason.type == 1) {
-                        if (errorReason.entity_name == item.entity) {
-                            valid = false
+                    if (errorReason.type === 1) {
+                        if (errorReason.entity_name === item.entity) {
+                            valid = false;
                             notification.open({
                                 message: 'Error',
                                 description: 'Please enter the right entity!',
@@ -193,11 +204,11 @@ class NERAnnotionItem extends Component {
             }
             feedback.push({
                 "entityCategoryId": item.id,
-                "origCategory":item.category,
-                "origEntity":item.entity,
+                "origCategory": item.category,
+                "origEntity": item.entity,
                 "isCorrect": item.action == 0,
                 "errorReasons": errorReasons,
-                "isNew":item.new_add
+                "isNew": item.new_add
             })
         }
 
@@ -215,7 +226,7 @@ class NERAnnotionItem extends Component {
         const url = "http://54.169.250.197:8888/ap/sentence/feedback";
         console.log(this.state)
         const param = {
-            sentenceId:this.state.id,
+            sentenceId: this.state.id,
             reason: JSON.stringify(feedback)
         };
         var doc = this;
@@ -300,10 +311,10 @@ class NERAnnotionItem extends Component {
             }
             let entity = responseData.tokens.slice(newMention.start, newMention.end);
             let entityName = "";
-            for(let nameItem of entity){
+            for (let nameItem of entity) {
                 entityName += nameItem + " "
             }
-            if (entityName !== "," && entityName !== "." && entityName !== "(" && entityName !== ")"){
+            if (entityName !== "," && entityName !== "." && entityName !== "(" && entityName !== ")") {
                 entityData.push({
                     name: entityName
                 });
@@ -324,8 +335,8 @@ class NERAnnotionItem extends Component {
         let entitySet = new Set(entityData);
         let tokenDataList = Array.from(new Set(responseData.tokens.concat(entityData).filter(v => !entitySet.has(v))));
         let tokenData = [];
-        for(let tokenWord of tokenDataList){
-            if (tokenWord !== "," && tokenWord !== "." ){
+        for (let tokenWord of tokenDataList) {
+            if (tokenWord !== "," && tokenWord !== ".") {
                 tokenData.push({
                     name: tokenWord
                 });
@@ -342,11 +353,11 @@ class NERAnnotionItem extends Component {
                 text += "<font color=#4c9bc3>"
             }
             text += responseData.tokens[i] + " ";
-            if (mention != null && mention.end === i+1) {
+            if (mention != null && mention.end === i + 1) {
                 mention = null;
                 text += "</font>"
             }
-            if (responseData.tokens[i] !== "," && responseData.tokens[i] !== "." && responseData.tokens[i] !== "(" && responseData.tokens[i] !== ")"){
+            if (responseData.tokens[i] !== "," && responseData.tokens[i] !== "." && responseData.tokens[i] !== "(" && responseData.tokens[i] !== ")") {
                 textOrg.add(responseData.tokens[i])
             }
         }
@@ -357,7 +368,7 @@ class NERAnnotionItem extends Component {
             tokenData: tokenData,
             text: text,
             id: responseData.sentence_id,
-            textOrg:Array.from(textOrg)
+            textOrg: Array.from(textOrg)
         })
     }
 
@@ -398,7 +409,7 @@ class NERAnnotionItem extends Component {
     AddMentionRequest = (entity, categorys) => {
 
         const listData = this.state.listData
-        for (let category of categorys){
+        for (let category of categorys) {
             listData.push({
                 entity: entity,
                 category: category,
