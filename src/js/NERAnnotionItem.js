@@ -165,6 +165,8 @@ class NERAnnotionItem extends Component {
         let feedback = [];
         let lineNumber = 1;
         for (let item of this.state.listData) {
+            console.log(item.action);
+            console.log(item.item.err_data.length);
             if (item.action !== 0 && item.err_data.length <= 0) {
                 valid = false;
                 notification.open({
@@ -193,7 +195,7 @@ class NERAnnotionItem extends Component {
                             "code": errorReason.type,
                             "msg": errorReason.entity_name
                         })
-                    } else if (errorReason.type == 2) {
+                    } else if (errorReason.type === 2) {
                         errorReasons.push({
                             "code": errorReason.type,
                             "msg": errorReason.category_name
@@ -206,7 +208,7 @@ class NERAnnotionItem extends Component {
                 "entityCategoryId": item.id,
                 "origCategory": item.category,
                 "origEntity": item.entity,
-                "isCorrect": item.action == 0,
+                "isCorrect": item.action === 0,
                 "errorReasons": errorReasons,
                 "isNew": item.new_add
             })
