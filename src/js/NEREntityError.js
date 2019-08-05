@@ -143,6 +143,7 @@ class NEREntityError extends Component {
     onSubmit = (data) => {
         //check valid
         for (let item of data) {
+            console.log(item.type);
             if (item.type === 1) {
                 console.log(item.entity_name);
                 console.log(this.props.item.entity);
