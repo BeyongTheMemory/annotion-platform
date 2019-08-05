@@ -143,8 +143,7 @@ class NEREntityError extends Component {
     onSubmit = (data) => {
         //check valid
         for (let item of data) {
-            console.log(item.type);
-            if (item.type === 1) {
+            if (item.type == 1) {
                 console.log(item.entity_name);
                 console.log(this.props.item.entity);
                 if (typeof (item.entity_name) == "undefined" || item.entity_name.trim() === "") {
@@ -162,7 +161,7 @@ class NEREntityError extends Component {
                     });
                     return;
                 }
-            } else if (item.type === 2) {
+            } else if (item.type == 2) {
                 if (typeof (item.category_name) == "undefined" || item.category_name.trim() === "") {
                     notification.open({
                         message: 'Error',
