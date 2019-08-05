@@ -167,7 +167,7 @@ class NERAnnotionItem extends Component {
         for (let item of this.state.listData) {
             let errorReasons = [];
             lineNumber = lineNumber++;
-            if (item.err_data.length > 0) {
+            if (item.action !== 0) {
                 for (let errorReason of item.err_data) {
                     if (errorReason.type === 1) {
                         if (errorReason.entity_name === item.entity) {
