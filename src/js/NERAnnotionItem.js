@@ -196,9 +196,9 @@ class NERAnnotionItem extends Component {
                         });
                         return;
                     }
-                    lineNumber++;
                 }
             }
+            lineNumber++;
             feedback.push({
                 "entityCategoryId": item.id,
                 "origCategory": item.category,
