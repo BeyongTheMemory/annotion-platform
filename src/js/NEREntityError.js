@@ -109,7 +109,7 @@ class NEREntityError extends Component {
             if (textItem.toLowerCase().includes(searchValue)) {
                 if (typeof (org) !== "undefined" && org.length > 0) {
                     searchData.push(org + " " + textItem);
-                }else {
+                } else {
                     searchData.push(textItem);
                 }
             }
@@ -123,10 +123,10 @@ class NEREntityError extends Component {
         let treeValue = this.getPath(value);
         let data = "";
         for (let i = 0; i < treeValue.length; i++) {
-            if (i !== 0){
-                data +=  "/" + treeValue[i]
-            }else {
-                data +=  treeValue[i]
+            if (i !== 0) {
+                data += "/" + treeValue[i]
+            } else {
+                data += treeValue[i]
             }
         }
         const {form} = this.props;
@@ -143,41 +143,43 @@ class NEREntityError extends Component {
     onSubmit = (data) => {
         //check valid
         for (let item of data) {
-            if (item.type == 1 && (typeof (item.entity_name) == "undefined" || item.entity_name.trim() == "")) {
-                notification.open({
-                    message: 'Error',
-                    description: 'correct entity name can not be empty',
-                    duration: 4,
-                });
-                return;
-            } else if (item.type == 2 && (typeof (item.category_name) == "undefined" || item.category_name.trim() == "")) {
-                notification.open({
-                    message: 'Error',
-                    description: 'category name can not be empty',
-                    duration: 4,
-                });
-                return;
-            }
-            if (this.props.item.entity == item.entity_name.trim()){
-                notification.open({
-                    message: 'Error',
-                    description: 'entity can not as same as old value',
-                    duration: 4,
-                });
-                return;
-            }
-            if (this.props.item.category == item.category_name.trim()){
-                notification.open({
-                    message: 'Error',
-                    description: 'category can not as same as old value',
-                    duration: 4,
-                });
-                return;
+            if (item.type === 1) {
+                if (typeof (item.entity_name) == "undefined" || item.entity_name.trim() === "") {
+                    notification.open({
+                        message: 'Error',
+                        description: 'correct entity name can not be empty',
+                        duration: 4,
+                    });
+                    return;
+                } else if (this.props.item.entity === item.entity_name.trim()) {
+                    notification.open({
+                        message: 'Error',
+                        description: 'entity can not as same as old value',
+                        duration: 4,
+                    });
+                    return;
+                }
+            } else if (item.type === 2) {
+                if (typeof (item.category_name) == "undefined" || item.category_name.trim() === "") {
+                    notification.open({
+                        message: 'Error',
+                        description: 'category name can not be empty',
+                        duration: 4,
+                    });
+                    return;
+                } else if (this.props.item.category === item.category_name.trim()) {
+                    notification.open({
+                        message: 'Error',
+                        description: 'category can not as same as old value',
+                        duration: 4,
+                    });
+                    return;
+                }
             }
 
         }
         this.props.onSubmit(data)
-    }
+    };
 
 
     render() {
