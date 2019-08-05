@@ -428,7 +428,7 @@ class NERAnnotionItem extends Component {
             if (nameCategorySet.has(entity + category)){
                 notification.open({
                     message: 'Error',
-                    description: 'Can not add an existing triple',
+                    description: 'The category is already existed',
                     duration: 4,
                 });
                 return

@@ -158,6 +158,23 @@ class NEREntityError extends Component {
                 });
                 return;
             }
+            if (this.props.item.entity == item.entity_name.trim()){
+                notification.open({
+                    message: 'Error',
+                    description: 'entity can not as same as old value',
+                    duration: 4,
+                });
+                return;
+            }
+            if (this.props.item.category == item.category_name.trim()){
+                notification.open({
+                    message: 'Error',
+                    description: 'category can not as same as old value',
+                    duration: 4,
+                });
+                return;
+            }
+
         }
         this.props.onSubmit(data)
     }

@@ -149,7 +149,7 @@ class AddNewMentionModel extends Component {
                 <Form onSubmit={this.handleSubmit} className="login-form">
                     <Form.Item>
                         {this.props.choose ? (
-                            <Select placeholder="Please choose a entity" value={this.state.entity}
+                            <Select placeholder="Click to select an existing entity" value={this.state.entity}
                                     onChange={(value) => {
                                         this.handleEntityChange(value)
                                     }}>
@@ -162,7 +162,7 @@ class AddNewMentionModel extends Component {
                                 this.handleEntityChange(value)
                             }}
                             onSearch={this.handleSearch}
-                            placeholder="Please input the correct entity name"
+                            placeholder="Please input the new entity"
                         />)
                         }
 
@@ -174,7 +174,7 @@ class AddNewMentionModel extends Component {
                             style={{width: 300}}
                             dropdownStyle={{maxHeight: 400, overflow: 'auto'}}
                             treeData={global.constants.treeData}
-                            placeholder="Please select the correct category"
+                            placeholder="Please select categories of the entity"
                             value={this.state.category}
                             onSelect={(value) => {
                                 this.handleTreeSelectChange(value)
