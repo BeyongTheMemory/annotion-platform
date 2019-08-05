@@ -163,9 +163,10 @@ class NERAnnotionItem extends Component {
         console.log(this.state.listData);
         let valid = true;
         let feedback = [];
-        let lineNumber = 1;
+        let lineNumber = 0;
         for (let item of this.state.listData) {
             let errorReasons = [];
+            lineNumber++;
             if (item.err_data.length > 0) {
                 for (let errorReason of item.err_data) {
                     if (errorReason.type === 1) {
@@ -198,7 +199,6 @@ class NERAnnotionItem extends Component {
                     }
                 }
             }
-            lineNumber++;
             feedback.push({
                 "entityCategoryId": item.id,
                 "origCategory": item.category,
