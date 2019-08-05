@@ -68,6 +68,7 @@ class NERAnnotionItem extends Component {
     };
 
     onErrSubmit = (data) => {
+        console.log(1111)
         this.state.current_item.err_data = data;
         this.setState({
             error_drawer_visible: false,
