@@ -192,7 +192,7 @@ class NERAnnotionItem extends Component {
                         valid = false;
                         notification.open({
                             message: 'Error',
-                            description: 'The erro reason is empty in triple ' + lineNumber + '!',
+                            description: 'The error reason is empty in triple ' + lineNumber + '!',
                             duration: 4,
                         });
                         return;
