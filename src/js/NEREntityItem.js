@@ -15,6 +15,9 @@ class NEREntityItem extends Component {
         {
             if (this.props.data.action != 0 && this.props.data.err_data.length > 0){
                 for (let errorReason of this.props.data.err_data ){
+                    if(errorReason.submit !== true){
+                        continue
+                    }
                     if (errorReason.type == 1) {
                         trueEntity =  <font color="red" size="4">({errorReason.entity_name})</font>
                     }

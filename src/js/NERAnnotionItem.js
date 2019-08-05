@@ -84,7 +84,7 @@ class NERAnnotionItem extends Component {
             });
             return;
         }
-        data = data.concat({id: -1})
+        data = data.concat({id: -1,submit:false})
         //this.state.current_item.err_data = data
         this.setState({
             current_err_data: data,
@@ -109,7 +109,9 @@ class NERAnnotionItem extends Component {
     onSubmit = () => {
         //set content
         var sure_content = ""
+        let lineNumber = 0;
         for (let item of this.state.listData) {
+            lineNumber++
             if (item.action == null && !item.new_add) {
                 notification.open({
                     message: 'Error',
@@ -118,13 +120,20 @@ class NERAnnotionItem extends Component {
                 });
                 return
             }
-
             if (item.new_add) {
                 sure_content += "<p>" + 'New Mention: ' + item.entity + "&nbsp&nbsp is an instance of &nbsp&nbsp" + item.category + "</p>"
             } else {
                 sure_content += "<p>" + "<font color='pink' size='4'>" + item.entity + "</font>" + "&nbsp&nbsp is an instance of &nbsp&nbsp" + "<font color='pink' size='4'>" + item.category + "</font>" + ":" + "<font color='red' size='4'>" + (item.action == 0) + "</font>" + "</p>"
                 if (item.action != 0 && item.err_data.length > 0) {
                     for (let errorReason of item.err_data) {
+                        if (errorReason.submit !== true) {
+                            notification.open({
+                                message: 'Error',
+                                description: 'Please submit line ' + lineNumber + '!',
+                                duration: 4,
+                            });
+                            return;
+                        }
                         sure_content += "<p>"
                         if (errorReason.type == 1) {
                             sure_content += "&nbsp&nbsp&nbsp&nbsp Entity is wrong,correct entity name:" + "<font color=orange>" + errorReason.entity_name + "</font>"
