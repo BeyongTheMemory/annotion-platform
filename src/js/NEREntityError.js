@@ -151,7 +151,7 @@ class NEREntityError extends Component {
                         duration: 4,
                     });
                     return;
-                } else if (this.props.item.entity === item.entity_name.trim()) {
+                } else if (this.props.item.entity.trim() === item.entity_name.trim()) {
                     notification.open({
                         message: 'Error',
                         description: 'entity can not as same as old value',
@@ -167,7 +167,7 @@ class NEREntityError extends Component {
                         duration: 4,
                     });
                     return;
-                } else if (this.props.item.category === item.category_name.trim()) {
+                } else if (this.props.item.category.trim() === item.category_name.trim()) {
                     notification.open({
                         message: 'Error',
                         description: 'category can not as same as old value',
