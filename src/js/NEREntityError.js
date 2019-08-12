@@ -78,7 +78,7 @@ class NEREntityError extends Component {
         const {form} = this.props;
         const keys = form.getFieldValue('keys');
         // console.log(index);
-        keys[index].entity_name = value;
+        keys[index].entityName = value;
         // console.log(keys);
         form.setFieldsValue({
             keys: keys,
@@ -133,7 +133,7 @@ class NEREntityError extends Component {
         const keys = form.getFieldValue('keys');
         // console.log(index);
         // console.log(keys);
-        keys[index].category_name = data;
+        keys[index].categoryName = data;
         // console.log(keys);
         form.setFieldsValue({
             keys: keys,
@@ -144,14 +144,14 @@ class NEREntityError extends Component {
         //check valid
         for (let item of data) {
             if (item.type == 1) {
-                if (typeof (item.entity_name) == "undefined" || item.entity_name.trim() === "") {
+                if (typeof (item.entityName) == "undefined" || item.entityName.trim() === "") {
                     notification.open({
                         message: 'Error',
                         description: 'correct entity name can not be empty',
                         duration: 4,
                     });
                     return;
-                } else if (this.props.item.entity.trim() === item.entity_name.trim()) {
+                } else if (this.props.item.entity.trim() === item.entityName.trim()) {
                     notification.open({
                         message: 'Error',
                         description: 'entity can not as same as old value',
@@ -160,14 +160,14 @@ class NEREntityError extends Component {
                     return;
                 }
             } else if (item.type == 2) {
-                if (typeof (item.category_name) == "undefined" || item.category_name.trim() === "") {
+                if (typeof (item.categoryName) == "undefined" || item.categoryName.trim() === "") {
                     notification.open({
                         message: 'Error',
                         description: 'category name can not be empty',
                         duration: 4,
                     });
                     return;
-                } else if (this.props.item.category.trim() === item.category_name.trim()) {
+                } else if (this.props.item.category.trim() === item.categoryName.trim()) {
                     notification.open({
                         message: 'Error',
                         description: 'category can not as same as old value',
@@ -198,7 +198,7 @@ class NEREntityError extends Component {
 
                         <Row gutter={16}>
                             <Col span={12}>
-                                <Select placeholder="Please choose the reason type" value={k.type}
+                                <Select placeholder="Please choose the reason type" value={k.type}  disabled
                                         onChange={(value) => {
                                             this.handleReasonChange(value, index)
                                         }}>
@@ -213,11 +213,11 @@ class NEREntityError extends Component {
                             <Row gutter={16}>
                                 <Col span={12}>
                                     <Modal visible={false}
-                                           style="display:none;">{typeof (k.entity_name) == "undefined" ? k.entity_name = this.props.item.entity : null}</Modal>
+                                           style="display:none;">{typeof (k.entityName) == "undefined" ? k.entityName = this.props.item.entity : null}</Modal>
 
                                     <AutoComplete
                                         dataSource={this.state.searchData}
-                                        value={k.entity_name}
+                                        value={k.entityName}
                                         onChange={(value) => {
                                             this.handleInputChange(value, index)
                                         }}
@@ -235,10 +235,10 @@ class NEREntityError extends Component {
                             <Row gutter={16}>
                                 <Col span={12}>
                                     <Modal visible={false}
-                                           style="display:none;">{typeof (k.category_name) == "undefined" ? k.category_name = this.props.item.category : null}</Modal>
+                                           style="display:none;">{typeof (k.categoryName) == "undefined" ? k.categoryName = this.props.item.category : null}</Modal>
                                     <TreeSelect
                                         showSearch
-                                        value={k.category_name}
+                                        value={k.categoryName}
                                         style={{width: 300}}
                                         dropdownStyle={{maxHeight: 400, overflow: 'auto'}}
                                         treeData={global.constants.treeData}
@@ -278,14 +278,6 @@ class NEREntityError extends Component {
 
 
                     {formItems}
-
-                    <Row gutter={16} style={{textAlign: 'center'}}>
-                        <Button type="dashed" onClick={() => {
-                            this.props.onErrAdd(keys)
-                        }} style={{width: '60%'}}>
-                            <Icon type="plus"/> Add Reason
-                        </Button>
-                    </Row>
 
                 </Form>
                 <div

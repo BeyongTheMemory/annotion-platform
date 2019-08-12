@@ -1,24 +1,21 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import {notification, List, Icon, Button, Modal, Typography, message, Row, Divider} from 'antd';
+import NEREntityList from './NEREntityList';
 import NEREntityItem from './NEREntityItem';
-import NEREntityError from './NEREntityError';
 import LoginModel from './LoginModel';
 import AddNewMentionModel from './AddNewMentionModel';
-
-const {Text, Title} = Typography;
 
 /**
  * 列表条目组件
  */
 class NERAnnotionItem extends Component {
     state = {
-        listData: [],
+        entitiesCategories: [],
         entityData: [],
         tokenData: [],
         error_drawer_visible: false,
         current_item: null,
-        current_err_data: [],
+        currentErrData: [],
         modalVisible: false,
         addNewMetationModel: false,
         iFrameHeight: '0px',
@@ -29,126 +26,102 @@ class NERAnnotionItem extends Component {
         addNewTitle: "",
         optionItems: [],
         textOrg: [],
-        id: -1
-    }
+        id: -1,
+        newDataList: []
+    };
 
     componentDidMount() {
         this.getNext()
     }
 
 
-    like = (item) => {
-        item.action = 0
+    refreshList = () => {
         this.setState({
-            listData: this.state.listData
-        });
-    }
-
-    dislike = (item) => {
-        item.action = 1
-        this.setState({
-            error_drawer_visible: true,
-            current_item: item,
-            current_err_data: item.err_data
-        });
-    }
-
-    deleteRecord = (item, index) => {
-        const listData = this.state.listData
-        listData.splice(index, 1)
-        this.setState({
-            listData: this.state.listData
-        });
-    }
-
-    onClose = () => {
-        this.setState({
-            error_drawer_visible: false,
+            entitiesCategories: this.state.entitiesCategories
         });
     };
 
-    onErrSubmit = (data) => {
-        this.state.current_item.err_data = data;
-        this.setState({
-            error_drawer_visible: false,
-        });
-    }
 
-    onErrAdd = (data) => {
-        if (data.length > 1) {
-            notification.open({
-                message: 'Error',
-                description: 'The reason maximum size is 2',
-                duration: 2,
-            });
-            return;
-        }
-        data = data.concat({id: -1,submit:false})
-        //this.state.current_item.err_data = data
+    deleteRecord = (item, index) => {
+        const listData = this.state.newDataList;
+        listData.splice(index, 1);
         this.setState({
-            current_err_data: data,
+            newDataList: this.state.newDataList
         });
-    }
+    };
 
-    onErrRemove = (data, index) => {
-        if (data.length === 1) {
-            notification.open({
-                message: 'Error',
-                description: 'The reason minimum size is 1',
-                duration: 2,
-            });
-            return;
-        }
-        data.splice(index, 1)
-        this.setState({
-            current_err_data: data,
-        });
-    }
 
     onSubmit = () => {
         //set content
-        var sure_content = ""
-        let lineNumber = 0;
-        for (let item of this.state.listData) {
-            lineNumber++
-            if (item.action == null && !item.new_add) {
+        let sure_content = "";
+        for (let entityCategories of this.state.entitiesCategories) {
+            if (entityCategories.action < 0) {
                 notification.open({
                     message: 'Error',
-                    description: 'mis instance',
-                    duration: 2,
+                    description: 'Please annotation ' + entityCategories.entity + '!',
+                    duration: 4,
                 });
-                return
+                return;
             }
-            if (item.new_add) {
-                sure_content += "<p>" + 'New Mention: ' + item.entity + "&nbsp&nbsp is an instance of &nbsp&nbsp" + item.category + "</p>"
+
+            if (entityCategories.action == 1 && entityCategories.errData[0].submit !== true) {
+                notification.open({
+                    message: 'Error',
+                    description: 'Please submit ' + entityCategories.entity + '!',
+                    duration: 4,
+                });
+                return;
+            }
+            if (entityCategories.action == 2) {
+                sure_content += "<p><font color='pink' size='4'>" + entityCategories.entity + "&nbsp&nbsp is not an entity" + "</font></p>";
             } else {
-                sure_content += "<p>" + "<font color='pink' size='4'>" + item.entity + "</font>" + "&nbsp&nbsp is an instance of &nbsp&nbsp" + "<font color='pink' size='4'>" + item.category + "</font>" + ":" + "<font color='red' size='4'>" + (item.action == 0) + "</font>" + "</p>"
-                if (item.action != 0 && item.err_data.length > 0) {
-                    for (let errorReason of item.err_data) {
-                        if (errorReason.submit !== true) {
-                            notification.open({
-                                message: 'Error',
-                                description: 'Please submit line ' + lineNumber + '!',
-                                duration: 4,
-                            });
-                            return;
-                        }
-                        sure_content += "<p>"
-                        if (errorReason.type == 1) {
-                            sure_content += "&nbsp&nbsp&nbsp&nbsp Entity is wrong,correct entity name:" + "<font color=orange>" + errorReason.entity_name + "</font>"
-                        } else if (errorReason.type == 2) {
-                            sure_content += "&nbsp&nbsp&nbsp&nbsp Category is wrong,correct category name:" + "<font color=orange>" + errorReason.category_name + "</font>"
-                        }
-                        sure_content += "</p>"
+                if (entityCategories.action == 0) {
+                    sure_content += "<p><font color='pink' size='4'>" + entityCategories.entity + "&nbsp&nbsp is correct" + "</font></p>";
+                }
+                if (entityCategories.action == 1) {
+                    sure_content += "<p><font color='pink' size='4'>" + entityCategories.entity + "&nbsp&nbsp wrong,correct:" + "<font color=orange>" + entityCategories.errData[0].entityName + "</font>" + "</p>";
+                }
+                for (let item of entityCategories.listData) {
+                    if (item.action == null) {
+                        notification.open({
+                            message: 'Error',
+                            description: 'mis instance',
+                            duration: 2,
+                        });
+                        return
                     }
+                    if (item.action != 0) {
+                        for (let errorReason of item.errData) {
+                            if (errorReason.submit !== true) {
+                                notification.open({
+                                    message: 'Error',
+                                    description: 'Please submit' + item.category + '!',
+                                    duration: 4,
+                                });
+                                return;
+                            }
+                            sure_content += "<p>" + "&nbsp&nbsp&nbsp&nbsp" + "<font color='pink' size='4'>" + item.category + "&nbsp&nbsp wrong,correct:" + "<font color=orange>" + errorReason.categoryName + "</font>" + "</p>";
+                        }
+                    } else {
+                        sure_content += "<p>" + "&nbsp&nbsp&nbsp&nbsp" + "<font color='pink' size='4'>" + item.category + "&nbsp&nbsp is correct" + "</font></p>"
+                    }
+
                 }
             }
+
         }
+
+
+        for (let item of this.state.newDataList) {
+            sure_content += "<p>" + 'New Mention: ' + item.entity + "&nbsp&nbsp is an instance of &nbsp&nbsp" + item.category + "</p>"
+        }
+
+
         this.setState({
             modalVisible: true,
             sure_content: sure_content
         });
-    }
+    };
 
     onAddNewEntity = () => {
         this.setState({
@@ -157,7 +130,7 @@ class NERAnnotionItem extends Component {
             optionItems: this.state.tokenData,
             addNewMetationModel: true
         })
-    }
+    };
 
     onAddNewCategory = () => {
         this.setState({
@@ -166,56 +139,49 @@ class NERAnnotionItem extends Component {
             optionItems: this.state.entityData,
             addNewMetationModel: true,
         })
-    }
+    };
 
     modalHandleOk = () => {
-        console.log(this.state.listData);
-        let valid = true;
-        let feedback = [];
-        let lineNumber = 0;
-        for (let item of this.state.listData) {
-            let errorReasons = [];
-            lineNumber++;
-            if (item.action != 0) {
-                for (let errorReason of item.err_data) {
-                    if (errorReason.type == 1) {
-                        if (errorReason.entity_name === item.entity) {
-                            valid = false;
-                            notification.open({
-                                message: 'Error',
-                                description: 'Please enter the right entity!',
-                                duration: 4,
-                            });
-                            return;
-                        }
-                        errorReasons.push({
-                            "code": errorReason.type,
-                            "msg": errorReason.entity_name
+        let feedbackList = [];
+        let addList = [];
+        for (let entityCategories of this.state.entitiesCategories) {
+            if (entityCategories.action == 2) {
+                feedbackList.push({
+                    "id": entityCategories.id,
+                    "origEntity": entityCategories.entity,
+                    "entityResult": entityCategories.action
+                });
+            } else {
+                let categoryFeedBack = [];
+                for (let item of entityCategories.listData) {
+                    if (item.action != 0) {
+                        categoryFeedBack.push({
+                            "origCategory": item.category,
+                            "isCorrect": false,
+                            "correctCategory": item.errData[0].categoryName,
                         })
-                    } else if (errorReason.type == 2) {
-                        errorReasons.push({
-                            "code": errorReason.type,
-                            "msg": errorReason.category_name
+                    } else {
+                        categoryFeedBack.push({
+                            "origCategory": item.category,
+                            "isCorrect": true,
                         })
-                    }else {
-                        valid = false;
-                        notification.open({
-                            message: 'Error',
-                            description: 'The error reason is empty in triple ' + lineNumber + '!',
-                            duration: 4,
-                        });
-                        return;
                     }
+
                 }
+                feedbackList.push({
+                    "id": entityCategories.id,
+                    "origEntity": entityCategories.entity,
+                    "correctEntity": entityCategories.errData[0].entityName,
+                    "entityResult": entityCategories.action,
+                    "typesResult": categoryFeedBack
+                });
             }
-            feedback.push({
-                "entityCategoryId": item.id,
-                "origCategory": item.category,
-                "origEntity": item.entity,
-                "isCorrect": item.action == 0,
-                "errorReasons": errorReasons,
-                "isNew": item.new_add
-            })
+        }
+        for (let item of this.state.newDataList) {
+            addList.push({
+                "category": item.category,
+                "entity": item.entity,
+            });
         }
 
 
@@ -223,10 +189,8 @@ class NERAnnotionItem extends Component {
             modalVisible: false,
         });
 
-        if (valid) {
-            this.postFeedback(feedback)
-        }
-    }
+        this.postFeedback({feedback: feedbackList, add: addList})
+    };
 
     postFeedback = (feedback) => {
         const url = "http://54.169.250.197:8888/ap/sentence/feedback";
@@ -263,13 +227,13 @@ class NERAnnotionItem extends Component {
                 message.error("network error");
             }
         })
-    }
+    };
 
     modalHandleCancel = () => {
         this.setState({
             modalVisible: false,
         });
-    }
+    };
 
     getNext = () => {
         const url = "http://54.169.250.197:8888/ap/sentence/next";
@@ -300,13 +264,13 @@ class NERAnnotionItem extends Component {
         })
 
 
-    }
+    };
 
     updateListData = (responseData) => {
-        console.log(responseData)
+        console.log(responseData);
         let mentionMap = new Map();
-        let listData = [];
         let entityData = [];
+        let entityCategories = [];
         for (let i = 0; i < responseData.mentions.length; i++) {
             let newMention = responseData.mentions[i];
             let oldMention = mentionMap.get(newMention.start);
@@ -327,15 +291,23 @@ class NERAnnotionItem extends Component {
             }
 
             let types = newMention.types;
+            let listData = [];
             for (let j = 0; j < types.length; j++) {
                 listData.push({
                     id: newMention.mention_id,
                     entity: entityName,
                     category: types[j],
                     action: null, //0正确 1错误
-                    err_data: [{"id": 0}]
+                    errData: [{"id": 0, submit: false, type: "2"}]
                 })
             }
+            entityCategories.push({
+                id: newMention.mention_id,
+                entity: entityName,
+                listData: listData,
+                action: -1,
+                errData: [{"id": 0, submit: false, type: "1"}]
+            })
         }
 
         let entitySet = new Set(entityData);
@@ -369,7 +341,7 @@ class NERAnnotionItem extends Component {
         }
 
         this.setState({
-            listData: listData,
+            entitiesCategories: entityCategories,
             entityData: entityData,
             tokenData: tokenData,
             text: text,
@@ -410,31 +382,33 @@ class NERAnnotionItem extends Component {
                 message.error("network error");
             }
         })
-    }
+    };
 
-    AddMentionRequest = (entity, categorys,addNewEntity) => {
+    AddMentionRequest = (entity, categorys, addNewEntity) => {
 
-        const listData = this.state.listData;
+        const listData = this.state.newDataList;
         let entityDataSet = new Set(this.state.entityData);
         entityDataSet.add({
-            name:entity
+            name: entity
         });
         let nameCategorySet = new Set();
-        for (let item of this.state.listData) {
-            if (item.entity.trim() === entity.trim() && addNewEntity){
-                notification.open({
-                    message: 'Error',
-                    description: 'Can not add an existing entity',
-                    duration: 4,
-                });
-                return
+        for (let entityCategory  of this.state.entitiesCategories) {
+            for (let item of entityCategory.listData) {
+                if (item.entity.trim() === entity.trim() && addNewEntity) {
+                    notification.open({
+                        message: 'Error',
+                        description: 'Can not add an existing entity',
+                        duration: 4,
+                    });
+                    return
+                }
+                nameCategorySet.add(item.entity.trim() + item.category.trim())
             }
-            nameCategorySet.add(item.entity.trim() + item.category.trim())
         }
 
         for (let category of categorys) {
             category = category.trim()
-            if (nameCategorySet.has(entity + category)){
+            if (nameCategorySet.has(entity + category)) {
                 notification.open({
                     message: 'Error',
                     description: 'The category is already existed',
@@ -446,14 +420,14 @@ class NERAnnotionItem extends Component {
                 entity: entity,
                 category: category,
                 action: null, //0正确 1错误
-                err_data: [{"id": 0}],
+                errData: [{"id": 0}],
                 new_add: true
             });
         }
         this.setState({
-            listData: listData,
+            newDataList: listData,
             addNewMetationModel: false,
-            entityData:Array.from(entityDataSet)
+            entityData: Array.from(entityDataSet)
         })
 
     };
@@ -465,21 +439,27 @@ class NERAnnotionItem extends Component {
     };
 
     render() {
-        const {listData, error_drawer_visible, current_err_data, modalVisible, loginVisible, current_item, sure_content, addNewMetationModel} = this.state;
-        const addBtn = <div style={{
-            marginTop: 12, lineHeight: '32px',
-        }}
-        >
-            <Row gutter={16} style={{textAlign: 'center', padding: 20}}>
-                <Button type="dashed" onClick={this.onAddNewEntity} style={{width: '30%'}}>
-                    <Icon type="plus"/> <strong><font size="4">Add New Entity</font></strong>
-                </Button>
-                <Button type="dashed" onClick={this.onAddNewCategory} style={{width: '30%'}}>
-                    <Icon type="plus"/> <strong><font size="4">Add New Category</font></strong>
-                </Button>
-            </Row>
-            <br/>
-        </div>
+        const {entitiesCategories, modalVisible, loginVisible, sure_content, addNewMetationModel, newDataList} = this.state;
+
+        const newDataListView = newDataList.length > 0 ?
+            <List
+                style={{marginTop: 10}}
+                bordered
+                size="large"
+                dataSource={newDataList}
+                itemLayout="horizontal"
+                split="false"
+                renderItem={(item, index) => (
+                    <List.Item
+                        actions={[<Icon type="delete" onClick={() => {
+                            this.deleteRecord(item, index)
+                        }}/>]}
+                    >
+                        <List.Item.Meta
+                            description={<NEREntityItem data={item} index={index} showEntity={true}/>}/>
+                    </List.Item>
+                )}
+            /> : "";
 
         return (
             <div style={{
@@ -505,37 +485,40 @@ class NERAnnotionItem extends Component {
                     style={{marginTop: 100}}
                     bordered
                     size="large"
-                    dataSource={listData}
+                    dataSource={entitiesCategories}
                     itemLayout="horizontal"
                     split="false"
-                    loadMore={addBtn}
                     renderItem={(item, index) => (
-                        <List.Item
-                            actions={item.new_add ? [<Icon type="delete" onClick={() => {
-                                this.deleteRecord(item, index)
-                            }}/>] : [
-                                <Icon type="like" theme={item.action === 0 ? 'filled' : 'outlined'}
-                                      onClick={() => {
-                                          this.like(item)
-                                      }}/>,
-                                <Icon type="dislike" theme={item.action === 1 ? 'filled' : 'outlined'}
-                                      onClick={() => {
-                                          this.dislike(item)
-                                      }}/>]}
-                        >
+                        <List.Item>
                             <List.Item.Meta
-                                description={<NEREntityItem data={item} index={index}/>}/>
+                                description={<NEREntityList data={item} index={index} text={this.state.textOrg}
+                                                            refreshList={this.refreshList.bind(this)}/>}/>
                         </List.Item>
                     )}
-
                 />
 
-                <NEREntityError onClose={this.onClose} visible={error_drawer_visible}
-                                errData={current_err_data} onSubmit={this.onErrSubmit} onErrAdd={this.onErrAdd}
-                                onErrRemove={this.onErrRemove} item={current_item} text={this.state.textOrg}
-                />
+                {newDataListView}
+
+                <div style={{
+                    marginTop: 12, lineHeight: '32px',
+                }}
+                >
+                    <Row gutter={16} style={{textAlign: 'center', padding: 20}}>
+                        <Button type="dashed" onClick={this.onAddNewEntity} style={{width: '30%'}}>
+                            <Icon type="plus"/> <strong><font size="4">Add New Entity</font></strong>
+                        </Button>
+                        <Button type="dashed" onClick={this.onAddNewCategory} style={{width: '30%'}}>
+                            <Icon type="plus"/> <strong><font size="4">Add New Category</font></strong>
+                        </Button>
+                    </Row>
+                    <br/>
+                </div>
 
                 <Modal
+                    style={{
+                        minHeight: 800,
+                        minWidth: 800
+                    }}
                     title="Sure?"
                     visible={modalVisible}
                     onOk={this.modalHandleOk}
