@@ -388,13 +388,16 @@ class NERAnnotionItem extends Component {
     AddMentionRequest = (entity, categorys, addNewEntity) => {
 
         const listData = this.state.newDataList;
-        let entityDataSet = new Set(this.state.entityData);
-        console.log(entityDataSet);
-        console.log(entity);
-        entityDataSet.add({
-            name: entity
-        });
-        console.log(entityDataSet);
+        let entityNameSet = new Set();
+        let entityDataList = [];
+        for (let entityData of this.state.entityData){
+            entityNameSet.add(entityData.name)
+        }
+        for (let entityName of entityNameSet){
+            entityDataList.push({
+                name: entityName
+            });
+        }
         let nameCategorySet = new Set();
         for (let entityCategory  of this.state.entitiesCategories) {
             for (let item of entityCategory.listData) {
@@ -431,7 +434,7 @@ class NERAnnotionItem extends Component {
         this.setState({
             newDataList: listData,
             addNewMetationModel: false,
-            entityData: Array.from(entityDataSet)
+            entityData: entityDataList
         })
 
     };

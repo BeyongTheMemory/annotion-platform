@@ -12,8 +12,8 @@ global.constants = {
                 disabled: true,
                 children: [
                     {
-                        title: 'Grains',
-                        value: 'Grains',
+                        title: 'Cereal grains',
+                        value: 'Cereal grains',
                         key: '0-1-1-1'
                     },
                     {
@@ -22,8 +22,8 @@ global.constants = {
                         key: '0-1-1-2'
                     },
                     {
-                        title: 'Manufactured multi-ingredient cereal products',
-                        value: 'Manufactured multi-ingredient cereal products',
+                        title: 'Manufactured cereal products',
+                        value: 'Manufactured cereal products',
                         key: '0-1-1-3'
                     },
                     {
@@ -83,54 +83,39 @@ global.constants = {
                 disabled: true,
                 children: [
                     {
-                        title: 'Vegetable juice',
-                        value: 'Vegetable juice',
-                        key: '0-1-3-1'
-                    },
-                    {
                         title: 'Fruiting vegetables',
                         value: 'Fruiting vegetables',
-                        key: '0-1-3-2'
-                    },
-                    {
-                        title: 'Brassica',
-                        value: 'Brassica',
-                        key: '0-1-3-3'
+                        key: '0-1-3-1'
                     },
                     {
                         title: 'Leaf vegetables',
                         value: 'Leaf vegetables',
-                        key: '0-1-3-4'
+                        key: '0-1-3-2'
                     },
                     {
                         title: 'Miniature versions of vegetables',
                         value: 'Miniature versions of vegetables',
-                        key: '0-1-3-5'
+                        key: '0-1-3-3'
                     },
                     {
                         title: 'Root and tuber vegetables',
                         value: 'Root and tuber vegetables',
-                        key: '0-1-3-6'
-                    },
-                    {
-                        title: 'Sea vegetables',
-                        value: 'Sea vegetables',
-                        key: '0-1-3-7'
+                        key: '0-1-3-4'
                     },
                     {
                         title: 'Stalk and stem vegetables',
                         value: 'Stalk and stem vegetables',
-                        key: '0-1-3-8'
+                        key: '0-1-3-5'
                     },
                     {
                         title: 'Herbs and Spices',
                         value: 'Herbs and Spices',
-                        key: '0-1-3-9'
+                        key: '0-1-3-6'
                     },
                     {
                         title: 'Others(Vegetables)',
                         value: 'Others(Vegetables)',
-                        key: '0-1-3-10'
+                        key: '0-1-3-7'
                     }
                 ]
             },
@@ -174,8 +159,8 @@ global.constants = {
                 disabled: true,
                 children: [
                     {
-                        title: 'Fruit drinks',
-                        value: 'Fruit drinks',
+                        title: 'Citrus fruits',
+                        value: 'Citrus fruits',
                         key: '0-1-5-1'
                     },
                     {
@@ -265,24 +250,29 @@ global.constants = {
                         key: '0-1-7-4'
                     },
                     {
-                        title: 'Aquatic animal products',
-                        value: 'Aquatic animal products',
+                        title: 'Aquatic animal',
+                        value: 'Aquatic animal',
                         key: '0-1-7-5'
+                    },
+                    {
+                        title: 'Crustaceans',
+                        value: 'Crustaceans',
+                        key: '0-1-7-6'
                     },
                     {
                         title: 'Canned meat',
                         value: 'Canned meat',
-                        key: '0-1-7-6'
+                        key: '0-1-7-7'
                     },
                     {
                         title: 'Dried meat or dried fish',
                         value: 'Dried meat or dried fish',
-                        key: '0-1-7-7'
+                        key: '0-1-7-8'
                     },
                     {
                         title: 'Others(Meat)',
                         value: 'Others(Meat)',
-                        key: '0-1-7-8'
+                        key: '0-1-7-9'
                     }
                 ]
             },
@@ -293,8 +283,8 @@ global.constants = {
                 disabled: true,
                 children: [
                     {
-                        title: 'Cookies',
-                        value: 'Cookies',
+                        title: 'Cookies and biscuits',
+                        value: 'Cookies and biscuits',
                         key: '0-1-8-1'
                     },
                     {
@@ -313,57 +303,47 @@ global.constants = {
                         key: '0-1-8-4'
                     },
                     {
+                        title: 'Chips and fries',
+                        value: 'Chips and fries',
+                        key: '0-1-8-5'
+                    },
+                    {
                         title: 'Others(Snacks)',
                         value: 'Others(Snacks)',
-                        key: '0-1-8-5'
+                        key: '0-1-8-6'
                     }
                 ]
             },
             {
-                title: 'Instant Foods',
-                value: 'Instant Foods',
+                title: 'Fast Foods',
+                value: 'Fast Foods',
                 key: '0-1-9',
                 disabled: true,
                 children: [
                     {
-                        title: 'American Chinese cuisine',
-                        value: 'American Chinese cuisine',
-                        key: '0-1-9-1'
-                    },
-                    {
                         title: 'Sandwiches',
                         value: 'Sandwiches',
-                        key: '0-1-9-2'
+                        key: '0-1-9-1'
                     },
                     {
                         title: 'Hamburgers (food)',
                         value: 'Hamburgers (food)',
-                        key: '0-1-9-3'
+                        key: '0-1-9-2'
                     },
                     {
                         title: 'Hot dogs',
                         value: 'Hot dogs',
-                        key: '0-1-9-4'
-                    },
-                    {
-                        title: 'Fast food brand',
-                        value: 'Fast food brand',
-                        key: '0-1-9-5'
+                        key: '0-1-9-3'
                     },
                     {
                         title: 'Pizza',
                         value: 'Pizza',
-                        key: '0-1-9-6'
+                        key: '0-1-9-4'
                     },
                     {
-                        title: 'Street food',
-                        value: 'Street food',
-                        key: '0-1-9-7'
-                    },
-                    {
-                        title: 'Others(Instant Foods)',
-                        value: 'Others(Instant Foods)',
-                        key: '0-1-9-8'
+                        title: 'Others(Fast Foods)',
+                        value: 'Others(Fast Foods)',
+                        key: '0-1-9-5'
                     }
                 ]
             },
@@ -374,8 +354,8 @@ global.constants = {
                 disabled: true,
                 children: [
                     {
-                        title: 'Non-alcoholic mixed drinks',
-                        value: 'Non-alcoholic mixed drinks',
+                        title: 'Vegetable juice',
+                        value: 'Vegetable juice',
                         key: '0-1-10-1'
                     },
                     {
@@ -389,8 +369,8 @@ global.constants = {
                         key: '0-1-10-3'
                     },
                     {
-                        title: 'Juice',
-                        value: 'Juice',
+                        title: 'Fruit drinks',
+                        value: 'Fruit drinks',
                         key: '0-1-10-4'
                     },
                     {
@@ -399,8 +379,8 @@ global.constants = {
                         key: '0-1-10-5'
                     },
                     {
-                        title: 'Soft drinks',
-                        value: 'Soft drinks',
+                        title: 'Plant milk',
+                        value: 'Plant milk',
                         key: '0-1-10-6'
                     },
                     {
@@ -419,14 +399,24 @@ global.constants = {
                         key: '0-1-10-9'
                     },
                     {
+                        title: 'Carbonated drinks',
+                        value: 'Carbonated drinks',
+                        key: '0-1-10-10'
+                    },
+                    {
+                        title: 'Chocolate drinks‎',
+                        value: 'Chocolate drinks‎',
+                        key: '0-1-10-11'
+                    },
+                    {
                         title: 'Alcoholic_drinks‎',
                         value: 'Alcoholic_drinks‎',
-                        key: '0-1-10-10'
+                        key: '0-1-10-12'
                     },
                     {
                         title: 'Others(Beverages)',
                         value: 'Others(Beverages)',
-                        key: '0-1-10-11'
+                        key: '0-1-10-13'
                     }
                 ]
             },
@@ -442,9 +432,14 @@ global.constants = {
                         key: '0-1-11-1'
                     },
                     {
+                        title: 'Sugar',
+                        value: 'Sugar',
+                        key: '0-1-11-2'
+                    },
+                    {
                         title: 'Sugar substitutes',
                         value: 'Sugar substitutes',
-                        key: '0-1-11-2'
+                        key: '0-1-11-3'
                     },
                     {
                         title: 'Others(Sweets)',
@@ -460,34 +455,29 @@ global.constants = {
                 disabled: true,
                 children: [
                     {
-                        title: 'Cooking oils',
-                        value: 'Cooking oils',
+                        title: 'Vegetable oils',
+                        value: 'Vegetable oils',
                         key: '0-1-12-1'
                     },
                     {
-                        title: 'Vegetable oils',
-                        value: 'Vegetable oils',
+                        title: 'Animal fats and oils',
+                        value: 'Animal fats and oils',
                         key: '0-1-12-2'
-                    },
-                    {
-                        title: 'Animal fats‎',
-                        value: 'Animal fats‎',
-                        key: '0-1-12-3'
                     },
                     {
                         title: 'Butter',
                         value: 'Butter',
-                        key: '0-1-12-4'
+                        key: '0-1-12-3'
                     },
                     {
                         title: 'Fat substitutes',
                         value: 'Fat substitutes',
-                        key: '0-1-12-5'
+                        key: '0-1-12-4'
                     },
                     {
                         title: 'Others(Fats and Oils)',
                         value: 'Others(Fats and Oils)',
-                        key: '0-1-12-6'
+                        key: '0-1-12-5'
                     }
                 ]
             },
@@ -498,44 +488,34 @@ global.constants = {
                 disabled: true,
                 children: [
                     {
-                        title: 'Sauces',
-                        value: 'Sauces',
+                        title: 'Sauces_and_paste',
+                        value: 'Sauces_and_paste',
                         key: '0-1-13-1'
-                    },
-                    {
-                        title: 'Butter',
-                        value: 'Butter',
-                        key: '0-1-13-2'
                     },
                     {
                         title: 'Jams and jellies',
                         value: 'Jams and jellies‎',
+                        key: '0-1-13-2'
+                    },
+                    {
+                        title: 'Pickled fruit or vegetables',
+                        value: 'Pickled fruit or vegetables',
                         key: '0-1-13-3'
-                    },
-                    {
-                        title: 'Pickles',
-                        value: 'Pickles',
-                        key: '0-1-13-4'
-                    },
-                    {
-                        title: 'Saladdressings',
-                        value: 'Saladdressings',
-                        key: '0-1-13-5'
                     },
                     {
                         title: 'Edible salt',
                         value: 'Edible salt',
-                        key: '0-1-13-6'
+                        key: '0-1-13-4'
                     },
                     {
                         title: 'Vinegar',
                         value: 'Vinegar',
-                        key: '0-1-13-7'
+                        key: '0-1-13-5'
                     },
                     {
                         title: 'Others(Condiments)',
                         value: 'Others(Condiments)',
-                        key: '0-1-13-8'
+                        key: '0-1-13-6'
                     }
                 ]
             },
@@ -594,34 +574,29 @@ global.constants = {
                         key: '0-1-15-4'
                     },
                     {
-                        title: 'Beef dishes',
-                        value: 'Beef dishes',
+                        title: 'Mammal meat dishes',
+                        value: 'Mammal meat dishes',
                         key: '0-1-15-5'
-                    },
-                    {
-                        title: 'Pork dishes',
-                        value: 'Pork dishes',
-                        key: '0-1-15-6'
                     },
                     {
                         title: 'Egg dishes',
                         value: 'Egg dishes',
+                        key: '0-1-15-6'
+                    },
+                    {
+                        title: 'Poultry meat dishes',
+                        value: 'Poultry meat dishes',
                         key: '0-1-15-7'
                     },
                     {
-                        title: 'Poultry dishes',
-                        value: 'Poultry dishes',
+                        title: 'Seafood meat dishes',
+                        value: 'Seafood meat dishes',
                         key: '0-1-15-8'
-                    },
-                    {
-                        title: 'Seafood dishes',
-                        value: 'Seafood dishes',
-                        key: '0-1-15-9'
                     },
                     {
                         title: 'Others(Dishes)',
                         value: 'Others(Dishes)',
-                        key: '0-1-15-10'
+                        key: '0-1-15-9'
                     }
                 ]
             },
@@ -638,202 +613,49 @@ global.constants = {
         disabled: true,
         children: [
             {
-                title: 'Energy',
-                value: 'Energy',
-                key: '0-2-1'
-            },
-            {
                 title: 'Carbohydrate',
                 value: 'Carbohydrate',
-                key: '0-2-2'
+                key: '0-2-1'
             },
             {
                 title: 'Lipid',
                 value: 'Lipid',
-                key: '0-2-3'
+                key: '0-2-2'
             },
             {
                 title: 'Protein',
                 value: 'Protein',
-                key: '0-2-4'
-            },
-            {
-                title: 'Water',
-                value: 'Water',
-                key: '0-2-5'
+                key: '0-2-3'
             },
             {
                 title: 'Ash',
                 value: 'Ash',
-                key: '0-2-6'
+                key: '0-2-4'
             },
             {
                 title: 'Vitamin',
                 value: 'Vitamin',
-                key: '0-2-7'
+                key: '0-2-5'
             },
             {
                 title: 'Dietary Fiber',
                 value: 'Dietary Fiber',
-                key: '0-2-8'
+                key: '0-2-6'
             },
             {
                 title: 'Chemical Substances',
                 value: 'Chemical Substances',
-                key: '0-2-9'
+                key: '0-2-7'
             },
             {
                 title: 'Others(Nutrients)',
                 value: 'Others(Nutrients)',
-                key: '0-2-10'
+                key: '0-2-8'
             }
         ]
-    }, {
-        title: 'Diseases',
-        value: 'Diseases',
-        key: '0-3',
-        disabled: true,
-        children: [
-            {
-                title: 'Genetic disorders by system',
-                value: 'Genetic disorders by system',
-                key: '0-3-1'
-            },
-            {
-                title: 'Syndromes by affected organ',
-                value: 'Syndromes by affected organ',
-                key: '0-3-2'
-            },
-            {
-                title: 'Blood disorders',
-                value: 'Blood disorders',
-                key: '0-3-3'
-            },
-            {
-                title: 'Breast diseases',
-                value: 'Breast diseases',
-                key: '0-3-4'
-            },
-            {
-                title: 'Cardiovascular diseases',
-                value: 'Cardiovascular diseases',
-                key: '0-3-5'
-            },
-            {
-                title: 'Cutaneous conditions',
-                value: 'Cutaneous conditions',
-                key: '0-3-6'
-            },
-            {
-                title: 'Digestive diseases',
-                value: 'Digestive diseases',
-                key: '0-3-7'
-            },
-            {
-                title: 'Diseases of the ear and mastoid process',
-                value: 'Diseases of the ear and mastoid process',
-                key: '0-3-8'
-            },
-            {
-                title: 'Endocrine, nutritional and metabolic diseases',
-                value: 'Endocrine, nutritional and metabolic diseases',
-                key: '0-3-9'
-            },
-            {
-                title: 'Diseases of the eye and adnexa',
-                value: 'Diseases of the eye and adnexa',
-                key: '0-3-10'
-            },
-            {
-                title: 'Foot diseases',
-                value: 'Foot diseases',
-                key: '0-3-11'
-            },
-            {
-                title: 'Genitourinary system diseases',
-                value: 'Genitourinary system diseases',
-                key: '0-3-12'
-            },
-            {
-                title: 'Hair diseases',
-                value: 'Hair diseases',
-                key: '0-3-13'
-            },
-            {
-                title: 'Immune system disorders',
-                value: 'Immune system disorders',
-                key: '0-3-14'
-            },
-            {
-                title: 'Musculoskeletal disorders',
-                value: 'Musculoskeletal disorders',
-                key: '0-3-15'
-            },
-            {
-                title: 'Neurological disorders',
-                value: 'Neurological disorders',
-                key: '0-3-16'
-            },
-            {
-                title: 'Orthopedic problems',
-                value: 'Orthopedic problems',
-                key: '0-3-17'
-            },
-            {
-                title: 'Respiratory diseases',
-                value: 'Respiratory diseases',
-                key: '0-3-18'
-            },
-            {
-                title: 'Sexual disorders',
-                value: 'Sexual disorders',
-                key: '0-3-19'
-            },
-            {
-                title: 'Voice disorders',
-                value: 'Voice disorders',
-                key: '0-3-20'
-            },
-            {
-                title: 'Others(Diseases)',
-                value: 'Others(Diseases)',
-                key: '0-3-21'
-            }
-        ]
-    }, {
-        title: 'Life style',
-        value: 'Life style',
-        key: '0-4',
-        disabled: true,
-        children: [
-            {
-                title: 'Diets',
-                value: 'Diets',
-                key: '0-4-1'
-            },
-            {
-                title: 'Physical exercise',
-                value: 'Physical exercise',
-                key: '0-4-2'
-            },
-            {
-                title: 'Others(Life style)',
-                value: 'Others(Life style)',
-                key: '0-4-3'
-            }
-        ]
-    },
-        {
-            title: 'Person',
-            value: 'Person',
-            key: '1',
-        }, {
-            title: 'Others',
-            value: 'Others',
-            key: '2',
-        }, {
-            title: 'Blank',
-            value: 'Blank',
-            key: '3',
-        }],
+    },  {
+        title: 'Wrong',
+        value: 'Wrong',
+        key: '1',
+    }],
 };
