@@ -399,7 +399,6 @@ class NERAnnotionItem extends Component {
                 name: entityName
             });
         }
-        console.log(entityDataList);
         let nameCategorySet = new Set();
         for (let entityCategory  of this.state.entitiesCategories) {
             for (let item of entityCategory.listData) {
@@ -414,9 +413,10 @@ class NERAnnotionItem extends Component {
                 nameCategorySet.add(item.entity.trim() + item.category.trim())
             }
         }
+        console.log(listData);
 
         for (let category of categorys) {
-            category = category.trim()
+            category = category.trim();
             if (nameCategorySet.has(entity + category)) {
                 notification.open({
                     message: 'Error',
@@ -433,6 +433,7 @@ class NERAnnotionItem extends Component {
                 new_add: true
             });
         }
+
         this.setState({
             newDataList: listData,
             addNewMetationModel: false,
