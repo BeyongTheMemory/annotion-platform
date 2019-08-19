@@ -24,14 +24,14 @@ class NEREntityItem extends Component {
             }
         }
 
-        const entityView = this.props.showEntity?   <strong><font color='#d9b26f' size="4">{this.props.data.entity}</font></strong> :"";
+        const entityView = this.props.showEntity?   <strong><font color='#a05c63f' size="4">{this.props.data.entity}</font></strong> :"";
 
         return (
             <div style={{textAlign: 'left'}}>
                 {entityView}
                 <strong>
                     <font size="4"> is an instance of </font>
-                    <font color="#a05c63" size="4">{this.props.data.category}</font>
+                    <font color="#d9b26f" size="4">{this.props.data.category}</font>
                     {trueCategory}
                 </strong>
             </div>
