@@ -74,7 +74,7 @@ class NEREntityList extends Component {
         }
         let urlEntity ;
         {
-            let url = "https://en.wikipedia.org/wiki/entity_name" + this.props.data.entity;
+            let url = "https://en.wikipedia.org/wiki/" + this.props.data.entity;
             urlEntity = <a href={url} size="4" target="_blank">{this.props.data.entity}</a>
         }
         return (
