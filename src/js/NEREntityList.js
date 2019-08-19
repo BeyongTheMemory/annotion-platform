@@ -41,11 +41,11 @@ class NEREntityList extends Component {
     }
 
     errEntity = (item) => {
-        item.errData = [{"id": 0, submit: true, type: "1", entityName: "Others"}];
+        item.errData = [{"id": 0, submit: true, type: "1", entityName: "Useless"}];
         item.action = 2;
         for (let dataItem of item.listData) {
             dataItem.action = 1;
-            dataItem.errData = [{"id": 0, submit: true, type: "1", entityName: "Others"}];
+            dataItem.errData = [{"id": 0, submit: true, type: "1", entityName: "Useless"}];
         }
         this.props.refreshList();
     };
