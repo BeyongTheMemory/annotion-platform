@@ -328,7 +328,7 @@ class NERAnnotionItem extends Component {
         for (let i = 0; i < responseData.tokens.length; i++) {
             if (mention == null && mentionMap.get(i) != null) {
                 mention = mentionMap.get(i)
-                text += "<font color=#4c9bc3>"
+                text += "<font color=#526c99>"
             }
             text += responseData.tokens[i] + " ";
             if (mention != null && mention.end === i + 1) {
