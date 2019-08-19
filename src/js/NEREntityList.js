@@ -81,17 +81,17 @@ class NEREntityList extends Component {
                     <font size="3">   {this.props.data.id}   </font>
                     <font size="3">   {this.props.data.entity}   </font>
                     {trueEntity}
-                    <Icon style={{marginLeft: 10}}
+                    <Icon style={{marginLeft: 10,fontSize: '20px'}}
                           type="like" theme={this.props.data.action === 0 ? 'filled' : 'outlined'}
                           onClick={() => {
                               this.like(this.props.data)
                           }}/>
-                    <Icon style={{marginLeft: 10}}
+                    <Icon style={{marginLeft: 10,fontSize: '20px'}}
                           type="dislike" theme={this.props.data.action === 1 ? 'filled' : 'outlined'}
                           onClick={() => {
                               this.dislike(this.props.data)
                           }}/>
-                    <Icon style={{marginLeft: 10}}
+                    <Icon style={{marginLeft: 10,fontSize: '20px'}}
                           type="delete" theme={this.props.data.action === 2 ? 'filled' : 'outlined'}
                           onClick={() => {
                               this.errEntity(this.props.data)
@@ -108,7 +108,7 @@ class NEREntityList extends Component {
                     renderItem={(item, index) => (
                         <List.Item
                             actions={this.props.data.action == 2 ? [
-                                <Icon   style={{ fontSize: '20px' }} type="delete" theme={'filled'}/>
+                                <Icon  style={{ fontSize: '20px' }} type="delete" theme={'filled'}/>
                             ] : [
                                 <Icon  style={{ fontSize: '20px' }} type="like" theme={item.action === 0 ? 'filled' : 'outlined'}
                                       onClick={() => {
