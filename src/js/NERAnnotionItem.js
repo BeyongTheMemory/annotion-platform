@@ -116,7 +116,7 @@ class NERAnnotionItem extends Component {
             sure_content += "<p><font color='#b16b9f' size='4'>New Mention:</font></p>";
         }
         for (let item of this.state.newDataList) {
-            sure_content += "<p><font color='#b16b9f' size='4'>" + item.entity + "&nbsp&nbsp is an instance of &nbsp&nbsp" + item.category + "</font></p>"
+            sure_content += "<p><font color='#b16b9f' size='4'>" + item.entity + "</font><font color='#d9b26f' size='4'>" + item.category + "</font></p>"
         }
 
 
