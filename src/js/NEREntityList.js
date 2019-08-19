@@ -84,7 +84,7 @@ class NEREntityList extends Component {
 
                 <strong>
                     <font size="3">   {this.props.data.id}   </font>
-                    <font size="5" > {urlEntity}  </font>
+                    <font size="4" > {urlEntity}  </font>
                     {trueEntity}
                     <Icon style={{marginLeft: 10,fontSize: '20px'}}
                           type="like" theme={this.props.data.action === 0 ? 'filled' : 'outlined'}
