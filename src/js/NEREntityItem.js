@@ -31,7 +31,7 @@ class NEREntityItem extends Component {
                 {entityView}
                 <strong>
                     <font size="4"> is an instance of </font>
-                    <font color="pink" size="4">{this.props.data.category}</font>
+                    <font color="#a05c63" size="4">{this.props.data.category}</font>
                     {trueCategory}
                 </strong>
             </div>
