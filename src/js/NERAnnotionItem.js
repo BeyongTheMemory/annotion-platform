@@ -76,10 +76,10 @@ class NERAnnotionItem extends Component {
                 sure_content += "<p><font color=#409ef7 size='4'>" + entityCategories.entity + "</font><font color='#c16957' size='4'>&nbsp&nbsp is not an entity</font></p>";
             } else {
                 if (entityCategories.action == 0) {
-                    sure_content += "<p><font color=#409ef7 size='4'>" + entityCategories.entity + "</font><font color='#c16957' size='4'>&nbsp&nbsp is correct</font></p>";
+                    sure_content += "<p><font color=#409ef7 size='4'>" + entityCategories.entity + "</font></p>";
                 }
                 if (entityCategories.action == 1) {
-                    sure_content += "<p><font color=#409ef7 size='4'>" + entityCategories.entity + "</font><font color='#c16957' size='4'>&nbsp&nbsp wrong,revised:</font><font color='#409ef7' >" + entityCategories.errData[0].entityName + "</font></p>";
+                    sure_content += "<p><font color=#409ef7 size='4'>" + entityCategories.entity + "</font><font color='#c16957' size='4'>&nbsp&nbsp wrong,revised:</font><font color='#409ef7' size='4'>" + entityCategories.errData[0].entityName + "</font></p>";
                 }
                 for (let item of entityCategories.listData) {
                     if (item.action == null) {
@@ -100,10 +100,10 @@ class NERAnnotionItem extends Component {
                                 });
                                 return;
                             }
-                            sure_content += "<p>&nbsp&nbsp&nbsp&nbsp<font color='#d9b26f' size='4'>" + item.category + "</font><font color='#c16957' size='4'>&nbsp&nbsp wrong,revised:</font><font color='#d9b26f'>" + errorReason.categoryName + "</font></p>";
+                            sure_content += "<p>&nbsp&nbsp&nbsp&nbsp<font color='#d9b26f' size='4'>" + item.category + "</font><font color='#c16957' size='4'>&nbsp&nbsp wrong,revised:</font><font color='#d9b26f' size='4'>" + errorReason.categoryName + "</font></p>";
                         }
                     } else {
-                        sure_content += "<p>&nbsp&nbsp&nbsp&nbsp<font color='#d9b26f' size='4'>" + item.category + "</font><font color='#c16957' size='4'>&nbsp&nbsp is correct</font></p>"
+                        sure_content += "<p>&nbsp&nbsp&nbsp&nbsp<font color='#d9b26f' size='4'>" + item.category + "</font></p>"
                     }
 
                 }
@@ -112,8 +112,11 @@ class NERAnnotionItem extends Component {
         }
 
 
+        if (this.state.newDataList.length > 0){
+            sure_content += "<p><font color='#d9b26f' size='4'>New Mention:</font></p>";
+        }
         for (let item of this.state.newDataList) {
-            sure_content += "<p>" + 'New Mention: ' + item.entity + "&nbsp&nbsp is an instance of &nbsp&nbsp" + item.category + "</p>"
+            sure_content += "<p><font color='#d9b26f' size='4'>" + item.entity + "&nbsp&nbsp is an instance of &nbsp&nbsp" + item.category + "</font></p>"
         }
 
 
