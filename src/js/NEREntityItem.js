@@ -18,7 +18,7 @@ class NEREntityItem extends Component {
                         continue
                     }
                     if (errorReason.type == 2) {
-                        trueCategory =  <font color='#884e6b' size="4">({errorReason.categoryName})</font>
+                        trueCategory =  <font color='#c16957' size="4">({errorReason.categoryName})</font>
                     }
                 }
             }
