@@ -72,6 +72,11 @@ class NEREntityList extends Component {
                 trueEntity = <font color="red" size="4">({this.props.data.errData[0].entityName})</font>
             }
         }
+        let urlEntity ;
+        {
+            let url = "https://en.wikipedia.org/wiki/entity_name" + {this.props.data.entity};
+            urlEntity = <a href={url} size="4">{this.props.data.entity}</a>
+        }
         return (
 
             <div style={{textAlign: 'left'}}>
