@@ -347,7 +347,7 @@ class NERAnnotionItem extends Component {
             text: text,
             id: responseData.sentence_id,
             textOrg: Array.from(textOrg),
-            newDataList:[]
+            newDataList: []
         })
     }
 
@@ -391,15 +391,16 @@ class NERAnnotionItem extends Component {
         let entityNameSet = new Set();
         let entityDataList = [];
         entityNameSet.add(entity);
-        for (let entityData of this.state.entityData){
+        for (let entityData of this.state.entityData) {
             entityNameSet.add(entityData.name)
         }
-        for (let entityName of entityNameSet){
+        for (let entityName of entityNameSet) {
             entityDataList.push({
                 name: entityName
             });
         }
         let nameCategorySet = new Set();
+
         for (let entityCategory  of this.state.entitiesCategories) {
             for (let item of entityCategory.listData) {
                 if (item.entity.trim() === entity.trim() && addNewEntity) {
@@ -413,7 +414,10 @@ class NERAnnotionItem extends Component {
                 nameCategorySet.add(item.entity.trim() + item.category.trim())
             }
         }
-        console.log(listData);
+
+        for (let newDataItem of listData) {
+            nameCategorySet.add(newDataItem.entity.trim() + newDataItem.category.trim())
+        }
 
         for (let category of categorys) {
             category = category.trim();
