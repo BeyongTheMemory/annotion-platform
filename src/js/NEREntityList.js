@@ -110,7 +110,7 @@ class NEREntityList extends Component {
                             actions={this.props.data.action == 2 ? [
                                 <Icon type="delete" theme={'filled'}/>
                             ] : [
-                                <Icon type="like" theme={item.action === 0 ? 'filled' : 'outlined'}
+                                <Icon  style={{ fontSize: '32px' }} type="like" theme={item.action === 0 ? 'filled' : 'outlined'}
                                       onClick={() => {
                                           this.like(item)
                                       }}/>,
