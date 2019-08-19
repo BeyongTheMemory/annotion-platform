@@ -69,7 +69,7 @@ class NEREntityList extends Component {
         let trueEntity;
         {
             if (this.props.data.action != 0 && this.props.data.errData[0].submit) {
-                trueEntity = <font color="red" size="4">({this.props.data.errData[0].entityName})</font>
+                trueEntity = <font color='#884e6b' size="4">({this.props.data.errData[0].entityName})</font>
             }
         }
         let urlEntity ;
