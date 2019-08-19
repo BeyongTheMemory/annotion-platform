@@ -250,6 +250,10 @@ class NERAnnotionItem extends Component {
                 response.json().then(function (data) {
                     console.log(data);
                     if (data.code === 200) {
+                        if (data.data == null){
+                            message.error("no data");
+                            return
+                        }
                         doc.updateListData(JSON.parse(data.data.content))
                     } else if (data.code === 10001) {
                         message.error("login first")
