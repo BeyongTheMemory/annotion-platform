@@ -398,6 +398,7 @@ class NERAnnotionItem extends Component {
                 name: entityName
             });
         }
+        console.log(entityDataList);
         let nameCategorySet = new Set();
         for (let entityCategory  of this.state.entitiesCategories) {
             for (let item of entityCategory.listData) {
