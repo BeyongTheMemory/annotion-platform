@@ -390,6 +390,7 @@ class NERAnnotionItem extends Component {
         const listData = this.state.newDataList;
         let entityNameSet = new Set();
         let entityDataList = [];
+        entityNameSet.add(entity);
         for (let entityData of this.state.entityData){
             entityNameSet.add(entityData.name)
         }
