@@ -346,7 +346,8 @@ class NERAnnotionItem extends Component {
             tokenData: tokenData,
             text: text,
             id: responseData.sentence_id,
-            textOrg: Array.from(textOrg)
+            textOrg: Array.from(textOrg),
+            newDataList:[]
         })
     }
 
@@ -388,9 +389,12 @@ class NERAnnotionItem extends Component {
 
         const listData = this.state.newDataList;
         let entityDataSet = new Set(this.state.entityData);
+        console.log(entityDataSet);
+        console.log(entity);
         entityDataSet.add({
             name: entity
         });
+        console.log(entityDataSet);
         let nameCategorySet = new Set();
         for (let entityCategory  of this.state.entitiesCategories) {
             for (let item of entityCategory.listData) {
