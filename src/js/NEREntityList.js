@@ -108,13 +108,13 @@ class NEREntityList extends Component {
                     renderItem={(item, index) => (
                         <List.Item
                             actions={this.props.data.action == 2 ? [
-                                <Icon type="delete" theme={'filled'}/>
+                                <Icon   style={{ fontSize: '20px' }} type="delete" theme={'filled'}/>
                             ] : [
-                                <Icon  style={{ fontSize: '32px' }} type="like" theme={item.action === 0 ? 'filled' : 'outlined'}
+                                <Icon  style={{ fontSize: '20px' }} type="like" theme={item.action === 0 ? 'filled' : 'outlined'}
                                       onClick={() => {
                                           this.like(item)
                                       }}/>,
-                                <Icon type="dislike" theme={item.action === 1 ? 'filled' : 'outlined'}
+                                <Icon  style={{ fontSize: '20px' }} type="dislike" theme={item.action === 1 ? 'filled' : 'outlined'}
                                       onClick={() => {
                                           this.dislike(item)
                                       }}/>]}
