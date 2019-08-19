@@ -24,7 +24,7 @@ class NEREntityItem extends Component {
             }
         }
 
-        const entityView = this.props.showEntity? <font color='#c16957' size="4">{this.props.data.entity}</font> :"";
+        const entityView = this.props.showEntity?   <strong><font color='#c16957' size="4">{this.props.data.entity}</font></strong> :"";
 
         return (
             <div style={{textAlign: 'left'}}>
