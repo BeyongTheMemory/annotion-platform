@@ -73,7 +73,7 @@ class NERAnnotionItem extends Component {
                 return;
             }
             if (entityCategories.action == 2) {
-                sure_content += "<p><font color=#409ef7 size='4'>" + entityCategories.entity + "</font><font color='#c16957' size='4'>&nbsp&nbsp is not an entity</font></p>";
+                sure_content += "<p><font color=#409ef7 size='4'>" + entityCategories.entity + "</font><font color='#c16957' size='4'>&nbsp&nbsp is useless</font></p>";
             } else {
                 if (entityCategories.action == 0) {
                     sure_content += "<p><font color=#409ef7 size='4'>" + entityCategories.entity + "</font></p>";
@@ -113,10 +113,10 @@ class NERAnnotionItem extends Component {
 
 
         if (this.state.newDataList.length > 0){
-            sure_content += "<p><font color='#d9b26f' size='4'>New Mention:</font></p>";
+            sure_content += "<p><font color='#b16b9f' size='4'>New Mention:</font></p>";
         }
         for (let item of this.state.newDataList) {
-            sure_content += "<p><font color='#d9b26f' size='4'>" + item.entity + "&nbsp&nbsp is an instance of &nbsp&nbsp" + item.category + "</font></p>"
+            sure_content += "<p><font color='#b16b9f' size='4'>" + item.entity + "&nbsp&nbsp is an instance of &nbsp&nbsp" + item.category + "</font></p>"
         }
 
 
