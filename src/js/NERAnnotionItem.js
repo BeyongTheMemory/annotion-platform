@@ -73,13 +73,13 @@ class NERAnnotionItem extends Component {
                 return;
             }
             if (entityCategories.action == 2) {
-                sure_content += "<p><font color='pink' size='4'>" + entityCategories.entity + "&nbsp&nbsp is not an entity" + "</font></p>";
+                sure_content += "<p><font color=#409ef7 size='4'>" + entityCategories.entity + "</font><font color='#c16957' size='4'>&nbsp&nbsp is not an entity</font></p>";
             } else {
                 if (entityCategories.action == 0) {
-                    sure_content += "<p><font color='pink' size='4'>" + entityCategories.entity + "&nbsp&nbsp is correct" + "</font></p>";
+                    sure_content += "<p><font color=#409ef7 size='4'>" + entityCategories.entity + "</font><font color='#c16957' size='4'>&nbsp&nbsp is correct</font></p>";
                 }
                 if (entityCategories.action == 1) {
-                    sure_content += "<p><font color='pink' size='4'>" + entityCategories.entity + "&nbsp&nbsp wrong,correct:" + "<font color=orange>" + entityCategories.errData[0].entityName + "</font>" + "</p>";
+                    sure_content += "<p><font color=#409ef7 size='4'>" + entityCategories.entity + "</font><font color='#c16957' size='4'>&nbsp&nbsp wrong,revised:</font><font color='#409ef7' >" + entityCategories.errData[0].entityName + "</font></p>";
                 }
                 for (let item of entityCategories.listData) {
                     if (item.action == null) {
@@ -100,10 +100,10 @@ class NERAnnotionItem extends Component {
                                 });
                                 return;
                             }
-                            sure_content += "<p>" + "&nbsp&nbsp&nbsp&nbsp" + "<font color='pink' size='4'>" + item.category + "&nbsp&nbsp wrong,correct:" + "<font color=orange>" + errorReason.categoryName + "</font>" + "</p>";
+                            sure_content += "<p>&nbsp&nbsp&nbsp&nbsp<font color='#d9b26f' size='4'>" + item.category + "</font><font color='#c16957' size='4'>&nbsp&nbsp wrong,revised:</font><font color='#d9b26f'>" + errorReason.categoryName + "</font></p>";
                         }
                     } else {
-                        sure_content += "<p>" + "&nbsp&nbsp&nbsp&nbsp" + "<font color='pink' size='4'>" + item.category + "&nbsp&nbsp is correct" + "</font></p>"
+                        sure_content += "<p>&nbsp&nbsp&nbsp&nbsp<font color='#d9b26f' size='4'>" + item.category + "</font><font color='#c16957' size='4'>&nbsp&nbsp is correct</font></p>"
                     }
 
                 }
