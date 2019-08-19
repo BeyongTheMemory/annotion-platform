@@ -424,7 +424,7 @@ class NERAnnotionItem extends Component {
 
         for (let category of categorys) {
             category = category.trim();
-            if (nameCategorySet.has(entity + category)) {
+            if (nameCategorySet.has(entity.trim() + category.trim())) {
                 notification.open({
                     message: 'Error',
                     description: 'The category is already existed',
