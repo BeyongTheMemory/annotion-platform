@@ -112,7 +112,7 @@ class NERAnnotionItem extends Component {
         }
 
 
-        if (this.state.newDataList.length > 0){
+        if (this.state.newDataList.length > 0) {
             sure_content += "<p><font color='#b16b9f' size='4'>New Mention:</font></p>";
         }
         for (let item of this.state.newDataList) {
@@ -250,7 +250,7 @@ class NERAnnotionItem extends Component {
                 response.json().then(function (data) {
                     console.log(data);
                     if (data.code === 200) {
-                        if (data.data == null){
+                        if (data.data == null) {
                             message.error("no data");
                             return
                         }
@@ -335,7 +335,7 @@ class NERAnnotionItem extends Component {
         for (let i = 0; i < responseData.tokens.length; i++) {
             if (mention == null && mentionMap.get(i) != null) {
                 mention = mentionMap.get(i)
-                text += "<font color=#409ef7>"
+                text += "<font color=#409ef7><font color=#d9b26f>" + mention.mention_id + "</font>"
             }
             text += responseData.tokens[i] + " ";
             if (mention != null && mention.end === i + 1) {
