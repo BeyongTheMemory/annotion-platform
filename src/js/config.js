@@ -465,8 +465,8 @@ global.constants = {
                         key: '0-1-12-2'
                     },
                     {
-                        title: 'Butter',
-                        value: 'Butter',
+                        title: 'Butter,cheese and cream',
+                        value: 'Butter,cheese and cream',
                         key: '0-1-12-3'
                     },
                     {
