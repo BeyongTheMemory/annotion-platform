@@ -653,9 +653,5 @@ global.constants = {
                 key: '0-2-8'
             }
         ]
-    },  {
-        title: 'Wrong',
-        value: 'Wrong',
-        key: '1',
     }],
 };
