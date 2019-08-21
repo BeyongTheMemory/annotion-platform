@@ -47,7 +47,6 @@ class NEREntityList extends Component {
     };
 
     resetEntity = (item) => {
-        console.log(item);
         if (item.action == 2) {
             item.errData = [{"id": 0, submit: true, type: "1", entityName: item.entity}];
             for (let dataItem of item.listData) {
@@ -75,7 +74,7 @@ class NEREntityList extends Component {
 
     onErrSubmit = (data) => {
         this.state.currentItem.errData = data;
-        console.log(this.state.currentItem);
+        this.props.updateEntityData(this.state.currentItem.entity,this.state.currentItem.errData[0].entityName);
         this.setState({
             errorDrawerVisible: false,
         });
@@ -113,12 +112,12 @@ class NEREntityList extends Component {
                     <Icon style={{marginLeft: 10, fontSize: '20px'}}
                           type="like" theme={this.props.data.action === 0 ? 'filled' : 'outlined'}
                           onClick={() => {
-                              this.like(this.props.data,true)
+                              this.like(this.props.data, true)
                           }}/>
                     <Icon style={{marginLeft: 10, fontSize: '20px'}}
                           type="dislike" theme={this.props.data.action === 1 ? 'filled' : 'outlined'}
                           onClick={() => {
-                              this.dislike(this.props.data,true)
+                              this.dislike(this.props.data, true)
                           }}/>
                     <Icon style={{marginLeft: 10, fontSize: '20px'}}
                           type="delete" theme={this.props.data.action === 2 ? 'filled' : 'outlined'}
@@ -142,11 +141,11 @@ class NEREntityList extends Component {
                                 <Icon style={{fontSize: '20px'}} type="dislike"
                                       theme={item.action === 1 ? 'filled' : 'outlined'}
                                       onClick={() => {
-                                          this.dislike(item,false)
+                                          this.dislike(item, false)
                                       }}/>,
                                 <Icon style={{fontSize: '20px'}} type="delete"
                                       theme={item.action === 2 ? 'filled' : 'outlined'} onClick={() => {
-                                    this.delete(item,false)
+                                    this.delete(item, false)
                                 }}/>
 
                             ] : [

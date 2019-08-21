@@ -144,6 +144,22 @@ class NERAnnotionItem extends Component {
         })
     };
 
+    updateEntityData = (oldToken, newToken) => {
+        console.log(this.state.entityData)
+        for (let i = 0; i < this.state.entityData.length; i++) {
+            console.log(this.state.entityData[i].name);
+            console.log(oldToken)
+            if (this.state.entityData[i].name == oldToken) {
+                if (newToken == "Useless"){
+                    delete  this.state.entityData[i]
+                }else {
+                    this.state.entityData[i].name = newToken;
+                }
+                return
+            }
+        }
+    };
+
     modalHandleOk = () => {
         let feedbackList = [];
         let addList = [];
@@ -513,7 +529,8 @@ class NERAnnotionItem extends Component {
                         <List.Item>
                             <List.Item.Meta
                                 description={<NEREntityList data={item} index={index} text={this.state.textOrg}
-                                                            refreshList={this.refreshList.bind(this)}/>}/>
+                                                            refreshList={this.refreshList.bind(this)}
+                                                            updateEntityData={this.updateEntityData.bind(this)}/>}/>
                         </List.Item>
                     )}
                 />
