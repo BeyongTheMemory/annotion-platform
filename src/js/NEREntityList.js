@@ -137,7 +137,7 @@ class NEREntityList extends Component {
                         <List.Item
                             actions={this.props.data.action == 2 ? [
                                 <Icon style={{fontSize: '20px'}} type="delete" theme={'filled'}/>
-                            ] : item.category.split("/").length < 4 ? [
+                            ] : (item.category.indexOf("Foods") != -1 && item.category.split("/").length < 4) || (item.category.indexOf("Nutrients") != -1 && item.category.split("/").length < 3)? [
                                 <Icon style={{fontSize: '20px'}} type="dislike"
                                       theme={item.action === 1 ? 'filled' : 'outlined'}
                                       onClick={() => {
